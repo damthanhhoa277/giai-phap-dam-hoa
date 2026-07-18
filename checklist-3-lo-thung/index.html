@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checklist 3 Lỗ Thủng Đang Rút Cạn Tiền Spa — Đàm Thanh Hoa</title>
+<meta name="description" content="Tự soi 5 phút: spa của chị đang thiếu hệ thống giữ khách, bán hàng hay vận hành — và tiền đang rò qua lỗ nào.">
+<!--
+  QT-002 · Checklist 3 Lỗ Thủng Đang Rút Cạn Tiền Spa — APP DIGITAL-FIRST (CANONICAL · SSOT)
+  Owner: BÌNH (P3) · Giải Pháp Đàm Hoa
+
+  KIẾN TRÚC 1-NGUỒN-2-HÌNH-HÀI:
+  - Toàn bộ nội dung nằm trong 1 object DATA (khối đánh dấu CORE-START → CORE-END bên dưới).
+  - Chế độ MÀN HÌNH (#app)  = bản online tương tác (CHÍNH): tick → tính → kết quả ngay.
+  - Chế độ IN (#printdoc)   = bản checklist tick tay 2 trang (PHỤ) — render từ CHÍNH DATA đó.
+  - Xuất PDF: mở file bằng Chrome → Ctrl+P → A4 → Save as PDF (bật Background graphics),
+    hoặc headless:  chrome --headless=new --no-pdf-header-footer --print-to-pdf=out.pdf file:///...html
+  - Sửa nội dung: CHỈ sửa trong DATA. Không sửa 2 nơi.
+
+  LỚP TÍCH HỢP (bật sau, không dựng lại app) — sửa trong CONFIG:
+  - CONFIG.ctaUrl      : link điểm đến CTA (Group "Chủ Spa Bình An" / Zalo / Chẩn Đoán khi live).
+  - CONFIG.webhookUrl  : endpoint nhận lead (Lark webhook do TUẤN dựng). Rỗng = form ẩn.
+  - CONFIG.ga4Id       : GA4 Measurement ID. Rỗng = không đo.
+-->
+<style>
+  :root{
+    --cream:#FAF6EC; --cream2:#F2ECDC; --paper:#FFFDF7;
+    --olive:#3E5541; --olive-deep:#2C3E2F; --olive-soft:#6E8168;
+    --gold:#B98A3E; --clay:#B5673D; --line:#D9D0BA;
+    --ink:#2B322A; --ink-soft:#5A6156;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    font-family:"Segoe UI","Helvetica Neue",Arial,"Noto Sans",sans-serif;
+    background:var(--cream2); color:var(--ink); line-height:1.5;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+
+  /* ============ SCREEN APP ============ */
+  #app{max-width:680px;margin:0 auto;padding:18px 14px 56px;}
+  .brandbar{display:flex;justify-content:space-between;align-items:center;font-size:10px;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--olive-soft);margin-bottom:12px;}
+  .brandbar b{color:var(--olive);}
+  .card{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;
+    padding:20px 18px;margin-bottom:14px;box-shadow:0 3px 14px rgba(44,62,47,.07);}
+  h1{font-size:clamp(22px,5.5vw,30px);line-height:1.15;color:var(--olive-deep);font-weight:800;letter-spacing:-.3px;}
+  h1 .drip{color:var(--clay);}
+  .subtitle{font-size:14px;color:var(--ink-soft);margin-top:7px;font-style:italic;}
+  .rule{height:3px;width:60px;background:var(--gold);border-radius:3px;margin:12px 0;}
+  .hookbox{background:var(--olive-deep);color:#F3EEDF;border-radius:12px;padding:14px 16px;
+    font-size:14.5px;line-height:1.55;margin:10px 0 14px;}
+  .hookbox b{color:#F4D48A;}
+  .note{font-size:12.5px;color:var(--ink-soft);}
+  .btn{display:inline-block;border:none;cursor:pointer;font-family:inherit;font-weight:800;
+    border-radius:12px;transition:transform .08s ease, box-shadow .12s ease;text-decoration:none;text-align:center;}
+  .btn:active{transform:scale(.97);}
+  .btn-primary{background:var(--olive);color:#fff;font-size:16px;padding:14px 26px;width:100%;
+    box-shadow:0 4px 12px rgba(62,85,65,.28);}
+  .btn-primary[disabled]{background:#A9B3A6;box-shadow:none;cursor:not-allowed;}
+  .btn-gold{background:var(--gold);color:#fff;font-size:15px;padding:13px 22px;width:100%;}
+  .btn-ghost{background:transparent;color:var(--olive);border:1.6px solid var(--olive);
+    font-size:13.5px;padding:10px 18px;width:100%;}
+
+  /* progress */
+  .progress-wrap{position:sticky;top:0;z-index:20;background:var(--cream2);padding:8px 0 6px;}
+  .progress-bar{height:8px;background:var(--line);border-radius:6px;overflow:hidden;}
+  .progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--olive),var(--gold));
+    border-radius:6px;transition:width .25s ease;}
+  .progress-label{font-size:11px;color:var(--olive-soft);margin-top:4px;text-align:right;}
+
+  /* leak section (screen) */
+  .leak-head{display:flex;gap:11px;align-items:center;margin-bottom:4px;}
+  .num{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--olive);color:#fff;
+    font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;}
+  .leak-title{font-size:17px;font-weight:800;color:var(--olive-deep);line-height:1.2;}
+  .bleed{font-size:12.8px;font-style:italic;color:var(--clay);margin:7px 0 12px;line-height:1.45;}
+  .q{border-top:1px dashed var(--line);padding:11px 0 10px;}
+  .q-text{font-size:14.5px;line-height:1.42;margin-bottom:9px;}
+  .q-btns{display:flex;gap:9px;}
+  .qb{flex:1;font-family:inherit;font-size:14px;font-weight:700;padding:10px 6px;border-radius:10px;
+    border:1.8px solid var(--line);background:var(--paper);color:var(--ink-soft);cursor:pointer;
+    transition:all .12s ease;}
+  .qb.on-yes{background:var(--olive);border-color:var(--olive);color:#fff;}
+  .qb.on-no{background:var(--clay);border-color:var(--clay);color:#fff;}
+  .money-hint{font-size:12px;background:#FBF3DF;border:1px dashed var(--gold);border-radius:9px;
+    padding:8px 11px;margin-top:12px;color:#6a5220;line-height:1.45;}
+
+  /* result */
+  .result-eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);
+    font-weight:800;margin-bottom:8px;}
+  .verdict{font-size:clamp(19px,5vw,24px);font-weight:800;color:var(--olive-deep);line-height:1.25;}
+  .sev-badge{display:inline-block;font-size:12.5px;font-weight:800;border-radius:8px;padding:4px 11px;
+    margin:10px 0 4px;}
+  .sev-on{background:#E4EDE2;color:#33532F;}
+  .sev-ro{background:#FBEED8;color:#8A5A14;}
+  .sev-mau{background:#F6DFD3;color:#8F3D1C;}
+  .concl{font-size:14.8px;line-height:1.6;margin-top:10px;}
+  .score-row{display:flex;gap:9px;margin:16px 0 4px;}
+  .score-cell{flex:1;border:1.5px solid var(--line);border-radius:12px;padding:10px 6px;text-align:center;background:var(--cream);}
+  .score-cell.worst{border-color:var(--clay);background:#FBF0E9;}
+  .score-cell .ic{font-size:19px;}
+  .score-cell .nm{font-size:10.5px;font-weight:800;color:var(--olive-deep);margin-top:3px;line-height:1.25;}
+  .score-cell .sc{font-size:11px;color:var(--ink-soft);margin-top:3px;}
+  .revealbox{background:var(--olive-deep);color:#F3EEDF;border-radius:13px;padding:16px 18px;margin-top:14px;
+    font-size:14px;line-height:1.6;}
+  .revealbox b{color:#F4D48A;}
+  .revealbox .big{display:block;font-size:15.5px;font-weight:800;color:#fff;margin-top:9px;}
+  .next-title{font-size:15.5px;font-weight:800;color:var(--olive-deep);margin-bottom:6px;}
+  .next-text{font-size:13.8px;line-height:1.55;margin-bottom:13px;}
+  .cta-stack{display:flex;flex-direction:column;gap:9px;}
+  .signature{font-size:12.5px;color:var(--olive-soft);font-style:italic;margin-top:14px;text-align:center;line-height:1.5;}
+  .footer{font-size:11px;color:var(--olive-soft);text-align:center;margin-top:18px;line-height:1.6;}
+
+  /* lead form */
+  .lead-form label{display:block;font-size:12.5px;font-weight:700;color:var(--olive-deep);margin:10px 0 4px;}
+  .lead-form input{width:100%;font-family:inherit;font-size:14.5px;padding:11px 12px;border-radius:10px;
+    border:1.6px solid var(--line);background:var(--paper);color:var(--ink);}
+  .lead-form input:focus{outline:none;border-color:var(--olive);}
+  .lead-msg{font-size:13px;margin-top:9px;}
+  .hidden{display:none !important;}
+  .warn-missing{border-color:var(--clay) !important; box-shadow:0 0 0 3px rgba(181,103,61,.18);}
+
+  /* ============ PRINT DOC (bản PDF phụ — render từ cùng DATA) ============ */
+  #printdoc{display:none;}
+  @media print{
+    body{background:#fff;}
+    #app,.progress-wrap{display:none !important;}
+    #printdoc{display:block;}
+    .page{margin:0;box-shadow:none;width:auto;min-height:auto;padding:10mm 14mm;position:relative;background:var(--paper);}
+    .page:first-child{page-break-after:always;}
+  }
+  /* print layout metrics (đúng bản 2 trang đã nghiệm thu) */
+  #printdoc .pbrandbar{display:flex;justify-content:space-between;align-items:center;font-size:9.5px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--olive-soft);margin-bottom:6px;}
+  #printdoc .pbrandbar b{color:var(--olive);}
+  #printdoc h1{font-size:22px;line-height:1.1;}
+  #printdoc .subtitle{font-size:12px;margin-top:3px;}
+  #printdoc .rule{width:58px;margin:5px 0 2px;}
+  #printdoc .phook{background:var(--olive-deep);color:#F3EEDF;border-radius:10px;padding:8px 14px;margin:7px 0 5px;
+    font-size:12px;line-height:1.4;}
+  #printdoc .phook b{color:#F4D48A;}
+  #printdoc .phowto{font-size:10.6px;color:var(--ink-soft);margin:5px 2px 7px;line-height:1.35;}
+  #printdoc .ptk{display:inline-block;border:1.6px solid var(--olive);width:12px;height:12px;border-radius:3px;
+    vertical-align:-2px;margin:0 2px;}
+  #printdoc .pleak{border:1.5px solid var(--line);border-radius:11px;padding:6px 13px 6px;margin-bottom:5px;background:var(--cream);}
+  #printdoc .pleak-head{display:flex;gap:10px;align-items:center;}
+  #printdoc .pnum{flex:0 0 auto;width:25px;height:25px;border-radius:50%;background:var(--olive);color:#fff;
+    font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;}
+  #printdoc .pleak-title{font-size:14.5px;font-weight:800;color:var(--olive-deep);line-height:1.18;}
+  #printdoc .pbleed{font-size:10.8px;font-style:italic;color:var(--clay);margin:3px 0 4px;padding-left:35px;line-height:1.3;}
+  #printdoc .pchecks{list-style:none;padding-left:35px;}
+  #printdoc .pchecks li{display:flex;gap:8px;align-items:flex-start;font-size:11.3px;margin-bottom:2px;color:var(--ink);line-height:1.28;}
+  #printdoc .pbox{flex:0 0 auto;display:inline-block;border:1.7px solid var(--olive);width:13px;height:13px;border-radius:3px;margin-top:1px;}
+  #printdoc .pmeta{padding-left:35px;margin-top:4px;}
+  #printdoc .pscale{font-size:10.2px;color:var(--olive-soft);}
+  #printdoc .pscale b{color:var(--clay);}
+  #printdoc .pmoney{font-size:10.3px;background:#FBF3DF;border:1px dashed var(--gold);border-radius:8px;
+    padding:4px 9px;margin:4px 0;color:#6a5220;line-height:1.32;}
+  #printdoc .pmoney b{color:var(--clay);}
+  #printdoc .proot{font-size:11.8px;font-weight:800;color:#fff;background:var(--olive);border-radius:7px;
+    padding:4px 10px;display:inline-block;margin-top:1px;}
+  #printdoc .proot .arrow{color:#F4D48A;}
+  #printdoc .ppagefoot{position:absolute;bottom:6mm;left:15mm;right:15mm;display:flex;justify-content:space-between;
+    font-size:9.5px;color:var(--olive-soft);letter-spacing:.05em;border-top:1px solid var(--line);padding-top:5px;}
+  #printdoc .p2title{font-size:20px;font-weight:800;color:var(--olive-deep);margin:4px 0 3px;}
+  #printdoc .p2sub{font-size:12.5px;color:var(--ink-soft);margin-bottom:14px;}
+  #printdoc .pmap{display:flex;gap:11px;margin:6px 0 16px;}
+  #printdoc .psys{flex:1;border:1.5px solid var(--line);border-radius:12px;padding:12px 10px;text-align:center;background:var(--cream);}
+  #printdoc .psys .pdot{width:34px;height:34px;border-radius:50%;background:var(--cream2);border:2px solid var(--olive);
+    display:flex;align-items:center;justify-content:center;font-size:18px;margin:0 auto 7px;}
+  #printdoc .psys h3{font-size:13px;color:var(--olive-deep);margin-bottom:3px;}
+  #printdoc .psys p{font-size:10.5px;color:var(--ink-soft);}
+  #printdoc .psys .pcircle{font-size:9.5px;color:var(--clay);margin-top:7px;font-weight:700;}
+  #printdoc .preveal{background:var(--olive-deep);color:#F3EEDF;border-radius:14px;padding:18px 20px;margin:6px 0 16px;}
+  #printdoc .preveal .peye{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#F4D48A;margin-bottom:8px;}
+  #printdoc .preveal p{font-size:13.5px;line-height:1.62;}
+  #printdoc .preveal b{color:#F4D48A;}
+  #printdoc .preveal .pbig{font-size:15.5px;font-weight:800;color:#fff;display:block;margin-top:10px;}
+  #printdoc .pcta{border:2px solid var(--olive);border-radius:14px;padding:16px 18px;background:var(--paper);}
+  #printdoc .pcta h3{font-size:16px;color:var(--olive-deep);margin-bottom:6px;}
+  #printdoc .pcta p{font-size:12.5px;color:var(--ink);margin-bottom:11px;}
+  #printdoc .pcta .pval{color:var(--olive-soft);font-style:italic;}
+  #printdoc .pdest{border:2px dashed var(--gold);border-radius:10px;background:#FBF3DF;padding:12px 14px;
+    text-align:center;color:#7a5c1c;}
+  #printdoc .pdest .plbl{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);}
+  #printdoc .pdest .pslot{font-size:14px;font-weight:800;color:var(--olive-deep);margin-top:4px;}
+  #printdoc .pdest .pqr{font-size:10px;color:var(--ink-soft);margin-top:4px;}
+  #printdoc .psignature{font-size:12px;color:var(--olive-soft);font-style:italic;margin-top:14px;}
+  #printdoc .pfoot2{margin-top:16px;border-top:1px solid var(--line);padding-top:11px;
+    display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--ink-soft);}
+  #printdoc .pfoot2 b{color:var(--olive);}
+  @page{size:A4;margin:0;}
+</style>
+</head>
+<body>
+
+<div class="progress-wrap hidden" id="progressWrap">
+  <div style="max-width:680px;margin:0 auto;padding:0 14px;">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-label" id="progressLabel"></div>
+  </div>
+</div>
+
+<div id="app"></div>
+<div id="printdoc" aria-hidden="true"></div>
+
+<script>
+/*CORE-START*/
+const DATA = {
+  meta: {
+    code: "QT-002",
+    brand: "Giải Pháp Đàm Hoa",
+    community: "Chủ Spa Bình An",
+    author: "Đàm Thanh Hoa"
+  },
+  title: ["Checklist 3 Lỗ Thủng", "Đang Rút Cạn Tiền Spa"],
+  subtitle: "Khám phá spa của chị đang thiếu hệ thống giữ khách, bán hàng hay vận hành.",
+  hook: "Spa chị có thể <b>không thiếu khách</b> — mà đang <b>thủng đáy</b>. Mỗi tháng tiền rò ra qua 3 cái lỗ chị không nhìn thấy. Và cả 3 lỗ đó chung <b>một gốc</b> — chị sẽ thấy ở cuối bài.",
+  howtoOnline: "Chị trả lời thật lòng 15 câu dưới đây (mỗi câu chỉ cần bấm <b>Có</b> hoặc <b>Chưa</b>) — mất ~5 phút. Xong sẽ thấy ngay spa mình đang thủng lỗ nào nặng nhất.",
+  howtoPrint: "Cách dùng: đánh ✓ nếu spa chị <b>đã có / đang làm</b>, để trống nếu <b>chưa có</b>. Trả lời thật lòng — chỉ mất ~5 phút. Càng nhiều ô trống, lỗ đó càng chảy máu.",
+  scaleText: "Đếm ô trống: 0–1 <i>còn ổn</i> · 2–3 <i>đang rò</i> · 4–5 <b>đang chảy máu</b>",
+  leaks: [
+    {
+      id: "giu-khach", icon: "🔁", num: 1,
+      title: "Không giữ chân được khách",
+      shortName: "Hệ thống GIỮ KHÁCH", tagline: "để khách cũ tự quay lại",
+      bleed: "Khách làm 1–2 lần rồi biến mất. Chị phải tốn tiền quảng cáo mua khách MỚI để bù chỗ khách CŨ lẽ ra tự quay lại — đổ tiền vào cái thùng thủng đáy.",
+      questions: [
+        "Có quy trình nhắn/gọi hỏi thăm khách trong 3–7 ngày sau buổi làm không?",
+        "Có lịch nhắc khách quay lại đúng chu kỳ (ví dụ mỗi 3–4 tuần) không?",
+        "Có cách biết khách nào lâu chưa quay lại để chủ động mời không?",
+        "Chất lượng mỗi buổi có ổn định như nhau — dù ai làm, đông hay vắng không?",
+        "Có lý do rõ để khách cũ quay lại (ưu đãi khách thân, tích buổi, gói chăm sóc định kỳ) không?"
+      ],
+      money: "💸 Ước lượng (tạm tính, chỉ để hình dung): mỗi tháng ước <b>____</b> khách cũ không quay lại × <b>____</b>đ (giá TB 1 lần làm) = <b>~____</b>đ/tháng. Nhân 12 để thấy số tiền cả năm đang để rơi.",
+      root: "Chị đang thiếu HỆ THỐNG GIỮ KHÁCH",
+      resultHeadline: "Lỗ nặng nhất của spa chị: KHÂU GIỮ KHÁCH",
+      resultConclusion: "Chị không thiếu khách — chị đang thiếu <b>hệ thống để khách cũ tự quay lại</b>. Mỗi tháng chị phải bỏ tiền mua khách mới để bù chỗ khách cũ lặng lẽ rời đi. Đó là cái lỗ đang rút tiền spa chị nhanh nhất.",
+      nextStep: "Việc nên làm trước tiên: xây <b>HỆ THỐNG GIỮ KHÁCH</b> — chăm sóc sau buổi làm, nhắc lịch đúng chu kỳ, và lý do rõ ràng để khách quay lại. Vá được lỗ này, mỗi đồng quảng cáo chị chi mới bắt đầu sinh lời."
+    },
+    {
+      id: "ban-hang", icon: "💬", num: 2,
+      title: "Không bán được liệu trình & upsell",
+      shortName: "Hệ thống BÁN HÀNG", tagline: "để chốt liệu trình & upsell",
+      bleed: "Khách chỉ mua lẻ từng buổi. Cùng khách đó, nếu tư vấn đúng cách họ đã lên liệu trình hoặc mua thêm — chị đang để tiền trên bàn mỗi ngày.",
+      questions: [
+        "Có kịch bản tư vấn chuẩn để mọi nhân viên (và chính chị) tư vấn nhất quán không?",
+        "Có quy trình mời khách lên liệu trình thay vì chỉ bán buổi lẻ không?",
+        "Có cơ chế thưởng/KPI cho nhân viên khi chốt liệu trình hoặc upsell không?",
+        "Có bước \"bán vòng hai\" — mời thêm dịch vụ/sản phẩm phù hợp sau buổi làm không?",
+        "Chị có nắm được mỗi tháng bao nhiêu % khách lẻ chuyển thành khách liệu trình không?"
+      ],
+      money: "💸 Ước lượng (tạm tính): mỗi tháng ước <b>____</b> khách lẻ đáng lẽ lên được liệu trình × <b>____</b>đ (chênh lệch giá trị liệu trình so với vài buổi lẻ) = <b>~____</b>đ/tháng đang để lỡ.",
+      root: "Chị đang thiếu HỆ THỐNG BÁN HÀNG",
+      resultHeadline: "Lỗ nặng nhất của spa chị: KHÂU BÁN HÀNG",
+      resultConclusion: "Khách đã đến với chị rồi — nhưng spa chưa có <b>hệ thống tư vấn để khách lên liệu trình</b>. Mỗi khách chỉ mua lẻ một buổi là một lần chị để tiền trên bàn. Đây là lỗ rò âm thầm nhưng cộng lại rất lớn.",
+      nextStep: "Việc nên làm trước tiên: xây <b>HỆ THỐNG BÁN HÀNG</b> — kịch bản tư vấn nhất quán, quy trình mời lên liệu trình, và cơ chế thưởng rõ ràng. Cùng lượng khách đó, doanh thu có thể khác hẳn."
+    },
+    {
+      id: "van-hanh", icon: "⚙️", num: 3,
+      title: "Spa phụ thuộc vào chủ",
+      shortName: "Hệ thống VẬN HÀNH", tagline: "để spa chạy khi chủ vắng",
+      bleed: "Chủ có mặt thì mọi thứ chạy; chủ vắng là chất lượng, tinh thần và doanh số tụt. Spa đang chạy bằng SỨC CHỦ, không bằng hệ thống — nên chị không nghỉ được và cũng không lớn được.",
+      questions: [
+        "Có bộ quy trình chuẩn (SOP) để nhân viên mới chạy được mà không cần chị kèm sát không?",
+        "Nếu chị vắng 1 tuần, chất lượng & doanh số có giữ nguyên không?",
+        "Có cách kiểm soát chất lượng dịch vụ mà không cần chị đứng nhìn không?",
+        "Có bảng phân quyền/phân việc rõ ai chịu trách nhiệm gì không?",
+        "Có cách đánh giá hiệu suất nhân viên định kỳ (không cảm tính) không?"
+      ],
+      money: "💸 Ước lượng (tạm tính): những ngày chị vắng, doanh số giảm <b>~__%</b> × số ngày chị buộc phải nghỉ/năm; cộng chi phí tuyển & đào tạo lại mỗi lần mất người <b>~____</b>đ. Đó là cái giá của việc spa dính chặt vào chị.",
+      root: "Chị đang thiếu HỆ THỐNG VẬN HÀNH",
+      resultHeadline: "Lỗ nặng nhất của spa chị: KHÂU VẬN HÀNH",
+      resultConclusion: "Spa đang chạy bằng <b>sức chị</b>, không bằng hệ thống. Chị có mặt thì mọi thứ ổn — chị vắng là chất lượng, tinh thần và doanh số tụt. Chị không nghỉ được, và spa cũng không lớn được, vì mọi thứ đều dính chặt vào chị.",
+      nextStep: "Việc nên làm trước tiên: xây <b>HỆ THỐNG VẬN HÀNH</b> — quy trình chuẩn, phân quyền rõ, kiểm soát chất lượng không cần chị đứng nhìn. Đó là con đường để chị được nghỉ mà spa vẫn chạy."
+    }
+  ],
+  severity: {
+    on:  { max: 1, label: "Còn ổn",          cls: "sev-on"  },
+    ro:  { max: 3, label: "Đang rò",          cls: "sev-ro"  },
+    mau: { max: 5, label: "Đang chảy máu",    cls: "sev-mau" }
+  },
+  tieOrder: ["giu-khach", "ban-hang", "van-hanh"],
+  tieNote: "Spa chị đang thiếu hệ thống ở <b>nhiều mảng cùng lúc</b> với mức độ ngang nhau. Đừng vá dàn trải — nên bắt đầu từ <b>một</b> mảng theo thứ tự tác động lên dòng tiền:",
+  healthy: {
+    headline: "Tin vui: chưa thấy lỗ nào đang chảy máu nặng",
+    conclusion: "Theo câu trả lời của chị, cả 3 mảng <b>giữ khách · bán hàng · vận hành</b> đều đã có nền khá tốt. Điều đó rất đáng quý — phần lớn spa không được như vậy. Bước tiếp theo của chị không phải là \"vá lỗ\" nữa, mà là <b>hệ thống hóa sâu hơn</b> để spa lớn lên mà không phụ thuộc thêm vào chị.",
+    nextStep: "Chị hãy vào cộng đồng để nhận thêm công cụ nâng cấp từng hệ thống — và khi bản Chẩn Đoán Sức Khỏe Spa ra mắt, chị sẽ là người hưởng lợi nhiều nhất từ nó."
+  },
+  reveal: {
+    eyebrow: "Sự thật ít ai nói cho chị",
+    body: "Chị vừa soi qua 3 lỗ. Để ý điều này: 3 lỗ khác tên, nhưng chung <b>một gốc</b>. Không lỗ nào là do chị thiếu cố gắng — mà vì spa đang chạy bằng <b>sức chị và trí nhớ của chị</b>, chưa có <b>hệ thống</b> gánh thay. Càng đông khách, chị càng phải gánh nặng hơn — nên càng làm càng mệt mà tiền vẫn cứ rò.",
+    big: "Đây không phải lỗi của chị. Đây là dấu hiệu đã đến lúc xây hệ thống."
+  },
+  cta: {
+    heading: "Bước tiếp theo cho chị",
+    body: "Tin tốt: cả 3 hệ thống này đều <b>học được và xây được</b> — theo thứ tự, không cần làm hết một lúc. Vá từng lỗ lẻ chỉ là dán băng keo; xây hệ thống mới lành từ gốc.",
+    value: "Nơi chị được hướng dẫn xây từng hệ thống cho spa mình — bắt đầu từ lỗ đang chảy máu nặng nhất:",
+    destLabel: "Vào Cộng đồng \"Chủ Spa Bình An\"",
+    printQrNote: "[ Chị/AI dán link hoặc QR vào đây ]"
+  },
+  p2: {
+    title: "Nhìn lại: 3 lỗ của chị — 1 gốc duy nhất",
+    sub: "Khoanh tròn ô có nhiều điểm trống nhất. Đó là hệ thống chị nên xây <b>TRƯỚC</b>.",
+    circleNote: "◯ khoanh nếu đây là lỗ nặng nhất"
+  },
+  signature: "Thương chị — người làm nghề tử tế. Một spa không cần lớn ngay để đáng tự hào; nó cần sống được, vững được, rồi mới lớn. — Đàm Thanh Hoa",
+  footer: { left: "🌿 Giải Pháp Đàm Hoa · Quà tặng miễn phí cho chủ spa", right: "Nhận thêm công cụ miễn phí 👉 [link]" },
+  lead: {
+    heading: "Nhận bản kết quả đầy đủ + hướng dẫn vá từng lỗ",
+    body: "Chị để lại thông tin, em gửi bản kết quả + tài liệu hướng dẫn qua email cho chị nha (quà chỉ giao qua email — chị nhớ kiểm tra cả mục Quảng cáo/Spam).",
+    fields: { name: "Tên của chị", phone: "Số điện thoại / Zalo", email: "Email nhận quà" },
+    submit: "Gửi cho em 💌",
+    thanks: "Em nhận được rồi ạ! Quà sẽ đến email của chị trong ít phút. Chị nhớ kiểm tra cả mục Quảng cáo/Spam nha 💛",
+    error: "Ơ, gửi chưa được chị ạ. Chị thử lại giúp em, hoặc nhắn trực tiếp cho Hoa qua kênh bên dưới nha."
+  }
+};
+
+/**
+ * Tính kết quả từ câu trả lời.
+ * @param {Object} answers - { leakId: [true/false x5] } — true = "Có" (đã có hệ thống), false = "Chưa".
+ * @returns {Object} { scores, severities, biggestId, biggestScore, biggestSeverity, tiedIds, isTie, healthy, answeredCount, total }
+ * Điểm rò của 1 lỗ = số câu "Chưa". Hòa điểm → ưu tiên theo DATA.tieOrder (tác động dòng tiền).
+ */
+function computeResult(answers) {
+  const scores = {}, severities = {};
+  let answeredCount = 0, total = 0;
+  for (const leak of DATA.leaks) {
+    const arr = (answers && answers[leak.id]) || [];
+    total += leak.questions.length;
+    let miss = 0;
+    for (let i = 0; i < leak.questions.length; i++) {
+      const v = arr[i];
+      if (v === true || v === false) answeredCount++;
+      if (v === false) miss++;
+    }
+    scores[leak.id] = miss;
+    severities[leak.id] = miss <= DATA.severity.on.max ? "on" : (miss <= DATA.severity.ro.max ? "ro" : "mau");
+  }
+  const maxScore = Math.max(...DATA.tieOrder.map(id => scores[id]));
+  const tiedIds = DATA.tieOrder.filter(id => scores[id] === maxScore);
+  const biggestId = tiedIds[0]; // hòa → lỗ đứng trước trong tieOrder thắng
+  const healthy = maxScore <= DATA.severity.on.max; // mọi lỗ đều "còn ổn"
+  return {
+    scores, severities,
+    biggestId, biggestScore: maxScore, biggestSeverity: severities[biggestId],
+    tiedIds, isTie: tiedIds.length > 1 && maxScore > DATA.severity.on.max,
+    healthy, answeredCount, total
+  };
+}
+/*CORE-END*/
+
+/* ================= CONFIG — lớp tích hợp (bật sau, không dựng lại app) ================= */
+const CONFIG = {
+  ctaUrl: "",       // link điểm đến CTA (Group "Chủ Spa Bình An" / Zalo / Chẩn Đoán khi live). Rỗng = nút hiện hướng dẫn tìm kênh.
+  moreUrl: "",      // link footer "nhận thêm công cụ miễn phí". Rỗng = ẩn dòng footer link.
+  webhookUrl: "",   // endpoint CRM (Lark webhook — TUẤN dựng). Rỗng = ẩn form thu lead.
+  ga4Id: ""         // GA4 Measurement ID (vd "G-XXXXXXX"). Rỗng = không đo.
+};
+
+/* ================= APP (chỉ chạy trong trình duyệt) ================= */
+if (typeof document !== "undefined") (function () {
+  const $ = sel => document.querySelector(sel);
+  const app = document.getElementById("app");
+  const STORE_KEY = "qt002-answers-v1";
+
+  // ---- tracking (no-op nếu chưa cấu hình GA4) ----
+  function track(ev, params) {
+    try { if (CONFIG.ga4Id && typeof window.gtag === "function") window.gtag("event", ev, params || {}); } catch (e) {}
+  }
+  if (CONFIG.ga4Id) {
+    const s = document.createElement("script");
+    s.async = true; s.src = "https://www.googletagmanager.com/gtag/js?id=" + CONFIG.ga4Id;
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag("js", new Date()); window.gtag("config", CONFIG.ga4Id);
+  }
+
+  // ---- state ----
+  let answers = {};
+  try { answers = JSON.parse(localStorage.getItem(STORE_KEY) || "{}") || {}; } catch (e) { answers = {}; }
+  for (const leak of DATA.leaks) if (!Array.isArray(answers[leak.id])) answers[leak.id] = [];
+
+  function save() { try { localStorage.setItem(STORE_KEY, JSON.stringify(answers)); } catch (e) {} }
+
+  // ---- render: màn hình checklist ----
+  function esc(s) { return s; } // nội dung do mình kiểm soát trong DATA (cho phép <b>/<i>)
+
+  function renderChecklist() {
+    let html = "";
+    html += `<div class="brandbar"><span>🌿 ${DATA.meta.brand} · ${DATA.meta.community}</span><span>Quà tặng miễn phí · ${DATA.meta.code}</span></div>`;
+    html += `<div class="card"><h1>${DATA.title[0]}<br><span class="drip">${DATA.title[1].replace("Đang ", "Đang&nbsp;")}</span></h1>`;
+    html += `<div class="rule"></div><p class="subtitle">${DATA.subtitle}</p>`;
+    html += `<div class="hookbox">${DATA.hook}</div>`;
+    html += `<p class="note">${DATA.howtoOnline}</p></div>`;
+
+    for (const leak of DATA.leaks) {
+      html += `<div class="card" id="sec-${leak.id}">`;
+      html += `<div class="leak-head"><div class="num">${leak.num}</div><div class="leak-title">${leak.title}</div></div>`;
+      html += `<p class="bleed">${leak.bleed}</p>`;
+      leak.questions.forEach((q, i) => {
+        html += `<div class="q" id="q-${leak.id}-${i}"><div class="q-text">${q}</div>
+          <div class="q-btns">
+            <button type="button" class="qb" data-leak="${leak.id}" data-i="${i}" data-v="yes">✔️ Có rồi</button>
+            <button type="button" class="qb" data-leak="${leak.id}" data-i="${i}" data-v="no">✖️ Chưa có</button>
+          </div></div>`;
+      });
+      html += `<div class="money-hint">${leak.money}</div></div>`;
+    }
+
+    html += `<div class="card" style="text-align:center;">
+      <button type="button" class="btn btn-primary" id="btnResult" disabled>Xem kết quả của spa chị</button>
+      <p class="note" id="resultNote" style="margin-top:9px;"></p>
+    </div>`;
+    html += `<div class="footer">${DATA.footer.left}</div>`;
+    app.innerHTML = html;
+
+    // gắn sự kiện
+    app.querySelectorAll(".qb").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const id = btn.dataset.leak, i = +btn.dataset.i, v = btn.dataset.v === "yes";
+        answers[id][i] = v; save();
+        paintAnswers(); updateProgress();
+      });
+    });
+    $("#btnResult").addEventListener("click", showResult);
+    paintAnswers(); updateProgress();
+    document.getElementById("progressWrap").classList.remove("hidden");
+    track("qt002_started");
+  }
+
+  function paintAnswers() {
+    for (const leak of DATA.leaks) {
+      leak.questions.forEach((q, i) => {
+        const wrap = document.getElementById(`q-${leak.id}-${i}`);
+        if (!wrap) return;
+        const v = answers[leak.id][i];
+        wrap.querySelectorAll(".qb").forEach(b => {
+          b.classList.remove("on-yes", "on-no");
+          if (v === true && b.dataset.v === "yes") b.classList.add("on-yes");
+          if (v === false && b.dataset.v === "no") b.classList.add("on-no");
+        });
+      });
+    }
+  }
+
+  function updateProgress() {
+    const r = computeResult(answers);
+    const pct = Math.round(r.answeredCount / r.total * 100);
+    $("#progressFill").style.width = pct + "%";
+    $("#progressLabel").textContent = `Đã trả lời ${r.answeredCount}/${r.total} câu`;
+    const btn = $("#btnResult"), note = $("#resultNote");
+    if (btn) {
+      btn.disabled = r.answeredCount < r.total;
+      note.textContent = r.answeredCount < r.total
+        ? `Chị trả lời nốt ${r.total - r.answeredCount} câu nữa là xem được kết quả nha.` : "Xong rồi — bấm để xem kết quả 👆";
+    }
+  }
+
+  // ---- render: màn hình kết quả ----
+  function leakById(id) { return DATA.leaks.find(l => l.id === id); }
+
+  function showResult() {
+    const r = computeResult(answers);
+    if (r.answeredCount < r.total) return;
+    const sev = DATA.severity[r.biggestSeverity];
+    const big = leakById(r.biggestId);
+    track("qt002_completed", { biggest_leak: r.biggestId, score: r.biggestScore, severity: r.biggestSeverity });
+
+    let html = "";
+    html += `<div class="brandbar"><span>🌿 ${DATA.meta.brand} · ${DATA.meta.community}</span><span>Kết quả · ${DATA.meta.code}</span></div>`;
+
+    // 1) verdict
+    html += `<div class="card"><div class="result-eyebrow">Kết quả của spa chị</div>`;
+    if (r.healthy) {
+      html += `<div class="verdict">${DATA.healthy.headline}</div>`;
+      html += `<p class="concl">${DATA.healthy.conclusion}</p>`;
+    } else {
+      html += `<div class="verdict">${big.resultHeadline}</div>`;
+      html += `<span class="sev-badge ${sev.cls}">${big.icon} Mức độ: ${sev.label} — ${r.biggestScore}/5 điểm rò</span>`;
+      if (r.isTie) {
+        const names = r.tiedIds.map(id => leakById(id).shortName.replace("Hệ thống ", "")).join(" · ");
+        html += `<p class="concl">${DATA.tieNote} <b>${names}</b> — bắt đầu từ <b>${big.shortName}</b>.</p>`;
+      }
+      html += `<p class="concl">${big.resultConclusion}</p>`;
+    }
+    // bảng 3 lỗ
+    html += `<div class="score-row">`;
+    for (const leak of DATA.leaks) {
+      const s = DATA.severity[r.severities[leak.id]];
+      const worst = !r.healthy && leak.id === r.biggestId ? " worst" : "";
+      html += `<div class="score-cell${worst}"><div class="ic">${leak.icon}</div>
+        <div class="nm">${leak.shortName.replace("Hệ thống ", "Hệ thống<br>")}</div>
+        <div class="sc">${r.scores[leak.id]}/5 · ${s.label}</div></div>`;
+    }
+    html += `</div><p class="note" style="margin-top:6px;">Điểm rò = số câu "Chưa có". Càng cao lỗ càng nặng.</p></div>`;
+
+    // 2) reveal 1 gốc
+    html += `<div class="revealbox"><div class="result-eyebrow" style="color:#F4D48A;">${DATA.reveal.eyebrow}</div>
+      <div>${DATA.reveal.body}<span class="big">${DATA.reveal.big}</span></div></div>`;
+
+    // 3) bước tiếp theo + CTA
+    const next = r.healthy ? DATA.healthy.nextStep : big.nextStep;
+    html += `<div class="card" style="margin-top:14px;"><div class="next-title">${DATA.cta.heading}</div>`;
+    html += `<p class="next-text">${next}</p><p class="next-text" style="font-style:italic;color:var(--olive-soft);">${DATA.cta.value}</p>`;
+    html += `<div class="cta-stack">`;
+    if (CONFIG.ctaUrl) {
+      html += `<a class="btn btn-primary" id="btnCta" href="${CONFIG.ctaUrl}" target="_blank" rel="noopener">👉 ${DATA.cta.destLabel}</a>`;
+    } else {
+      html += `<button type="button" class="btn btn-primary" id="btnCta">👉 ${DATA.cta.destLabel}</button>`;
+    }
+    html += `<button type="button" class="btn btn-ghost" id="btnPdf">🖨️ Tải / in bản checklist PDF để giữ lại</button>`;
+    html += `<button type="button" class="btn btn-ghost" id="btnRedo" style="border-style:dashed;">↩️ Làm lại từ đầu</button>`;
+    html += `</div></div>`;
+
+    // 4) lead form (chỉ hiện khi webhook đã bật)
+    if (CONFIG.webhookUrl) {
+      html += `<div class="card lead-form" id="leadCard"><div class="next-title">${DATA.lead.heading}</div>
+        <p class="next-text">${DATA.lead.body}</p>
+        <label>${DATA.lead.fields.name}</label><input id="leadName" type="text" autocomplete="name">
+        <label>${DATA.lead.fields.phone}</label><input id="leadPhone" type="tel" autocomplete="tel">
+        <label>${DATA.lead.fields.email}</label><input id="leadEmail" type="email" autocomplete="email">
+        <div style="margin-top:13px;"><button type="button" class="btn btn-gold" id="btnLead">${DATA.lead.submit}</button></div>
+        <p class="lead-msg" id="leadMsg"></p></div>`;
+    }
+
+    html += `<p class="signature">${DATA.signature}</p>`;
+    html += `<div class="footer">${DATA.footer.left}${CONFIG.moreUrl ? ` · <a href="${CONFIG.moreUrl}" target="_blank" rel="noopener" style="color:var(--olive);">nhận thêm công cụ miễn phí</a>` : ""}</div>`;
+    app.innerHTML = html;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    document.getElementById("progressWrap").classList.add("hidden");
+
+    // events
+    $("#btnPdf").addEventListener("click", () => { track("qt002_pdf"); window.print(); });
+    $("#btnRedo").addEventListener("click", () => {
+      answers = {}; for (const leak of DATA.leaks) answers[leak.id] = [];
+      save(); renderChecklist(); window.scrollTo(0, 0);
+    });
+    const cta = $("#btnCta");
+    cta.addEventListener("click", () => {
+      track("qt002_cta_click", { biggest_leak: r.biggestId });
+      if (!CONFIG.ctaUrl) alert('Chị tìm cộng đồng "Chủ Spa Bình An" của Đàm Thanh Hoa trên Facebook, hoặc nhắn Zalo cho Hoa để được hướng dẫn nha 💛');
+    });
+    if (CONFIG.webhookUrl) $("#btnLead").addEventListener("click", () => submitLead(r));
+  }
+
+  // ---- CRM layer ----
+  function submitLead(r) {
+    const name = $("#leadName").value.trim(), phone = $("#leadPhone").value.trim(), email = $("#leadEmail").value.trim();
+    let ok = true;
+    [["#leadName", name], ["#leadPhone", phone], ["#leadEmail", email]].forEach(([sel, v]) => {
+      const el = $(sel); el.classList.toggle("warn-missing", !v); if (!v) ok = false;
+    });
+    if (!ok) { $("#leadMsg").textContent = "Chị điền giúp em đủ 3 ô nha."; return; }
+    const payload = {
+      source: DATA.meta.code, name, phone, email,
+      scores: r.scores, biggest_leak: r.biggestId, severity: r.biggestSeverity, is_tie: r.isTie,
+      ts: new Date().toISOString(), page: location.href
+    };
+    $("#btnLead").disabled = true; $("#leadMsg").textContent = "Đang gửi…";
+    fetch(CONFIG.webhookUrl, {
+      method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload)
+    }).then(res => {
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      track("qt002_lead", { biggest_leak: r.biggestId });
+      $("#leadCard").innerHTML = `<p class="concl">✅ ${DATA.lead.thanks}</p>`;
+    }).catch(() => {
+      $("#btnLead").disabled = false; $("#leadMsg").textContent = DATA.lead.error;
+    });
+  }
+
+  // ---- render: bản in (từ CÙNG DATA — không lặp nội dung) ----
+  function renderPrintDoc() {
+    const d = DATA;
+    let p1leaks = "";
+    for (const leak of d.leaks) {
+      p1leaks += `<div class="pleak">
+        <div class="pleak-head"><div class="pnum">${leak.num}</div><div class="pleak-title">${leak.title}</div></div>
+        <p class="pbleed">${leak.bleed}</p>
+        <ul class="pchecks">${leak.questions.map(q => `<li><span class="pbox"></span> ${q}</li>`).join("")}</ul>
+        <div class="pmeta"><div class="pscale">${d.scaleText}</div>
+        <div class="pmoney">${leak.money}</div>
+        <span class="proot">Gốc rễ <span class="arrow">→</span> ${leak.root}</span></div></div>`;
+    }
+    let sysCells = d.leaks.map(l => `<div class="psys"><div class="pdot">${l.icon}</div>
+      <h3>${l.shortName.replace("Hệ thống ", "Hệ thống<br>")}</h3><p>${l.tagline}</p>
+      <div class="pcircle">${d.p2.circleNote}</div></div>`).join("");
+    document.getElementById("printdoc").innerHTML = `
+    <section class="page">
+      <div class="pbrandbar"><span>🌿 ${d.meta.brand.replace("Đàm Hoa", "<b>Đàm Hoa</b>")} · ${d.meta.community}</span><span>Quà tặng miễn phí · ${d.meta.code}</span></div>
+      <h1>${d.title[0]}<br><span class="drip">${d.title[1]}</span></h1>
+      <div class="rule"></div><p class="subtitle">${d.subtitle}</p>
+      <div class="phook">${d.hook.replace("cuối bài", "cuối trang sau")}</div>
+      <p class="phowto">${d.howtoPrint.replace("đánh ✓", 'đánh <span class="ptk"></span>✓')}</p>
+      ${p1leaks}
+      <div class="ppagefoot"><span>🌿 ${d.meta.community} — ${d.meta.brand}</span><span>Trang 1/2 · Lật sang trang sau để thấy "1 gốc"</span></div>
+    </section>
+    <section class="page">
+      <div class="pbrandbar"><span>🌿 ${d.meta.brand.replace("Đàm Hoa", "<b>Đàm Hoa</b>")} · ${d.meta.community}</span><span>Checklist 3 Lỗ Thủng · ${d.meta.code}</span></div>
+      <h2 class="p2title">${d.p2.title}</h2><p class="p2sub">${d.p2.sub}</p>
+      <div class="pmap">${sysCells}</div>
+      <div class="preveal"><div class="peye">${d.reveal.eyebrow}</div>
+        <p>${d.reveal.body}<span class="pbig">${d.reveal.big}</span></p></div>
+      <div class="pcta"><h3>${d.cta.heading}</h3>
+        <p>${d.cta.body}<br><span class="pval">${d.cta.value}</span></p>
+        <div class="pdest"><div class="plbl">👉 Điểm đến</div>
+          <div class="pslot">${d.cta.destLabel}</div>
+          <div class="pqr">${CONFIG.ctaUrl ? CONFIG.ctaUrl : d.cta.printQrNote}</div></div></div>
+      <p class="psignature">${d.signature}</p>
+      <div class="pfoot2"><span><b>🌿 ${d.meta.brand}</b> · Quà tặng miễn phí cho chủ spa</span><span>${CONFIG.moreUrl ? "Nhận thêm công cụ miễn phí 👉 " + CONFIG.moreUrl : d.footer.right}</span></div>
+    </section>`;
+  }
+
+  renderPrintDoc();
+  renderChecklist();
+})();
+</script>
+</body>
+</html>
