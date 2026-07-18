@@ -227,11 +227,11 @@ const DATA = {
       shortName: "Hệ thống GIỮ KHÁCH", tagline: "để khách cũ tự quay lại",
       bleed: "Khách làm 1–2 lần rồi biến mất. Chị phải tốn tiền quảng cáo mua khách MỚI để bù chỗ khách CŨ lẽ ra tự quay lại — đổ tiền vào cái thùng thủng đáy.",
       questions: [
-        "Có quy trình nhắn/gọi hỏi thăm khách trong 3–7 ngày sau buổi làm không?",
-        "Có lịch nhắc khách quay lại đúng chu kỳ (ví dụ mỗi 3–4 tuần) không?",
-        "Có cách biết khách nào lâu chưa quay lại để chủ động mời không?",
-        "Chất lượng mỗi buổi có ổn định như nhau — dù ai làm, đông hay vắng không?",
-        "Có lý do rõ để khách cũ quay lại (ưu đãi khách thân, tích buổi, gói chăm sóc định kỳ) không?"
+        { t: "Có quy trình nhắn/gọi hỏi thăm khách trong 3–7 ngày sau buổi làm không?", a: "own" },
+        { t: "Có lịch nhắc khách quay lại đúng chu kỳ (ví dụ mỗi 3–4 tuần) không?", a: "own" },
+        { t: "Có cách biết khách nào lâu chưa quay lại để chủ động mời không?", a: "own" },
+        { t: "Chất lượng mỗi buổi có ổn định như nhau — dù ai làm, đông hay vắng không?", a: "fact" },
+        { t: "Có lý do rõ để khách cũ quay lại (ưu đãi khách thân, tích buổi, gói chăm sóc định kỳ) không?", a: "own" }
       ],
       money: "💸 Ước lượng (tạm tính, chỉ để hình dung): mỗi tháng ước <b>____</b> khách cũ không quay lại × <b>____</b>đ (giá TB 1 lần làm) = <b>~____</b>đ/tháng. Nhân 12 để thấy số tiền cả năm đang để rơi.",
       root: "Chị đang thiếu HỆ THỐNG GIỮ KHÁCH",
@@ -245,11 +245,11 @@ const DATA = {
       shortName: "Hệ thống BÁN HÀNG", tagline: "để chốt liệu trình & upsell",
       bleed: "Khách chỉ mua lẻ từng buổi. Cùng khách đó, nếu tư vấn đúng cách họ đã lên liệu trình hoặc mua thêm — chị đang để tiền trên bàn mỗi ngày.",
       questions: [
-        "Có kịch bản tư vấn chuẩn để mọi nhân viên (và chính chị) tư vấn nhất quán không?",
-        "Có quy trình mời khách lên liệu trình thay vì chỉ bán buổi lẻ không?",
-        "Có cơ chế thưởng/KPI cho nhân viên khi chốt liệu trình hoặc upsell không?",
-        "Có bước \"bán vòng hai\" — mời thêm dịch vụ/sản phẩm phù hợp sau buổi làm không?",
-        "Chị có nắm được mỗi tháng bao nhiêu % khách lẻ chuyển thành khách liệu trình không?"
+        { t: "Có kịch bản tư vấn chuẩn để mọi nhân viên (và chính chị) tư vấn nhất quán không?", a: "own" },
+        { t: "Có quy trình mời khách lên liệu trình thay vì chỉ bán buổi lẻ không?", a: "own" },
+        { t: "Có cơ chế thưởng/KPI cho nhân viên khi chốt liệu trình hoặc upsell không?", a: "own" },
+        { t: "Có bước \"bán vòng hai\" — mời thêm dịch vụ/sản phẩm phù hợp sau buổi làm không?", a: "own" },
+        { t: "Chị có nắm được mỗi tháng bao nhiêu % khách lẻ chuyển thành khách liệu trình không?", a: "fact" }
       ],
       money: "💸 Ước lượng (tạm tính): mỗi tháng ước <b>____</b> khách lẻ đáng lẽ lên được liệu trình × <b>____</b>đ (chênh lệch giá trị liệu trình so với vài buổi lẻ) = <b>~____</b>đ/tháng đang để lỡ.",
       root: "Chị đang thiếu HỆ THỐNG BÁN HÀNG",
@@ -263,11 +263,11 @@ const DATA = {
       shortName: "Hệ thống VẬN HÀNH", tagline: "để spa chạy khi chủ vắng",
       bleed: "Chủ có mặt thì mọi thứ chạy; chủ vắng là chất lượng, tinh thần và doanh số tụt. Spa đang chạy bằng SỨC CHỦ, không bằng hệ thống — nên chị không nghỉ được và cũng không lớn được.",
       questions: [
-        "Có bộ quy trình chuẩn (SOP) để nhân viên mới chạy được mà không cần chị kèm sát không?",
-        "Nếu chị vắng 1 tuần, chất lượng & doanh số có giữ nguyên không?",
-        "Có cách kiểm soát chất lượng dịch vụ mà không cần chị đứng nhìn không?",
-        "Có bảng phân quyền/phân việc rõ ai chịu trách nhiệm gì không?",
-        "Có cách đánh giá hiệu suất nhân viên định kỳ (không cảm tính) không?"
+        { t: "Có bộ quy trình chuẩn (SOP) để nhân viên mới chạy được mà không cần chị kèm sát không?", a: "own" },
+        { t: "Nếu chị vắng 1 tuần, chất lượng & doanh số có giữ nguyên không?", a: "fact" },
+        { t: "Có cách kiểm soát chất lượng dịch vụ mà không cần chị đứng nhìn không?", a: "own" },
+        { t: "Có bảng phân quyền/phân việc rõ ai chịu trách nhiệm gì không?", a: "own" },
+        { t: "Có cách đánh giá hiệu suất nhân viên định kỳ (không cảm tính) không?", a: "own" }
       ],
       money: "💸 Ước lượng (tạm tính): những ngày chị vắng, doanh số giảm <b>~__%</b> × số ngày chị buộc phải nghỉ/năm; cộng chi phí tuyển & đào tạo lại mỗi lần mất người <b>~____</b>đ. Đó là cái giá của việc spa dính chặt vào chị.",
       root: "Chị đang thiếu HỆ THỐNG VẬN HÀNH",
@@ -276,6 +276,12 @@ const DATA = {
       nextStep: "Việc nên làm trước tiên: xây <b>HỆ THỐNG VẬN HÀNH</b> — quy trình chuẩn, phân quyền rõ, kiểm soát chất lượng không cần chị đứng nhìn. Đó là con đường để chị được nghỉ mà spa vẫn chạy."
     }
   ],
+  // Nhãn đáp án theo NGỮ NGHĨA từng câu (a: "own" = đã sở hữu quy trình/công cụ · "fact" = kết quả/trạng thái thực tế).
+  // KHÔNG ảnh hưởng logic tính điểm: yes = tốt, no = 1 điểm rò — bất kể nhãn.
+  answerLabels: {
+    own:  { yes: "✔️ Có rồi", no: "✖️ Chưa có" },
+    fact: { yes: "✔️ Có",     no: "✖️ Không"   }
+  },
   severity: {
     on:  { max: 1, label: "Còn ổn",          cls: "sev-on"  },
     ro:  { max: 3, label: "Đang rò",          cls: "sev-ro"  },
@@ -401,10 +407,11 @@ if (typeof document !== "undefined") (function () {
       html += `<div class="leak-head"><div class="num">${leak.num}</div><div class="leak-title">${leak.title}</div></div>`;
       html += `<p class="bleed">${leak.bleed}</p>`;
       leak.questions.forEach((q, i) => {
-        html += `<div class="q" id="q-${leak.id}-${i}"><div class="q-text">${q}</div>
+        const lb = DATA.answerLabels[q.a] || DATA.answerLabels.own;
+        html += `<div class="q" id="q-${leak.id}-${i}"><div class="q-text">${q.t}</div>
           <div class="q-btns">
-            <button type="button" class="qb" data-leak="${leak.id}" data-i="${i}" data-v="yes">✔️ Có rồi</button>
-            <button type="button" class="qb" data-leak="${leak.id}" data-i="${i}" data-v="no">✖️ Chưa có</button>
+            <button type="button" class="qb" data-leak="${leak.id}" data-i="${i}" data-v="yes">${lb.yes}</button>
+            <button type="button" class="qb" data-leak="${leak.id}" data-i="${i}" data-v="no">${lb.no}</button>
           </div></div>`;
       });
       html += `<div class="money-hint">${leak.money}</div></div>`;
@@ -579,7 +586,7 @@ if (typeof document !== "undefined") (function () {
       p1leaks += `<div class="pleak">
         <div class="pleak-head"><div class="pnum">${leak.num}</div><div class="pleak-title">${leak.title}</div></div>
         <p class="pbleed">${leak.bleed}</p>
-        <ul class="pchecks">${leak.questions.map(q => `<li><span class="pbox"></span> ${q}</li>`).join("")}</ul>
+        <ul class="pchecks">${leak.questions.map(q => `<li><span class="pbox"></span> ${q.t}</li>`).join("")}</ul>
         <div class="pmeta"><div class="pscale">${d.scaleText}</div>
         <div class="pmoney">${leak.money}</div>
         <span class="proot">Gốc rễ <span class="arrow">→</span> ${leak.root}</span></div></div>`;
