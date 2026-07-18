@@ -264,7 +264,7 @@ const DATA = {
       bleed: "Chủ có mặt thì mọi thứ chạy; chủ vắng là chất lượng, tinh thần và doanh số tụt. Spa đang chạy bằng SỨC CHỦ, không bằng hệ thống — nên chị không nghỉ được và cũng không lớn được.",
       questions: [
         { t: "Có bộ quy trình chuẩn (SOP) để nhân viên mới chạy được mà không cần chị kèm sát không?", a: "own" },
-        { t: "Nếu chị vắng 1 tuần, chất lượng & doanh số có giữ nguyên không?", a: "fact" },
+        { t: "Nếu chị vắng mặt 1 tuần, spa vẫn vận hành ổn định và doanh số không bị ảnh hưởng đáng kể không?", a: "fact" },
         { t: "Có cách kiểm soát chất lượng dịch vụ mà không cần chị đứng nhìn không?", a: "own" },
         { t: "Có bảng phân quyền/phân việc rõ ai chịu trách nhiệm gì không?", a: "own" },
         { t: "Có cách đánh giá hiệu suất nhân viên định kỳ (không cảm tính) không?", a: "own" }
@@ -279,8 +279,8 @@ const DATA = {
   // Nhãn đáp án theo NGỮ NGHĨA từng câu (a: "own" = đã sở hữu quy trình/công cụ · "fact" = kết quả/trạng thái thực tế).
   // KHÔNG ảnh hưởng logic tính điểm: yes = tốt, no = 1 điểm rò — bất kể nhãn.
   answerLabels: {
-    own:  { yes: "✔️ Có rồi", no: "✖️ Chưa có" },
-    fact: { yes: "✔️ Có",     no: "✖️ Không"   }
+    own:  { yes: "✔️ Có", no: "✖️ Chưa có" },
+    fact: { yes: "✔️ Có", no: "✖️ Không"   }
   },
   severity: {
     on:  { max: 1, label: "Còn ổn",          cls: "sev-on"  },
