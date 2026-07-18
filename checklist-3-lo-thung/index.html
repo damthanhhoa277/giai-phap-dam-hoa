@@ -207,6 +207,9 @@
 
 <script>
 /*CORE-START*/
+// ✅ LANGUAGE LOCK V1.0 — 18/07/2026 (Hoa nghiệm thu vòng cuối).
+// 15 câu hỏi ĐÃ KHÓA — không sửa câu chữ nếu không phát hiện lỗi nghiêm trọng (Hoa quyết).
+// Test tự động khóa exact từng chữ trong test_qt002_core.js — sửa là test đỏ.
 const DATA = {
   meta: {
     code: "QT-002",
@@ -227,11 +230,11 @@ const DATA = {
       shortName: "Hệ thống GIỮ KHÁCH", tagline: "để khách cũ tự quay lại",
       bleed: "Khách làm 1–2 lần rồi biến mất. Chị phải tốn tiền quảng cáo mua khách MỚI để bù chỗ khách CŨ lẽ ra tự quay lại — đổ tiền vào cái thùng thủng đáy.",
       questions: [
-        { t: "Sau khi khách làm dịch vụ vài ngày, spa có nhắn tin hỏi thăm không?", a: "own" },
+        { t: "Vài ngày sau khi khách làm dịch vụ, spa có nhắn tin hỏi thăm không?", a: "own" },
         { t: "Đến kỳ chăm sóc tiếp theo, spa có chủ động nhắc khách quay lại không?", a: "own" },
-        { t: "Khách lâu không quay lại, chị có cách nào nhận ra ngay để mời lại không?", a: "own" },
+        { t: "Khách lâu không quay lại, chị có cách nào nhận ra ngay để chủ động mời không?", a: "own" },
         { t: "Dù ai làm, đông khách hay vắng khách, chất lượng dịch vụ có luôn ổn định không?", a: "fact" },
-        { t: "Khách quen có được ưu đãi riêng để muốn quay lại không — như tích buổi, giảm giá, hay gói định kỳ?", a: "own" }
+        { t: "Khách quen có được ưu đãi riêng như tích buổi, giảm giá hay gói định kỳ để muốn quay lại không?", a: "own" }
       ],
       money: "💸 Ước lượng (tạm tính, chỉ để hình dung): mỗi tháng ước <b>____</b> khách cũ không quay lại × <b>____</b>đ (giá TB 1 lần làm) = <b>~____</b>đ/tháng. Nhân 12 để thấy số tiền cả năm đang để rơi.",
       root: "Chị đang thiếu HỆ THỐNG GIỮ KHÁCH",
@@ -247,7 +250,7 @@ const DATA = {
       questions: [
         { t: "Spa có kịch bản tư vấn chung để nhân viên nào tư vấn cũng chuẩn như nhau không?", a: "own" },
         { t: "Khi khách chỉ làm buổi lẻ, spa có cách tư vấn để khách chuyển sang liệu trình không?", a: "own" },
-        { t: "Nhân viên bán được liệu trình có được thưởng rõ ràng không?", a: "own" },
+        { t: "Nhân viên bán được liệu trình, spa có thưởng rõ ràng không?", a: "own" },
         { t: "Mỗi lần làm xong cho khách, spa có giới thiệu thêm dịch vụ hay sản phẩm phù hợp không?", a: "own" },
         { t: "Chị có biết mỗi tháng bao nhiêu khách lẻ chuyển sang mua liệu trình không?", a: "fact" }
       ],
@@ -263,9 +266,9 @@ const DATA = {
       shortName: "Hệ thống VẬN HÀNH", tagline: "để spa chạy khi chủ vắng",
       bleed: "Chủ có mặt thì mọi thứ chạy; chủ vắng là chất lượng, tinh thần và doanh số tụt. Spa đang chạy bằng SỨC CHỦ, không bằng hệ thống — nên chị không nghỉ được và cũng không lớn được.",
       questions: [
-        { t: "Nhân viên mới vào, spa có sẵn quy trình để họ tự làm được việc, không cần chị kèm sát không?", a: "own" },
-        { t: "Nếu chị vắng mặt cả tuần, spa có vẫn hoạt động tốt và doanh thu vẫn ổn không?", a: "fact" },
-        { t: "Spa có cách kiểm tra chất lượng dịch vụ thường xuyên mà không cần chị tự đi xem không?", a: "own" },
+        { t: "Nếu mai có một nhân viên mới vào làm, họ có thể bắt tay vào công việc mà không cần chị kèm sát không?", a: "fact" },
+        { t: "Nếu chị vắng mặt cả tuần, spa vẫn hoạt động tốt và doanh thu vẫn ổn chứ?", a: "fact" },
+        { t: "Spa có cách theo dõi chất lượng dịch vụ thường xuyên mà không cần chị trực tiếp kiểm tra không?", a: "own" },
         { t: "Trong spa, ai phụ trách việc gì có được phân công rõ ràng không?", a: "own" },
         { t: "Cuối tháng, chị có cách đánh giá nhân viên rõ ràng, thay vì chỉ dựa vào cảm tính không?", a: "own" }
       ],
