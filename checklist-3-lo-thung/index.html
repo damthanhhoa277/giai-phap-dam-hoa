@@ -89,7 +89,17 @@
   /* result */
   .result-eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);
     font-weight:800;margin-bottom:8px;}
-  .verdict{font-size:clamp(19px,5vw,24px);font-weight:800;color:var(--olive-deep);line-height:1.25;}
+  .verdict-icon{font-size:44px;line-height:1;margin:2px 0 8px;}
+  .verdict{font-size:clamp(20px,5.5vw,26px);font-weight:800;color:var(--olive-deep);line-height:1.22;}
+  .punch{font-size:16px;font-weight:800;color:var(--clay);margin-top:11px;line-height:1.45;}
+  .bar-track{height:6px;background:var(--cream2);border:1px solid var(--line);border-radius:4px;margin-top:7px;overflow:hidden;}
+  .bar-fill{height:100%;border-radius:4px;}
+  .btn-cta{background:var(--gold);color:#fff;font-size:16.5px;padding:15px 22px;width:100%;
+    box-shadow:0 5px 16px rgba(185,138,62,.38);}
+  .sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(250,246,236,.97);
+    border-top:1.5px solid var(--line);padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+    box-shadow:0 -4px 18px rgba(44,62,47,.12);}
+  .sticky-cta-inner{max-width:680px;margin:0 auto;}
   .sev-badge{display:inline-block;font-size:12.5px;font-weight:800;border-radius:8px;padding:4px 11px;
     margin:10px 0 4px;}
   .sev-on{background:#E4EDE2;color:#33532F;}
@@ -125,7 +135,7 @@
   #printdoc{display:none;}
   @media print{
     body{background:#fff;}
-    #app,.progress-wrap{display:none !important;}
+    #app,.progress-wrap,.sticky-cta{display:none !important;}
     #printdoc{display:block;}
     .page{margin:0;box-shadow:none;width:auto;min-height:auto;padding:10mm 14mm;position:relative;background:var(--paper);}
     .page:first-child{page-break-after:always;}
@@ -238,8 +248,9 @@ const DATA = {
       ],
       money: "💸 Ước lượng (tạm tính, chỉ để hình dung): mỗi tháng ước <b>____</b> khách cũ không quay lại × <b>____</b>đ (giá TB 1 lần làm) = <b>~____</b>đ/tháng. Nhân 12 để thấy số tiền cả năm đang để rơi.",
       root: "Chị đang thiếu HỆ THỐNG GIỮ KHÁCH",
-      resultHeadline: "Lỗ nặng nhất của spa chị: KHÂU GIỮ KHÁCH",
-      resultConclusion: "Chị không thiếu khách — chị đang thiếu <b>hệ thống để khách cũ tự quay lại</b>. Mỗi tháng chị phải bỏ tiền mua khách mới để bù chỗ khách cũ lặng lẽ rời đi. Đó là cái lỗ đang rút tiền spa chị nhanh nhất.",
+      resultHeadline: "Tiền spa chị đang rò ở KHÂU GIỮ KHÁCH",
+      resultPunch: "Chị không thiếu khách — chị thiếu hệ thống để khách cũ tự quay lại.",
+      resultConclusion: "Mỗi tháng chị phải bỏ tiền quảng cáo mua khách mới, trong khi khách cũ lặng lẽ rời đi. Đây là lỗ đang rút tiền spa chị nhanh nhất.",
       nextStep: "Việc nên làm trước tiên: xây <b>HỆ THỐNG GIỮ KHÁCH</b> — chăm sóc sau buổi làm, nhắc lịch đúng chu kỳ, và lý do rõ ràng để khách quay lại. Vá được lỗ này, mỗi đồng quảng cáo chị chi mới bắt đầu sinh lời."
     },
     {
@@ -256,8 +267,9 @@ const DATA = {
       ],
       money: "💸 Ước lượng (tạm tính): mỗi tháng ước <b>____</b> khách lẻ đáng lẽ lên được liệu trình × <b>____</b>đ (chênh lệch giá trị liệu trình so với vài buổi lẻ) = <b>~____</b>đ/tháng đang để lỡ.",
       root: "Chị đang thiếu HỆ THỐNG BÁN HÀNG",
-      resultHeadline: "Lỗ nặng nhất của spa chị: KHÂU BÁN HÀNG",
-      resultConclusion: "Khách đã đến với chị rồi — nhưng spa chưa có <b>hệ thống tư vấn để khách lên liệu trình</b>. Mỗi khách chỉ mua lẻ một buổi là một lần chị để tiền trên bàn. Đây là lỗ rò âm thầm nhưng cộng lại rất lớn.",
+      resultHeadline: "Tiền spa chị đang rò ở KHÂU BÁN HÀNG",
+      resultPunch: "Khách đã đến rồi — spa chỉ thiếu hệ thống để khách mua nhiều hơn.",
+      resultConclusion: "Mỗi khách chỉ mua lẻ một buổi là một lần chị để tiền trên bàn. Lỗ này rò âm thầm nhưng cộng lại rất lớn.",
       nextStep: "Việc nên làm trước tiên: xây <b>HỆ THỐNG BÁN HÀNG</b> — kịch bản tư vấn nhất quán, quy trình mời lên liệu trình, và cơ chế thưởng rõ ràng. Cùng lượng khách đó, doanh thu có thể khác hẳn."
     },
     {
@@ -274,8 +286,9 @@ const DATA = {
       ],
       money: "💸 Ước lượng (tạm tính): những ngày chị vắng, doanh số giảm <b>~__%</b> × số ngày chị buộc phải nghỉ/năm; cộng chi phí tuyển & đào tạo lại mỗi lần mất người <b>~____</b>đ. Đó là cái giá của việc spa dính chặt vào chị.",
       root: "Chị đang thiếu HỆ THỐNG VẬN HÀNH",
-      resultHeadline: "Lỗ nặng nhất của spa chị: KHÂU VẬN HÀNH",
-      resultConclusion: "Spa đang chạy bằng <b>sức chị</b>, không bằng hệ thống. Chị có mặt thì mọi thứ ổn — chị vắng là chất lượng, tinh thần và doanh số tụt. Chị không nghỉ được, và spa cũng không lớn được, vì mọi thứ đều dính chặt vào chị.",
+      resultHeadline: "Tiền spa chị đang rò ở KHÂU VẬN HÀNH",
+      resultPunch: "Spa đang chạy bằng sức chị — chưa có hệ thống gánh thay.",
+      resultConclusion: "Chị có mặt thì mọi thứ ổn, chị vắng là chất lượng và doanh số tụt. Chị không nghỉ được, spa cũng không lớn được.",
       nextStep: "Việc nên làm trước tiên: xây <b>HỆ THỐNG VẬN HÀNH</b> — quy trình chuẩn, phân quyền rõ, kiểm soát chất lượng không cần chị đứng nhìn. Đó là con đường để chị được nghỉ mà spa vẫn chạy."
     }
   ],
@@ -291,7 +304,8 @@ const DATA = {
     mau: { max: 5, label: "Đang chảy máu",    cls: "sev-mau" }
   },
   tieOrder: ["giu-khach", "ban-hang", "van-hanh"],
-  tieNote: "Spa chị đang thiếu hệ thống ở <b>nhiều mảng cùng lúc</b> với mức độ ngang nhau. Đừng vá dàn trải — nên bắt đầu từ <b>một</b> mảng theo thứ tự tác động lên dòng tiền:",
+  tieHeadline: "Tiền spa chị đang rò ở NHIỀU KHÂU cùng lúc",
+  tieNote: "Spa chị đang thiếu hệ thống ở <b>nhiều mảng cùng lúc</b> — đừng vá dàn trải. Bắt đầu từ",
   healthy: {
     headline: "Tin vui: chưa thấy lỗ nào đang chảy máu nặng",
     conclusion: "Theo câu trả lời của chị, cả 3 mảng <b>giữ khách · bán hàng · vận hành</b> đều đã có nền khá tốt. Điều đó rất đáng quý — phần lớn spa không được như vậy. Bước tiếp theo của chị không phải là \"vá lỗ\" nữa, mà là <b>hệ thống hóa sâu hơn</b> để spa lớn lên mà không phụ thuộc thêm vào chị.",
@@ -299,7 +313,7 @@ const DATA = {
   },
   reveal: {
     eyebrow: "Sự thật ít ai nói cho chị",
-    body: "Chị vừa soi qua 3 lỗ. Để ý điều này: 3 lỗ khác tên, nhưng chung <b>một gốc</b>. Không lỗ nào là do chị thiếu cố gắng — mà vì spa đang chạy bằng <b>sức chị và trí nhớ của chị</b>, chưa có <b>hệ thống</b> gánh thay. Càng đông khách, chị càng phải gánh nặng hơn — nên càng làm càng mệt mà tiền vẫn cứ rò.",
+    body: "3 lỗ khác tên nhưng chung <b>một gốc</b>: spa đang chạy bằng <b>sức chị và trí nhớ của chị</b>, chưa có <b>hệ thống</b> gánh thay. Càng đông khách chị càng gánh nặng — nên càng làm càng mệt mà tiền vẫn cứ rò.",
     big: "Đây không phải lỗi của chị. Đây là dấu hiệu đã đến lúc xây hệ thống."
   },
   cta: {
@@ -438,6 +452,9 @@ if (typeof document !== "undefined") (function () {
     $("#btnResult").addEventListener("click", showResult);
     paintAnswers(); updateProgress();
     document.getElementById("progressWrap").classList.remove("hidden");
+    const oldSticky = document.getElementById("stickyCta");
+    if (oldSticky) oldSticky.remove();
+    app.style.paddingBottom = "";
     track("qt002_started");
   }
 
@@ -482,30 +499,36 @@ if (typeof document !== "undefined") (function () {
     let html = "";
     html += `<div class="brandbar"><span>🌿 ${DATA.meta.brand} · ${DATA.meta.community}</span><span>Kết quả · ${DATA.meta.code}</span></div>`;
 
-    // 1) verdict
+    // 1) verdict — 5 giây hiểu: icon to + tiêu đề mạnh + 1 câu chốt
     html += `<div class="card"><div class="result-eyebrow">Kết quả của spa chị</div>`;
     if (r.healthy) {
+      html += `<div class="verdict-icon">🌿</div>`;
       html += `<div class="verdict">${DATA.healthy.headline}</div>`;
       html += `<p class="concl">${DATA.healthy.conclusion}</p>`;
     } else {
-      html += `<div class="verdict">${big.resultHeadline}</div>`;
-      html += `<span class="sev-badge ${sev.cls}">${big.icon} Mức độ: ${sev.label} — ${r.biggestScore}/5 điểm rò</span>`;
+      html += `<div class="verdict-icon">${r.isTie ? "💧" : big.icon}</div>`;
+      html += `<div class="verdict">${r.isTie ? DATA.tieHeadline : big.resultHeadline}</div>`;
+      html += `<span class="sev-badge ${sev.cls}">Mức độ: ${sev.label} — ${r.biggestScore}/5 điểm rò</span>`;
       if (r.isTie) {
-        const names = r.tiedIds.map(id => leakById(id).shortName.replace("Hệ thống ", "")).join(" · ");
-        html += `<p class="concl">${DATA.tieNote} <b>${names}</b> — bắt đầu từ <b>${big.shortName}</b>.</p>`;
+        html += `<p class="punch">${DATA.tieNote} <b>${big.shortName}</b> — vì tác động lên dòng tiền nhanh nhất.</p>`;
+      } else {
+        html += `<p class="punch">${big.resultPunch}</p>`;
       }
       html += `<p class="concl">${big.resultConclusion}</p>`;
     }
-    // bảng 3 lỗ
+    // bảng 3 lỗ + thanh mức độ màu (nhìn phát biết lỗ nào nặng)
+    const SEVC = { on: "#6E8168", ro: "#B98A3E", mau: "#B5673D" };
     html += `<div class="score-row">`;
     for (const leak of DATA.leaks) {
       const s = DATA.severity[r.severities[leak.id]];
       const worst = !r.healthy && leak.id === r.biggestId ? " worst" : "";
+      const pct = Math.round(r.scores[leak.id] / leak.questions.length * 100);
       html += `<div class="score-cell${worst}"><div class="ic">${leak.icon}</div>
         <div class="nm">${leak.shortName.replace("Hệ thống ", "Hệ thống<br>")}</div>
+        <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${SEVC[r.severities[leak.id]]}"></div></div>
         <div class="sc">${r.scores[leak.id]}/5 · ${s.label}</div></div>`;
     }
-    html += `</div><p class="note" style="margin-top:6px;">Điểm rò = số câu "Chưa có". Càng cao lỗ càng nặng.</p></div>`;
+    html += `</div><p class="note" style="margin-top:6px;">Điểm rò = số câu "Chưa có" / "Không". Càng cao, lỗ càng nặng.</p></div>`;
 
     // 2) reveal 1 gốc
     html += `<div class="revealbox"><div class="result-eyebrow" style="color:#F4D48A;">${DATA.reveal.eyebrow}</div>
@@ -517,9 +540,9 @@ if (typeof document !== "undefined") (function () {
     html += `<p class="next-text">${next}</p><p class="next-text" style="font-style:italic;color:var(--olive-soft);">${DATA.cta.value}</p>`;
     html += `<div class="cta-stack">`;
     if (CONFIG.ctaUrl) {
-      html += `<a class="btn btn-primary" id="btnCta" href="${CONFIG.ctaUrl}" target="_blank" rel="noopener">👉 ${DATA.cta.destLabel}</a>`;
+      html += `<a class="btn btn-cta" id="btnCta" href="${CONFIG.ctaUrl}" target="_blank" rel="noopener">👉 ${DATA.cta.destLabel}</a>`;
     } else {
-      html += `<button type="button" class="btn btn-primary" id="btnCta">👉 ${DATA.cta.destLabel}</button>`;
+      html += `<button type="button" class="btn btn-cta" id="btnCta">👉 ${DATA.cta.destLabel}</button>`;
     }
     html += `<button type="button" class="btn btn-ghost" id="btnPdf">🖨️ Tải / in bản checklist PDF để giữ lại</button>`;
     html += `<button type="button" class="btn btn-ghost" id="btnRedo" style="border-style:dashed;">↩️ Làm lại từ đầu</button>`;
@@ -548,12 +571,28 @@ if (typeof document !== "undefined") (function () {
       answers = {}; for (const leak of DATA.leaks) answers[leak.id] = [];
       save(); renderChecklist(); window.scrollTo(0, 0);
     });
-    const cta = $("#btnCta");
-    cta.addEventListener("click", () => {
-      track("qt002_cta_click", { biggest_leak: r.biggestId });
-      if (!CONFIG.ctaUrl) alert('Chị tìm cộng đồng "Chủ Spa Bình An" của Đàm Thanh Hoa trên Facebook, hoặc nhắn Zalo cho Hoa để được hướng dẫn nha 💛');
+    const ctaFallbackMsg = 'Chị tìm cộng đồng "Chủ Spa Bình An" của Đàm Thanh Hoa trên Facebook, hoặc nhắn Zalo cho Hoa để được hướng dẫn nha 💛';
+    $("#btnCta").addEventListener("click", () => {
+      track("qt002_cta_click", { biggest_leak: r.biggestId, placement: "main" });
+      if (!CONFIG.ctaUrl) alert(ctaFallbackMsg);
     });
     if (CONFIG.webhookUrl) $("#btnLead").addEventListener("click", () => submitLead(r));
+
+    // sticky CTA dính đáy màn hình (mobile-first) — chỉ ở màn kết quả
+    let sticky = document.getElementById("stickyCta");
+    if (!sticky) {
+      sticky = document.createElement("div");
+      sticky.id = "stickyCta"; sticky.className = "sticky-cta";
+      document.body.appendChild(sticky);
+    }
+    sticky.innerHTML = `<div class="sticky-cta-inner">${CONFIG.ctaUrl
+      ? `<a class="btn btn-cta" id="btnCtaSticky" href="${CONFIG.ctaUrl}" target="_blank" rel="noopener">👉 ${DATA.cta.destLabel}</a>`
+      : `<button type="button" class="btn btn-cta" id="btnCtaSticky">👉 ${DATA.cta.destLabel}</button>`}</div>`;
+    document.getElementById("btnCtaSticky").addEventListener("click", () => {
+      track("qt002_cta_click", { biggest_leak: r.biggestId, placement: "sticky" });
+      if (!CONFIG.ctaUrl) alert(ctaFallbackMsg);
+    });
+    app.style.paddingBottom = "110px";
   }
 
   // ---- CRM layer ----
