@@ -1,6 +1,6 @@
-# Chủ Spa Bình An — Công cụ miễn phí cho chủ spa
+# Đàm Thanh Hoa — Công cụ miễn phí cho chủ spa
 
-Trang công cụ (GitHub Pages) của thương hiệu **Chủ Spa Bình An** · Đàm Thanh Hoa.
+Trang công cụ (GitHub Pages) của thương hiệu cá nhân **Đàm Thanh Hoa** — chuyên gia xây hệ thống vận hành spa.
 
 | Trang | Đường dẫn | Vai trò |
 |---|---|---|
@@ -10,7 +10,7 @@ Trang công cụ (GitHub Pages) của thương hiệu **Chủ Spa Bình An** · 
 ## Trang thu lead `/kiem-tra-dong-tien/`
 - Form gửi về **Google Apps Script Web App** (double opt-in): khách điền → nhận email xác nhận → bấm xác nhận → nhận link quà.
 - Ai không bấm xác nhận thì **không vào danh sách gửi** (tránh bị đánh dấu spam).
-- Sổ lead: Google Sheet `DANH SÁCH LEAD — Chủ Spa Bình An` (Drive của Hoa).
+- Sổ lead: Google Sheet `DANH SÁCH LEAD — Đàm Thanh Hoa` (Drive của Hoa).
 - Đổi endpoint: sửa `CONFIG.apiUrl` trong `kiem-tra-dong-tien/index.html`.
 - Ảnh quà tạo bằng **Gemini**, tông cream–olive–gold theo bảng màu thương hiệu.
 
