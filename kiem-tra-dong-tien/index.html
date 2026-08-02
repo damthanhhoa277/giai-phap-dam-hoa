@@ -217,10 +217,15 @@ var CONFIG = {
 /* Ẩn thanh CTA khi khách đã cuộn tới ô điền thông tin — khỏi che chữ */
 (function(){
   var thanh = document.getElementById('thanhCta'), khu = document.getElementById('nhanqua');
-  if (!thanh || !khu || !('IntersectionObserver' in window)) return;
-  new IntersectionObserver(function(es){
-    es.forEach(function(e){ thanh.classList.toggle('an', e.isIntersecting); });
-  }, {threshold: 0.12}).observe(khu);
+  if (!thanh || !khu) return;
+  function xet(){
+    var r = khu.getBoundingClientRect();
+    // ô điền thông tin đã lọt vào tầm nhìn -> ẩn thanh, khỏi che chữ
+    thanh.classList.toggle('an', r.top < window.innerHeight * 0.92 && r.bottom > 60);
+  }
+  window.addEventListener('scroll', xet, {passive:true});
+  window.addEventListener('resize', xet, {passive:true});
+  xet();
 })();
 
 (function(){
