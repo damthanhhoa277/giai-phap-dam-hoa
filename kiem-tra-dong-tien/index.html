@@ -86,7 +86,7 @@
 <body>
 <div class="wrap">
 
-  <div class="brandbar"><span><b>Giải Pháp Đàm Hoa</b></span><span>Quà tặng miễn phí</span></div>
+  <div class="brandbar"><span><b>Chủ Spa Bình An</b></span><span>Quà tặng miễn phí</span></div>
 
   <!-- HERO -->
   <div class="card">
@@ -159,7 +159,7 @@
       <label for="email">Email để nhận quà</label>
       <input id="email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="ten@gmail.com" required>
 
-      <button class="btn" type="submit" id="btn">Gửi quà cho em nhé 🎁</button>
+      <button class="btn" type="submit" id="btn">Nhận quà miễn phí 🎁</button>
     </form>
 
     <div class="msg" id="msg"></div>
@@ -186,7 +186,7 @@
       <div class="av">ĐH</div>
       <div>
         <div style="font-weight:800;color:var(--olive-deep);font-size:16.5px;">Đàm Thanh Hoa</div>
-        <div style="font-size:13px;color:var(--olive-soft);margin-top:2px;">Giải Pháp Đàm Hoa · Hệ thống vận hành cho chủ spa</div>
+        <div style="font-size:13px;color:var(--olive-soft);margin-top:2px;">Chủ Spa Bình An · Hệ thống vận hành cho chủ spa</div>
         <p style="font-size:14.4px;color:var(--ink-soft);margin-top:10px;">Em làm bảng này vì gặp quá nhiều chị chủ spa chăm chỉ, tay nghề giỏi, khách quý — nhưng cuối tháng vẫn không có tiền, rồi tự trách mình. Phần lớn không phải lỗi của các chị. Là do <b>chưa có hệ thống để nhìn ra con số thật</b>. Nhìn ra rồi thì sửa được.</p>
       </div>
     </div>
@@ -194,7 +194,7 @@
 
   <div class="anchor-cta"><a href="#nhanqua">Nhận quà miễn phí →</a></div>
 
-  <p class="foot">© Giải Pháp Đàm Hoa · Đàm Thanh Hoa<br>Quà tặng miễn phí dành cho chủ spa Việt Nam</p>
+  <p class="foot">© Chủ Spa Bình An · Đàm Thanh Hoa<br>Quà tặng miễn phí dành cho chủ spa Việt Nam</p>
 </div>
 
 <script>
@@ -226,7 +226,7 @@ var CONFIG = {
       return bao('no','Trang đang được hoàn thiện, chị quay lại sau ít phút giúp em ạ.');
     }
 
-    btn.disabled = true; btn.textContent = 'Em đang gửi…';
+    btn.disabled = true; btn.textContent = 'Đang gửi…';
     fetch(CONFIG.apiUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
@@ -241,12 +241,12 @@ var CONFIG = {
         f.style.display = 'none';
         bao('ok', '<b>' + d.thongDiep + '</b><br>Chị mở hộp thư <b>' + email.value.trim() + '</b> và bấm nút xác nhận trong email của em nha. Không thấy thì chị xem mục <b>Quảng cáo</b> hoặc <b>Thư rác</b> giúp em ạ.');
       } else {
-        btn.disabled = false; btn.textContent = 'Gửi quà cho em nhé 🎁';
+        btn.disabled = false; btn.textContent = 'Nhận quà miễn phí 🎁';
         bao('no', (d && d.thongDiep) || 'Có trục trặc, chị thử lại giúp em ạ.');
       }
     })
     .catch(function(){
-      btn.disabled = false; btn.textContent = 'Gửi quà cho em nhé 🎁';
+      btn.disabled = false; btn.textContent = 'Nhận quà miễn phí 🎁';
       bao('no','Mạng đang trục trặc nên chưa gửi được. Chị thử lại giúp em, hoặc nhắn trực tiếp cho em cũng được ạ.');
     });
   });
