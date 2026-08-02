@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kiểm Tra Nhanh Sức Khỏe Dòng Tiền Spa — quà tặng từ Đàm Thanh Hoa</title>
+<meta name="description" content="Bảng kiểm tra 5 phút cho chủ spa: điền 6 con số của tháng vừa rồi, biết ngay tiền spa đang thật sự dư hay hụt, và có đang lỡ tiêu vào tiền khách trả trước không.">
+<meta property="og:title" content="Tháng nào cũng có khách. Cuối tháng vẫn không còn tiền.">
+<meta property="og:description" content="5 phút, 6 con số — biết spa của chị đang giữ được bao nhiêu tiền thật. Quà miễn phí từ Đàm Thanh Hoa.">
+<meta property="og:image" content="anh-qua-tang.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎁</text></svg>">
+<!--
+  TRANG LEAD MAGNET — QT-001 Kiểm Tra Nhanh Sức Khỏe Dòng Tiền Spa
+  Nguồn chân lý: KHO-TRI-THUC/wiki/03-Marketing/qua-tang/ (vault). Đây là bản DEPLOY.
+  Cấu hình 1 chỗ: CONFIG.apiUrl (Apps Script Web App — nhận lead + gửi mail xác nhận).
+-->
+<style>
+  :root{
+    --cream:#FAF6EC; --cream2:#F2ECDC; --paper:#FFFDF7;
+    --olive:#3E5541; --olive-deep:#2C3E2F; --olive-soft:#6E8168;
+    --gold:#B98A3E; --clay:#B5673D; --line:#D9D0BA;
+    --ink:#2B322A; --ink-soft:#5A6156;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+  body{font-family:"Segoe UI","Helvetica Neue",Arial,"Noto Sans",sans-serif;
+    background:var(--cream2);color:var(--ink);line-height:1.55;}
+  .wrap{max-width:680px;margin:0 auto;padding:16px 14px 60px;}
+  .brandbar{display:flex;justify-content:space-between;align-items:center;font-size:10px;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--olive-soft);margin-bottom:12px;}
+  .brandbar b{color:var(--olive);}
+  .card{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;
+    padding:22px 18px;margin-bottom:14px;box-shadow:0 3px 14px rgba(44,62,47,.07);}
+  h1{font-size:clamp(23px,6vw,33px);line-height:1.16;color:var(--olive-deep);font-weight:800;letter-spacing:-.4px;}
+  h1 .hl{color:var(--clay);}
+  h2{font-size:clamp(18px,4.6vw,22px);color:var(--olive-deep);font-weight:800;line-height:1.25;}
+  .sub{font-size:15px;color:var(--ink-soft);margin-top:10px;}
+  .rule{height:3px;width:58px;background:var(--gold);border-radius:3px;margin:13px 0;}
+  .hero-img{width:100%;border-radius:13px;border:1px solid var(--line);display:block;margin:16px 0 4px;}
+  .cap{font-size:11.5px;color:var(--olive-soft);text-align:center;font-style:italic;}
+  .hookbox{background:var(--olive-deep);color:#F3EEDF;border-radius:13px;padding:17px 17px;
+    font-size:15px;line-height:1.62;margin:16px 0 4px;}
+  .hookbox b{color:#F4D48A;}
+  .hookbox p+p{margin-top:11px;}
+  .num{display:flex;gap:13px;align-items:flex-start;padding:14px 0;border-bottom:1px dashed var(--line);}
+  .num:last-child{border-bottom:none;padding-bottom:2px;}
+  .num .n{flex:none;width:31px;height:31px;border-radius:50%;background:var(--olive);color:#fff;
+    font-weight:800;font-size:14.5px;display:flex;align-items:center;justify-content:center;margin-top:1px;}
+  .num .t{font-weight:800;color:var(--olive-deep);font-size:16px;}
+  .num .d{font-size:14px;color:var(--ink-soft);margin-top:3px;}
+  .who li{list-style:none;padding:9px 0 9px 27px;position:relative;font-size:15px;border-bottom:1px dashed var(--line);}
+  .who li:last-child{border-bottom:none;}
+  .who li::before{content:"✓";position:absolute;left:2px;top:9px;color:var(--gold);font-weight:900;}
+  .notfor{background:var(--cream);border:1px dashed var(--line);border-radius:11px;padding:13px 14px;
+    font-size:13.7px;color:var(--ink-soft);margin-top:14px;}
+  label{display:block;font-size:12.5px;font-weight:800;color:var(--olive-deep);margin:13px 0 5px;letter-spacing:.02em;}
+  input{width:100%;font-family:inherit;font-size:16px;padding:12px 13px;border-radius:11px;
+    border:1.6px solid var(--line);background:var(--paper);color:var(--ink);}
+  input:focus{outline:none;border-color:var(--olive);box-shadow:0 0 0 3px rgba(62,85,65,.12);}
+  input.err{border-color:var(--clay);box-shadow:0 0 0 3px rgba(181,103,61,.16);}
+  .btn{display:block;width:100%;border:none;cursor:pointer;font-family:inherit;font-weight:800;
+    border-radius:12px;background:var(--gold);color:#fff;font-size:17px;padding:15px 20px;margin-top:18px;
+    box-shadow:0 4px 13px rgba(185,138,62,.32);transition:transform .08s ease;}
+  .btn:active{transform:scale(.98);}
+  .btn[disabled]{background:#C3B79C;box-shadow:none;cursor:progress;}
+  .msg{font-size:14px;margin-top:12px;padding:12px 13px;border-radius:10px;display:none;line-height:1.55;}
+  .msg.ok{display:block;background:#EDF3EA;border:1px solid #BBD0B4;color:#2C3E2F;}
+  .msg.no{display:block;background:#FBEDE6;border:1px solid #E3C0AC;color:#8C4A26;}
+  .privacy{font-size:12.3px;color:var(--ink-soft);margin-top:13px;line-height:1.55;}
+  .steps{counter-reset:s;margin-top:6px;}
+  .steps li{list-style:none;position:relative;padding:8px 0 8px 30px;font-size:14.6px;color:var(--ink-soft);}
+  .steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:8px;
+    width:21px;height:21px;border-radius:50%;background:var(--cream2);color:var(--olive);
+    font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;}
+  .author{display:flex;gap:14px;align-items:flex-start;}
+  .author .av{flex:none;width:52px;height:52px;border-radius:50%;background:var(--olive);color:#F4D48A;
+    display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;}
+  .foot{text-align:center;font-size:11.5px;color:var(--olive-soft);margin-top:22px;line-height:1.6;}
+  .anchor-cta{position:sticky;bottom:12px;margin-top:16px;}
+  .anchor-cta a{display:block;text-align:center;text-decoration:none;background:var(--olive);color:#fff;
+    font-weight:800;font-size:15.5px;padding:14px;border-radius:12px;box-shadow:0 6px 18px rgba(44,62,47,.26);}
+  @media(max-width:380px){ .card{padding:19px 15px;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="brandbar"><span><b>Giải Pháp Đàm Hoa</b></span><span>Quà tặng miễn phí</span></div>
+
+  <!-- HERO -->
+  <div class="card">
+    <h1>Tháng nào cũng có khách.<br><span class="hl">Cuối tháng vẫn không còn tiền.</span></h1>
+    <div class="rule"></div>
+    <p class="sub">Chị điền <b>6 con số</b> của tháng vừa rồi. Trong <b>5 phút</b>, chị biết spa mình đang thật sự giữ được bao nhiêu tiền — và tiền đang rò đi đâu.</p>
+    <picture>
+      <source srcset="anh-qua-tang.webp" type="image/webp">
+      <img class="hero-img" src="anh-qua-tang.jpg" alt="Bảng kiểm tra sức khỏe dòng tiền spa" width="1376" height="768" loading="eager">
+    </picture>
+    <p class="cap">Kiểm Tra Nhanh Sức Khỏe Dòng Tiền Spa · dùng được trên điện thoại</p>
+  </div>
+
+  <!-- NỖI ĐAU -->
+  <div class="card">
+    <div class="hookbox">
+      <p>Chị có bao giờ thấy thế này không: sổ ghi <b>doanh thu tháng này cao hơn tháng trước</b>, khách khen, lịch kín — mà tới ngày trả lương, trả tiền mặt bằng, chị lại phải <b>lấy tiền túi bù vào</b>?</p>
+      <p>Rồi chị tự trách mình chi tiêu không khéo. Tự nhủ tháng sau chăm chỉ hơn.</p>
+      <p><b>Nhưng phần lớn trường hợp không phải chị làm ít. Cũng không phải chị tiêu hoang.</b></p>
+      <p>Mà là vì tiền trong két spa <b>đang lẫn nhiều loại tiền khác nhau</b> — tiền lời thật, tiền khách trả trước cho buổi chưa làm, tiền chị ứng ra. Nhìn vào két thì thấy có tiền, nên yên tâm. Đến lúc phải trả nợ dịch vụ cho khách mới biết là mình đã tiêu vào phần không phải của mình.</p>
+      <p><b>Không đếm được thì không giữ được.</b> Cái chị thiếu không phải là khách — mà là một cách nhìn ra con số thật.</p>
+    </div>
+  </div>
+
+  <!-- 4 CON SỐ -->
+  <div class="card">
+    <h2>Điền xong, chị có ngay 4 con số</h2>
+    <div class="rule"></div>
+    <div class="num"><div class="n">1</div><div>
+      <div class="t">Tiền chị tiêu được thật sự</div>
+      <div class="d">Trong két còn bao nhiêu là của spa, sau khi trừ phần đang nợ dịch vụ cho khách. Con số này âm là chị đang tiêu vào tiền của khách mà không hay.</div></div></div>
+    <div class="num"><div class="n">2</div><div>
+      <div class="t">Tiền của khách đang nằm trong két</div>
+      <div class="d">Khách trả trước cho gói, liệu trình — buổi chưa làm thì tiền đó vẫn là của khách, chỉ đang gửi ở chỗ chị.</div></div></div>
+    <div class="num"><div class="n">3</div><div>
+      <div class="t">Tiền biến mất không lời giải</div>
+      <div class="d">Đối chiếu đầu tháng – thu – chi – cuối tháng. Lệch bao nhiêu là bấy nhiêu tiền đi mà không ai nhớ đi đâu.</div></div></div>
+    <div class="num"><div class="n">4</div><div>
+      <div class="t">Tháng rồi spa sống bằng tiền gì</div>
+      <div class="d">Bằng tiền spa làm ra, hay bằng tiền khách ứng trước, hay bằng tiền túi của chị. Ba cái này khác nhau hoàn toàn.</div></div></div>
+    <p class="privacy" style="margin-top:15px;">Kèm theo: <b>một việc chị nên làm ngay</b> — bảng tự chọn ra việc gấp nhất theo đúng tình trạng số của chị, không phải danh sách chung chung.</p>
+  </div>
+
+  <!-- DÀNH CHO AI -->
+  <div class="card">
+    <h2>Quà này hợp với chị nếu…</h2>
+    <div class="rule"></div>
+    <ul class="who">
+      <li>Chị đang tự đứng spa, mini spa hoặc home spa, doanh thu khoảng 30–200 triệu/tháng</li>
+      <li>Spa chị <b>có bán gói, liệu trình trả trước</b> — hoặc đang định bán</li>
+      <li>Chị ghi thu chi bằng sổ tay, tin nhắn, hoặc trong đầu</li>
+      <li>Chị không rành kế toán và cũng không muốn học kế toán</li>
+    </ul>
+    <div class="notfor">Em nói thật để chị đỡ mất thời gian: đây <b>không phải</b> phần mềm kế toán, cũng không phải bảng tính lãi lỗ chi tiết. Đây là bài kiểm tra nhanh để chị nhìn ra vấn đề — chứ chưa giải quyết vấn đề. Nếu chị cần một hệ thống sổ sách đầy đủ thì cái này chưa đủ cho chị.</div>
+  </div>
+
+  <!-- FORM -->
+  <div class="card" id="nhanqua">
+    <h2>Chị để lại thông tin, em gửi quà qua email</h2>
+    <div class="rule"></div>
+    <p class="sub" style="margin-top:0;font-size:14.5px;">Quà miễn phí, không mất phí gì cả.</p>
+
+    <form id="f" novalidate>
+      <label for="ten">Em gọi chị là gì ạ?</label>
+      <input id="ten" name="ten" type="text" autocomplete="name" placeholder="Ví dụ: chị Lan" required>
+
+      <label for="sdt">Số điện thoại <span style="font-weight:600;color:var(--ink-soft);">(không bắt buộc)</span></label>
+      <input id="sdt" name="sdt" type="tel" autocomplete="tel" inputmode="tel" placeholder="Để em tiện liên hệ khi chị cần">
+
+      <label for="email">Email để nhận quà</label>
+      <input id="email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="ten@gmail.com" required>
+
+      <button class="btn" type="submit" id="btn">Gửi quà cho em nhé 🎁</button>
+    </form>
+
+    <div class="msg" id="msg"></div>
+
+    <p class="privacy">🔒 Em dùng thông tin này <b>chỉ để gửi quà và những nội dung hữu ích cho chủ spa</b>. Em không bán, không cho ai khác dữ liệu của chị. Chị muốn dừng nhận thư lúc nào cũng được — nhắn em một câu là xong.</p>
+  </div>
+
+  <!-- SAU KHI ĐĂNG KÝ -->
+  <div class="card">
+    <h2>Sau khi chị bấm nút</h2>
+    <div class="rule"></div>
+    <ol class="steps">
+      <li>Em gửi ngay <b>một email xác nhận</b> vào hộp thư của chị.</li>
+      <li>Chị mở email đó và <b>bấm nút xác nhận</b> — để em chắc chắn đúng là chị, không phải ai điền nhầm.</li>
+      <li>Em gửi <b>link quà</b> ngay sau đó. Chị bấm vào, chọn <i>“Tạo bản sao”</i> là có bản riêng của mình.</li>
+      <li>Chị mở sheet <b>0. TEST NHANH</b>, điền 6 ô màu vàng bằng số của <b>một tháng đã khép sổ</b>.</li>
+    </ol>
+    <p class="privacy" style="margin-top:12px;">Không thấy email sau vài phút, chị xem giúp em trong mục <b>Quảng cáo</b> hoặc <b>Thư rác</b> nha — đôi khi Gmail xếp nhầm chỗ.</p>
+  </div>
+
+  <!-- TÁC GIẢ -->
+  <div class="card">
+    <div class="author">
+      <div class="av">ĐH</div>
+      <div>
+        <div style="font-weight:800;color:var(--olive-deep);font-size:16.5px;">Đàm Thanh Hoa</div>
+        <div style="font-size:13px;color:var(--olive-soft);margin-top:2px;">Giải Pháp Đàm Hoa · Hệ thống vận hành cho chủ spa</div>
+        <p style="font-size:14.4px;color:var(--ink-soft);margin-top:10px;">Em làm bảng này vì gặp quá nhiều chị chủ spa chăm chỉ, tay nghề giỏi, khách quý — nhưng cuối tháng vẫn không có tiền, rồi tự trách mình. Phần lớn không phải lỗi của các chị. Là do <b>chưa có hệ thống để nhìn ra con số thật</b>. Nhìn ra rồi thì sửa được.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="anchor-cta"><a href="#nhanqua">Nhận quà miễn phí →</a></div>
+
+  <p class="foot">© Giải Pháp Đàm Hoa · Đàm Thanh Hoa<br>Quà tặng miễn phí dành cho chủ spa Việt Nam</p>
+</div>
+
+<script>
+/* ====== CẤU HÌNH — sửa 1 chỗ ====== */
+var CONFIG = {
+  apiUrl: "https://script.google.com/macros/s/AKfycbyb1PHX-8JF4lAxAgph-ONsskBAO8XU6yf8PWPsKdx19yzO2nqle_swCDIlIaGw1PCQ/exec",   // Apps Script Web App (nhận lead + gửi mail xác nhận)
+  nguon : "trang-qt001"
+};
+
+(function(){
+  var f = document.getElementById('f'),
+      btn = document.getElementById('btn'),
+      msg = document.getElementById('msg');
+
+  function bao(kieu, chu){ msg.className = 'msg ' + kieu; msg.innerHTML = chu; }
+  function hopLeEmail(v){ return /^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(v); }
+
+  f.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    var ten = document.getElementById('ten'),
+        sdt = document.getElementById('sdt'),
+        email = document.getElementById('email');
+    [ten, email].forEach(function(o){ o.classList.remove('err'); });
+
+    if (!ten.value.trim()){ ten.classList.add('err'); ten.focus(); return bao('no','Chị cho em xin tên với ạ.'); }
+    if (!hopLeEmail(email.value.trim())){ email.classList.add('err'); email.focus(); return bao('no','Email chưa đúng định dạng, chị kiểm tra lại giúp em ạ.'); }
+
+    if (!CONFIG.apiUrl || CONFIG.apiUrl.indexOf('__') === 0){
+      return bao('no','Trang đang được hoàn thiện, chị quay lại sau ít phút giúp em ạ.');
+    }
+
+    btn.disabled = true; btn.textContent = 'Em đang gửi…';
+    fetch(CONFIG.apiUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({
+        ten: ten.value.trim(), sdt: sdt.value.trim(),
+        email: email.value.trim().toLowerCase(), nguon: CONFIG.nguon
+      })
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      if (d && d.ok){
+        f.style.display = 'none';
+        bao('ok', '<b>' + d.thongDiep + '</b><br>Chị mở hộp thư <b>' + email.value.trim() + '</b> và bấm nút xác nhận trong email của em nha. Không thấy thì chị xem mục <b>Quảng cáo</b> hoặc <b>Thư rác</b> giúp em ạ.');
+      } else {
+        btn.disabled = false; btn.textContent = 'Gửi quà cho em nhé 🎁';
+        bao('no', (d && d.thongDiep) || 'Có trục trặc, chị thử lại giúp em ạ.');
+      }
+    })
+    .catch(function(){
+      btn.disabled = false; btn.textContent = 'Gửi quà cho em nhé 🎁';
+      bao('no','Mạng đang trục trặc nên chưa gửi được. Chị thử lại giúp em, hoặc nhắn trực tiếp cho em cũng được ạ.');
+    });
+  });
+})();
+</script>
+</body>
+</html>
