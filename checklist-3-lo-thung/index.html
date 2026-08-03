@@ -319,9 +319,9 @@ const DATA = {
   cta: {
     heading: "Bước tiếp theo cho chị",
     body: "Tin tốt: cả 3 hệ thống này đều <b>học được và xây được</b> — theo thứ tự, không cần làm hết một lúc. Vá từng lỗ lẻ chỉ là dán băng keo; xây hệ thống mới lành từ gốc.",
-    value: "Nơi chị được hướng dẫn xây từng hệ thống cho spa mình — bắt đầu từ lỗ đang chảy máu nặng nhất:",
-    destLabel: "Vào Cộng đồng \"Chủ Spa Bình An\"",
-    printQrNote: "[ Chị/AI dán link hoặc QR vào đây ]"
+    value: "Lỗ nào rồi cũng quy về tiền. Việc tiếp theo là đo xem mỗi tháng spa chị đang để rơi mất bao nhiêu — bảng miễn phí, làm trong 5 phút:",
+    destLabel: "Đo xem mỗi tháng spa mất bao nhiêu tiền",
+    printQrNote: "quatang.damthanhhoa.com"
   },
   p2: {
     title: "Nhìn lại: 3 lỗ của chị — 1 gốc duy nhất",
@@ -329,12 +329,12 @@ const DATA = {
     circleNote: "◯ khoanh nếu đây là lỗ nặng nhất"
   },
   signature: "Thương chị — người làm nghề tử tế. Một spa không cần lớn ngay để đáng tự hào; nó cần sống được, vững được, rồi mới lớn. — Đàm Thanh Hoa",
-  footer: { left: "🌿 Đàm Thanh Hoa · Quà tặng miễn phí cho chủ spa", right: "Nhận thêm công cụ miễn phí 👉 [link]" },
+  footer: { left: "🌿 Đàm Thanh Hoa · Quà tặng miễn phí cho chủ spa", right: "Nhận thêm công cụ miễn phí 👉 quatang.damthanhhoa.com" },
   lead: {
     heading: "Nhận bản kết quả đầy đủ + hướng dẫn vá từng lỗ",
     body: "Chị để lại thông tin, em gửi bản kết quả + tài liệu hướng dẫn qua email cho chị nha (quà chỉ giao qua email — chị nhớ kiểm tra cả mục Quảng cáo/Spam).",
     fields: { name: "Tên của chị", phone: "Số điện thoại / Zalo", email: "Email nhận quà" },
-    submit: "Gửi cho em 💌",
+    submit: "Nhận quà miễn phí 💌",
     thanks: "Em nhận được rồi ạ! Quà sẽ đến email của chị trong ít phút. Chị nhớ kiểm tra cả mục Quảng cáo/Spam nha 💛",
     error: "Ơ, gửi chưa được chị ạ. Chị thử lại giúp em, hoặc nhắn trực tiếp cho Hoa qua kênh bên dưới nha."
   }
@@ -376,7 +376,7 @@ function computeResult(answers) {
 
 /* ================= CONFIG — lớp tích hợp (bật sau, không dựng lại app) ================= */
 const CONFIG = {
-  ctaUrl: "",       // link điểm đến CTA (Group "Chủ Spa Bình An" / Zalo / Chẩn Đoán khi live). Rỗng = nút hiện hướng dẫn tìm kênh.
+  ctaUrl: "https://quatang.damthanhhoa.com/kiem-tra-dong-tien/",  // ĐÍCH TẠM (03/08/2026): dẫn sang quà đo dòng tiền. ĐỔI sang link Group "Chủ Spa Bình An" ngay khi Hoa lập xong — nhớ đổi cả destLabel + value bên dưới.
   moreUrl: "",      // link footer "nhận thêm công cụ miễn phí". Rỗng = ẩn dòng footer link.
   webhookUrl: "",   // endpoint CRM (Lark webhook — TUẤN dựng). Rỗng = ẩn form thu lead.
   ga4Id: ""         // GA4 Measurement ID (vd "G-XXXXXXX"). Rỗng = không đo.
