@@ -18,7 +18,7 @@
   - Sửa nội dung: CHỈ sửa trong DATA. Không sửa 2 nơi.
 
   LỚP TÍCH HỢP (bật sau, không dựng lại app) — sửa trong CONFIG:
-  - CONFIG.ctaUrl      : link điểm đến CTA (Group "Chủ Spa Bình An" / Zalo / Chẩn Đoán khi live).
+  - CONFIG.ctaUrl      : link điểm đến CTA (Group "Chủ Spa Kinh Doanh Bình An" / Zalo / Chẩn Đoán khi live).
   - CONFIG.webhookUrl  : endpoint nhận lead (Lark webhook do TUẤN dựng). Rỗng = form ẩn.
   - CONFIG.ga4Id       : GA4 Measurement ID. Rỗng = không đo.
 -->
@@ -224,7 +224,7 @@ const DATA = {
   meta: {
     code: "QT-002",
     brand: "Đàm Thanh Hoa",
-    community: "Chủ Spa Bình An",
+    community: "Chủ Spa Kinh Doanh Bình An",
     author: "Đàm Thanh Hoa"
   },
   title: ["Checklist 3 Lỗ Thủng", "Đang Rút Cạn Tiền Spa"],
@@ -376,7 +376,7 @@ function computeResult(answers) {
 
 /* ================= CONFIG — lớp tích hợp (bật sau, không dựng lại app) ================= */
 const CONFIG = {
-  ctaUrl: "https://quatang.damthanhhoa.com/kiem-tra-dong-tien/",  // ĐÍCH TẠM (03/08/2026): dẫn sang quà đo dòng tiền. ĐỔI sang link Group "Chủ Spa Bình An" ngay khi Hoa lập xong — nhớ đổi cả destLabel + value bên dưới.
+  ctaUrl: "https://quatang.damthanhhoa.com/kiem-tra-dong-tien/",  // ĐÍCH TẠM (03/08/2026): dẫn sang quà đo dòng tiền. ĐỔI sang link Group "Chủ Spa Kinh Doanh Bình An" ngay khi Hoa lập xong — nhớ đổi cả destLabel + value bên dưới.
   moreUrl: "",      // link footer "nhận thêm công cụ miễn phí". Rỗng = ẩn dòng footer link.
   webhookUrl: "",   // endpoint CRM (Lark webhook — TUẤN dựng). Rỗng = ẩn form thu lead.
   ga4Id: ""         // GA4 Measurement ID (vd "G-XXXXXXX"). Rỗng = không đo.
@@ -571,7 +571,7 @@ if (typeof document !== "undefined") (function () {
       answers = {}; for (const leak of DATA.leaks) answers[leak.id] = [];
       save(); renderChecklist(); window.scrollTo(0, 0);
     });
-    const ctaFallbackMsg = 'Chị tìm cộng đồng "Chủ Spa Bình An" của Đàm Thanh Hoa trên Facebook, hoặc nhắn Zalo cho Hoa để được hướng dẫn nha 💛';
+    const ctaFallbackMsg = 'Chị tìm cộng đồng "Chủ Spa Kinh Doanh Bình An" của Đàm Thanh Hoa trên Facebook, hoặc nhắn Zalo cho Hoa để được hướng dẫn nha 💛';
     $("#btnCta").addEventListener("click", () => {
       track("qt002_cta_click", { biggest_leak: r.biggestId, placement: "main" });
       if (!CONFIG.ctaUrl) alert(ctaFallbackMsg);
