@@ -62,6 +62,11 @@
     border:1.6px solid var(--line);background:var(--paper);color:var(--ink);}
   input:focus{outline:none;border-color:var(--olive);box-shadow:0 0 0 3px rgba(62,85,65,.12);}
   input.err{border-color:var(--clay);box-shadow:0 0 0 3px rgba(181,103,61,.16);}
+  .agree{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;color:var(--ink-soft);
+    line-height:1.5;font-weight:400;margin:2px 0 14px;}
+  .agree input{width:18px;height:18px;flex:none;margin-top:2px;accent-color:var(--olive);}
+  .agree.err-box{color:var(--clay);}
+  .agree a{color:var(--olive);font-weight:600;}
   .btn{display:block;width:100%;border:none;cursor:pointer;font-family:inherit;font-weight:800;
     border-radius:12px;background:var(--gold);color:#fff;font-size:17px;padding:15px 20px;margin-top:18px;
     box-shadow:0 4px 13px rgba(185,138,62,.32);transition:transform .08s ease;}
@@ -166,12 +171,14 @@
       <label for="email">Email để nhận quà</label>
       <input id="email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="ten@gmail.com" required>
 
+      <label class="agree" id="agreeBox"><input id="dongy" name="dongy" type="checkbox"><span>Mình đồng ý để Đàm Thanh Hoa gửi quà và email nội dung hữu ích cho chủ spa, theo <a href="https://quatang.damthanhhoa.com/chinh-sach-bao-mat/" target="_blank" rel="noopener">Chính sách bảo mật</a> &amp; Luật Bảo vệ dữ liệu cá nhân 91/2025/QH15.</span></label>
+
       <button class="btn" type="submit" id="btn">Nhận quà miễn phí 🎁</button>
     </form>
 
     <div class="msg" id="msg"></div>
 
-    <p class="privacy">🔒 Em dùng thông tin này <b>chỉ để gửi quà và những nội dung hữu ích cho chủ spa</b>. Em không bán, không cho ai khác dữ liệu của chị. Chị muốn dừng nhận thư lúc nào cũng được — nhắn em một câu là xong.</p>
+    <p class="privacy">🔒 Em dùng thông tin này <b>chỉ để gửi quà và những nội dung hữu ích cho chủ spa</b>. Em không bán, không cho ai khác dữ liệu của chị. Chị muốn dừng nhận thư lúc nào cũng được — nhắn em một câu là xong. Chi tiết: <a href="https://quatang.damthanhhoa.com/chinh-sach-bao-mat/" target="_blank" rel="noopener" style="color:var(--olive);font-weight:600;">Chính sách bảo mật</a>.</p>
   </div>
 
   <!-- SAU KHI ĐĂNG KÝ -->
@@ -242,6 +249,9 @@ var CONFIG = {
 
     if (!ten.value.trim()){ ten.classList.add('err'); ten.focus(); return bao('no','Chị cho em xin tên với ạ.'); }
     if (!hopLeEmail(email.value.trim())){ email.classList.add('err'); email.focus(); return bao('no','Email chưa đúng định dạng, chị kiểm tra lại giúp em ạ.'); }
+    var dongy = document.getElementById('dongy'), agreeBox = document.getElementById('agreeBox');
+    if (agreeBox) agreeBox.classList.remove('err-box');
+    if (dongy && !dongy.checked){ if (agreeBox) agreeBox.classList.add('err-box'); dongy.focus(); return bao('no','Chị tick ô đồng ý giúp em nhé — có vậy em mới được phép gửi quà qua email ạ.'); }
 
     btn.disabled = true; btn.textContent = 'Đang gửi…';
     fetch(CONFIG.apiUrl, {
