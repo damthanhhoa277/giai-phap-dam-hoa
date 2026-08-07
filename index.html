@@ -1,21 +1,121 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Giải Pháp Đàm Hoa — Công cụ miễn phí cho chủ spa</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quà tặng miễn phí cho chủ spa — Đàm Thanh Hoa</title>
+<meta name="description" content="Bốn công cụ miễn phí giúp chủ spa nhìn rõ spa của mình: dòng tiền, chỗ rò tiền, giữ khách quay lại và bàn giao người mới.">
+<meta property="og:title" content="Quà tặng miễn phí cho chủ spa — Đàm Thanh Hoa">
+<meta property="og:description" content="Bốn công cụ miễn phí giúp chủ spa nhìn rõ spa của mình — dùng được ngay trên điện thoại.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quatang.damthanhhoa.com/">
+<link rel="canonical" href="https://quatang.damthanhhoa.com/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎁</text></svg>">
 <style>
-body{font-family:"Segoe UI",Arial,sans-serif;background:#F2ECDC;color:#2B322A;display:flex;min-height:100vh;align-items:center;justify-content:center;margin:0;padding:20px;}
-.box{max-width:520px;background:#FFFDF7;border:1.5px solid #D9D0BA;border-radius:18px;padding:34px 28px;text-align:center;box-shadow:0 6px 24px rgba(44,62,47,.12);}
-h1{color:#2C3E2F;font-size:24px;margin:0 0 8px;}
-p{color:#5A6156;font-size:14.5px;line-height:1.6;}
-a.tool{display:block;margin-top:18px;background:#3E5541;color:#fff;text-decoration:none;font-weight:800;padding:15px 20px;border-radius:12px;font-size:15.5px;}
-.sub{font-size:12px;color:#6E8168;margin-top:16px;}
+  :root{
+    --cream2:#F2ECDC; --paper:#FFFDF7; --olive:#3E5541; --olive-deep:#2C3E2F;
+    --olive-soft:#6E8168; --gold:#B98A3E; --clay:#B5673D; --line:#D9D0BA;
+    --ink:#2B322A; --ink-soft:#5A6156;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Segoe UI","Helvetica Neue",Arial,"Noto Sans",sans-serif;
+    background:var(--cream2);color:var(--ink);line-height:1.55}
+  .wrap{max-width:680px;margin:0 auto;padding:20px 14px 96px}
+  .brandbar{display:flex;justify-content:space-between;align-items:center;font-size:10px;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--olive-soft);margin-bottom:14px}
+  .brandbar b{color:var(--olive)}
+  .card{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;
+    padding:22px 18px;margin-bottom:14px;box-shadow:0 3px 14px rgba(44,62,47,.07)}
+  h1{font-size:clamp(22px,5.6vw,30px);line-height:1.18;color:var(--olive-deep);font-weight:800;letter-spacing:-.3px}
+  h1 .hl{color:var(--clay)}
+  .rule{height:3px;width:58px;background:var(--gold);border-radius:3px;margin:13px 0}
+  .sub{font-size:15px;color:var(--ink-soft);margin-top:10px}
+  .qua{display:block;text-decoration:none;color:inherit;border:1.5px solid var(--line);
+    border-radius:14px;padding:16px 15px;margin-top:12px;background:var(--paper);
+    transition:border-color .15s ease, transform .08s ease}
+  .qua:active{transform:scale(.99)}
+  .qua:hover{border-color:var(--olive)}
+  .qua .top{display:flex;gap:11px;align-items:flex-start}
+  .qua .ico{flex:none;width:34px;height:34px;border-radius:9px;background:var(--cream2);
+    display:flex;align-items:center;justify-content:center;font-size:17px}
+  .qua .t{font-weight:800;color:var(--olive-deep);font-size:16px;line-height:1.3}
+  .qua .d{font-size:14px;color:var(--ink-soft);margin-top:5px}
+  .qua .go{font-size:13.5px;font-weight:800;color:var(--gold);margin-top:9px}
+  .author{display:flex;gap:14px;align-items:flex-start}
+  .author .av{flex:none;width:52px;height:52px;border-radius:50%;background:var(--olive);color:#F4D48A;
+    display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800}
+  .foot{text-align:center;font-size:11.5px;color:var(--olive-soft);margin-top:22px;line-height:1.7}
+  .foot a{color:var(--olive-soft)}
+  .zalo-fab{position:fixed;right:14px;bottom:22px;z-index:25;width:56px;height:56px;border-radius:50%;
+    background:#0068FF;color:#fff;display:flex;align-items:center;justify-content:center;
+    font-size:13px;font-weight:800;letter-spacing:.02em;text-decoration:none;
+    box-shadow:0 5px 18px rgba(0,104,255,.42);transition:transform .08s ease}
+  .zalo-fab:active{transform:scale(.94)}
+  @media(max-width:380px){ .card{padding:19px 15px} }
 </style>
 </head>
-<body><div class="box">
-<h1>🌿 Giải Pháp Đàm Hoa</h1>
-<p>Công cụ miễn phí giúp chủ spa nhìn rõ spa của mình — và xây hệ thống để bớt mệt, bớt rò tiền.</p>
-<a class="tool" href="checklist-3-lo-thung/">🎁 Checklist 3 Lỗ Thủng Đang Rút Cạn Tiền Spa →</a>
-<p class="sub">Đàm Thanh Hoa · Chủ Spa Kinh Doanh Bình An</p>
-</div></body>
+<body>
+<div class="wrap">
+
+  <div class="brandbar"><span><b>Đàm Thanh Hoa</b> · Chuyên gia xây hệ thống vận hành spa</span><span>Quà tặng miễn phí</span></div>
+
+  <div class="card">
+    <h1>Bốn công cụ miễn phí<br><span class="hl">để nhìn rõ spa của mình.</span></h1>
+    <div class="rule"></div>
+    <p class="sub">Mỗi công cụ trả lời đúng một câu hỏi. Bạn chọn câu đang làm mình bận tâm nhất — làm trong 5 phút, ngay trên điện thoại.</p>
+  </div>
+
+  <div class="card">
+    <a class="qua" href="kiem-tra-dong-tien/">
+      <div class="top"><div class="ico">💰</div><div>
+        <div class="t">Kiểm Tra Nhanh Sức Khỏe Dòng Tiền Spa</div>
+        <div class="d">Tháng nào cũng có khách mà cuối tháng vẫn hết tiền? Điền 6 con số, biết spa đang giữ được bao nhiêu tiền thật.</div>
+        <div class="go">Nhận quà miễn phí →</div>
+      </div></div>
+    </a>
+
+    <a class="qua" href="3-lo-thung/">
+      <div class="top"><div class="ico">🕳️</div><div>
+        <div class="t">Checklist 3 Lỗ Thủng Đang Rút Cạn Tiền Spa</div>
+        <div class="d">Trả lời 15 câu, thấy tiền đang rò qua chỗ nào và mỗi tháng rơi mất khoảng bao nhiêu.</div>
+        <div class="go">Nhận quà miễn phí →</div>
+      </div></div>
+    </a>
+
+    <a class="qua" href="7-viec-giu-khach/">
+      <div class="top"><div class="ico">💗</div><div>
+        <div class="t">7 Việc Giữ Khách Quay Lại Với Spa</div>
+        <div class="d">Khách đang thuộc về spa hay thuộc về một người thợ? Trả lời 7 câu là rõ.</div>
+        <div class="go">Nhận quà miễn phí →</div>
+      </div></div>
+    </a>
+
+    <a class="qua" href="sop-3-ngay/">
+      <div class="top"><div class="ico">⚙️</div><div>
+        <div class="t">Bộ Khung SOP 3 Ngày Cho Nhân Viên Mới</div>
+        <div class="d">Bao nhiêu việc đang nằm trong đầu bạn, chưa ai làm thay được? Kèm khung 24 mục để viết ra.</div>
+        <div class="go">Nhận quà miễn phí →</div>
+      </div></div>
+    </a>
+  </div>
+
+  <div class="card">
+    <div class="author">
+      <div class="av">ĐH</div>
+      <div>
+        <div style="font-weight:800;color:var(--olive-deep);font-size:16.5px;">Đàm Thanh Hoa</div>
+        <div style="font-size:13px;color:var(--olive-soft);margin-top:2px;">Chuyên gia xây hệ thống vận hành spa</div>
+        <p style="font-size:14.4px;color:var(--ink-soft);margin-top:10px;">15 năm nghề spa, từng vận hành 6 chi nhánh. Mình làm những công cụ này vì gặp quá nhiều chủ spa chăm chỉ, tay nghề giỏi — nhưng vẫn mệt, vẫn rò tiền, rồi tự trách mình. Phần lớn không phải lỗi của các bạn, mà là <b>chưa có hệ thống để nhìn ra con số thật</b>.</p>
+      </div>
+    </div>
+  </div>
+
+  <a class="zalo-fab" href="https://zalo.me/0912088869" target="_blank" rel="noopener"
+     aria-label="Nhắn Zalo cho Đàm Thanh Hoa">Zalo</a>
+
+  <p class="foot">© Đàm Thanh Hoa · Chuyên gia xây hệ thống vận hành spa<br>
+  Quà tặng miễn phí dành cho chủ spa Việt Nam · Zalo 0912 088 869<br>
+  <a href="chinh-sach-bao-mat/">Chính sách bảo mật</a></p>
+</div>
+</body>
 </html>
