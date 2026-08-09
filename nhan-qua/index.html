@@ -131,6 +131,17 @@ var QUA = {
               sheet:'1KMXSBXDnRpgB8woAB6vrLngr5lX91ef03ijz4S1V31Q' }
 };
 
+/* ====== ĐO LƯỜNG — ghi vào sheet "MO QUA" trong sổ lead ======
+   Chỉ ghi: mã quà · hành động · loại máy · nguồn. KHÔNG ghi thông tin cá nhân nào. */
+var URL_DO = 'https://script.google.com/macros/s/AKfycbyveWz-H7SPeuG23EXeR3zWmLmdAZ3QqY6V77PmvT7vZuBjvgEsIwmJylxOxqsG-QUmeA/exec';
+function ghiNhan(ma, viec, may, tu){
+  try{
+    var u = URL_DO + '?q=' + encodeURIComponent(ma) + '&viec=' + encodeURIComponent(viec)
+          + '&may=' + encodeURIComponent(may) + '&tu=' + encodeURIComponent(tu || '');
+    var i = new Image(); i.referrerPolicy = 'no-referrer'; i.src = u;
+  }catch(e){}
+}
+
 (function(){
   function $(id){ return document.getElementById(id); }
   function hien(el, co){ el.classList.toggle('an', !co); }
@@ -160,12 +171,25 @@ var QUA = {
   if (epKieu === 'dt') laDienThoai = true;
   if (epKieu === 'pc') laDienThoai = false;
 
+  var loaiMay = laDienThoai ? 'dienthoai' : 'maytinh';
+  var nguon = ((location.search.match(/[?&]tu=([A-Za-z0-9-]{1,24})/) || [])[1]) || '';
+
+  /* ghi nhận: khách đã MỞ trang nhận quà */
+  ghiNhan(ma, 'mo_trang', loaiMay, nguon);
+
+  /* gắn ghi nhận vào mọi nút — không cản đường đi của khách */
+  function theoDoi(id, viec){
+    var el = $(id);
+    if (el) el.addEventListener('click', function(){ ghiNhan(ma, viec, loaiMay, nguon); });
+  }
+
   /* --- gắn link --- */
   if (q.app) {
     hien($('khoiApp'), true); hien($('khoiDienThoai'), false); hien($('khoiMayTinh'), false);
     $('nutApp').href = q.app;
     $('nhanThietBi').textContent = 'Mở thẳng, không cần tải';
     $('doiMay').innerHTML = '';
+    theoDoi('nutApp', 'mo_app');
     return;
   }
 
@@ -182,12 +206,17 @@ var QUA = {
   hien($('khoiMayTinh'), !laDienThoai);
   $('nhanThietBi').textContent = laDienThoai ? '📱 Bạn đang dùng điện thoại' : '💻 Bạn đang dùng máy tính';
 
+  theoDoi('nutCopy1', 'lay_ban_rieng');  theoDoi('nutXem1', 'xem_truoc');
+  theoDoi('nutCopy2', 'lay_ban_rieng');  theoDoi('nutXem2', 'xem_truoc');
+  theoDoi('nutTai2',  'tai_excel');
+
   /* --- cho khách tự đổi nếu nhận sai --- */
   var khac = laDienThoai ? 'pc' : 'dt';
   var chuKhac = laDienThoai ? 'Mình đang ngồi máy tính →' : 'Mình đang dùng điện thoại →';
   $('doiMay').innerHTML = '<a id="doiLink">' + chuKhac + '</a>';
   $('doiLink').addEventListener('click', function(){
-    location.search = '?q=' + ma + '&may=' + khac;
+    ghiNhan(ma, 'doi_thiet_bi', loaiMay, nguon);
+    location.search = '?q=' + ma + '&may=' + khac + (nguon ? '&tu=' + nguon : '');
   });
 
   /* --- thêm lối tải file cho điện thoại, đặt cuối, chữ nhỏ --- */
@@ -195,8 +224,9 @@ var QUA = {
     var p = document.createElement('p');
     p.className = 'doi-may';
     p.style.marginTop = '4px';
-    p.innerHTML = '<a href="' + linkTai + '">Hoặc tải file Excel về máy</a>';
+    p.innerHTML = '<a id="nutTai1" href="' + linkTai + '">Hoặc tải file Excel về máy</a>';
     $('khoiDienThoai').appendChild(p);
+    theoDoi('nutTai1', 'tai_excel');
   }
 })();
 </script>
