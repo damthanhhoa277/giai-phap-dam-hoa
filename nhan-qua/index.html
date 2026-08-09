@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nhận quà — Đàm Thanh Hoa</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎁</text></svg>">
+<style>
+  :root{
+    --cream:#FAF6EC; --cream2:#F2ECDC; --paper:#FFFDF7;
+    --olive:#3E5541; --olive-deep:#2C3E2F; --olive-soft:#6E8168;
+    --gold:#B98A3E; --clay:#B5673D; --line:#D9D0BA;
+    --ink:#2B322A; --ink-soft:#5A6156;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Segoe UI","Helvetica Neue",Arial,"Noto Sans",sans-serif;
+    background:var(--cream2);color:var(--ink);line-height:1.55}
+  .wrap{max-width:620px;margin:0 auto;padding:18px 14px 90px}
+  .brandbar{display:flex;justify-content:space-between;align-items:center;font-size:10px;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--olive-soft);margin-bottom:12px}
+  .brandbar b{color:var(--olive)}
+  .card{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;
+    padding:22px 18px;margin-bottom:14px;box-shadow:0 3px 14px rgba(44,62,47,.07)}
+  h1{font-size:clamp(21px,5.4vw,28px);line-height:1.2;color:var(--olive-deep);font-weight:800}
+  .rule{height:3px;width:54px;background:var(--gold);border-radius:3px;margin:12px 0}
+  .sub{font-size:15px;color:var(--ink-soft);margin-top:8px}
+  .tag{display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--olive);background:var(--cream);border:1px solid var(--line);border-radius:999px;padding:5px 11px}
+  .btn{display:block;text-align:center;text-decoration:none;border:none;cursor:pointer;width:100%;
+    font-family:inherit;font-weight:800;border-radius:12px;font-size:16.5px;padding:16px 18px;margin-top:14px}
+  .btn-1{background:var(--gold);color:#fff;box-shadow:0 4px 13px rgba(185,138,62,.32)}
+  .btn-2{background:var(--paper);color:var(--olive-deep);border:1.8px solid var(--olive)}
+  .btn:active{transform:scale(.99)}
+  .hai{display:grid;gap:10px}
+  @media(min-width:520px){ .hai.doi{grid-template-columns:1fr 1fr} .hai.doi .btn{margin-top:0} }
+  .buoc{counter-reset:s;margin-top:14px}
+  .buoc li{list-style:none;position:relative;padding:9px 0 9px 32px;font-size:14.8px;color:var(--ink-soft);
+    border-bottom:1px dashed var(--line)}
+  .buoc li:last-child{border-bottom:none}
+  .buoc li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:9px;
+    width:22px;height:22px;border-radius:50%;background:var(--cream2);color:var(--olive);
+    font-size:12.5px;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .luuy{background:var(--cream);border:1px dashed var(--line);border-radius:11px;padding:12px 13px;
+    font-size:13.6px;color:var(--ink-soft);margin-top:14px}
+  .doi-may{text-align:center;margin-top:16px;font-size:13.8px;color:var(--ink-soft)}
+  .doi-may a{color:var(--olive);font-weight:700;cursor:pointer;text-decoration:underline}
+  .xem{display:block;text-align:center;margin-top:14px;font-size:14px;color:var(--olive);font-weight:600}
+  .foot{text-align:center;font-size:11.5px;color:var(--olive-soft);margin-top:20px;line-height:1.7}
+  .foot a{color:var(--olive-soft)}
+  .zalo-fab{position:fixed;right:14px;bottom:22px;z-index:25;width:56px;height:56px;border-radius:50%;
+    background:#0068FF;color:#fff;display:flex;align-items:center;justify-content:center;
+    font-size:13px;font-weight:800;text-decoration:none;box-shadow:0 5px 18px rgba(0,104,255,.42)}
+  .an{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="brandbar"><span><b>Đàm Thanh Hoa</b> · Chuyên gia xây hệ thống vận hành spa</span><span>Quà tặng</span></div>
+
+  <div class="card">
+    <span class="tag" id="nhanThietBi">Đang nhận diện…</span>
+    <h1 id="tenQua" style="margin-top:10px">Quà của bạn</h1>
+    <div class="rule"></div>
+    <p class="sub" id="motaQua">Bạn chọn cách dùng hợp với máy đang cầm trên tay nhé.</p>
+  </div>
+
+  <!-- ĐIỆN THOẠI -->
+  <div class="card an" id="khoiDienThoai">
+    <h2 style="font-size:18.5px;color:var(--olive-deep)">Dùng ngay trên điện thoại</h2>
+    <a class="btn btn-1" id="nutCopy1" href="#">Mở quà &amp; tạo bản của mình</a>
+    <ol class="buoc">
+      <li>Bấm nút trên — Google sẽ hỏi <b>“Tạo bản sao”</b>.</li>
+      <li>Bấm <b>Tạo bản sao</b>. Bảng thành bản riêng của bạn, không ai thấy số của bạn.</li>
+      <li>Điền vào các ô màu vàng là bảng tự chạy ra kết quả.</li>
+    </ol>
+    <div class="luuy">
+      📱 Nếu máy hỏi <b>đăng nhập</b>, bạn đăng nhập bằng <b>chính Gmail đã nhận thư này</b>. Bảng cần chỗ để lưu, nên nó lưu vào Google Drive của bạn — miễn phí, và chỉ mình bạn xem được.
+    </div>
+    <a class="xem" id="nutXem1" href="#" target="_blank" rel="noopener">Chỉ muốn xem trước cho biết →</a>
+  </div>
+
+  <!-- MÁY TÍNH -->
+  <div class="card an" id="khoiMayTinh">
+    <h2 style="font-size:18.5px;color:var(--olive-deep)">Chọn cách bạn thích</h2>
+    <div class="hai doi" style="margin-top:14px">
+      <a class="btn btn-1" id="nutCopy2" href="#">Dùng online — khỏi cài gì</a>
+      <a class="btn btn-2" id="nutTai2" href="#">Tải file Excel về máy</a>
+    </div>
+    <ol class="buoc">
+      <li><b>Dùng online:</b> bấm nút vàng → Google hỏi “Tạo bản sao” → bấm đồng ý. Cần đăng nhập Gmail.</li>
+      <li><b>Tải về máy:</b> bấm nút viền xanh → mở file bằng <b>Excel</b> hoặc <b>WPS</b>. Không cần đăng nhập gì cả.</li>
+    </ol>
+    <div class="luuy">
+      💡 Bản online tiện hơn ở chỗ: mở lại được trên cả điện thoại lẫn máy tính, và không sợ mất file.
+    </div>
+    <a class="xem" id="nutXem2" href="#" target="_blank" rel="noopener">Chỉ muốn xem trước cho biết →</a>
+  </div>
+
+  <!-- APP (QT-002) -->
+  <div class="card an" id="khoiApp">
+    <h2 style="font-size:18.5px;color:var(--olive-deep)">Mở là dùng được ngay</h2>
+    <p class="sub">Quà này chạy thẳng trên trình duyệt — không phải tải, không phải đăng nhập.</p>
+    <a class="btn btn-1" id="nutApp" href="#">Mở quà</a>
+  </div>
+
+  <p class="doi-may" id="doiMay"></p>
+
+  <a class="zalo-fab" href="https://zalo.me/0912088869" target="_blank" rel="noopener" aria-label="Nhắn Zalo cho Đàm Thanh Hoa">Zalo</a>
+
+  <p class="foot">© Đàm Thanh Hoa · Chuyên gia xây hệ thống vận hành spa<br>
+  Cần giúp gì bạn cứ nhắn Zalo 0912 088 869<br>
+  <a href="../chinh-sach-bao-mat/">Chính sách bảo mật</a></p>
+</div>
+
+<script>
+/* ====== DANH MỤC QUÀ — thêm quà mới chỉ cần thêm 1 khối ====== */
+var QUA = {
+  'QT-001': { ten:'Kiểm Tra Nhanh Sức Khỏe Dòng Tiền Spa',
+              mota:'Điền 6 con số của tháng vừa rồi, 5 phút là biết spa mình thật sự giữ được bao nhiêu tiền.',
+              sheet:'1jsaS6Rkz9fZ7PKongJIBGAZOWT58ow1GqLjEfM5T_Pc' },
+  'QT-002': { ten:'Checklist 3 Lỗ Thủng Đang Rút Cạn Tiền Spa',
+              mota:'Trả lời 15 câu, thấy ngay tiền spa đang rò qua chỗ nào.',
+              app:'../checklist-3-lo-thung/' },
+  'QT-003': { ten:'7 Việc Giữ Khách Quay Lại Với Spa',
+              mota:'Trả lời 7 câu, biết khách đang thuộc về spa hay thuộc về một người thợ.',
+              sheet:'1EXuZrRPhggnWHXN_JvsVMeHsZS7jQbIEkTd6Adz6TF4' },
+  'QT-004': { ten:'Bộ Khung SOP 3 Ngày Cho Nhân Viên Mới',
+              mota:'Chọn 10 việc, biết bao nhiêu việc đang nằm trong đầu bạn chưa ai làm thay được.',
+              sheet:'1KMXSBXDnRpgB8woAB6vrLngr5lX91ef03ijz4S1V31Q' }
+};
+
+(function(){
+  function $(id){ return document.getElementById(id); }
+  function hien(el, co){ el.classList.toggle('an', !co); }
+
+  /* --- lấy mã quà từ đường dẫn --- */
+  var ma = (location.search.match(/[?&]q=([A-Za-z0-9-]+)/) || [])[1] || 'QT-001';
+  ma = ma.toUpperCase();
+  var q = QUA[ma] || QUA['QT-001'];
+
+  $('tenQua').textContent = q.ten;
+  $('motaQua').textContent = q.mota;
+  document.title = q.ten + ' — quà tặng từ Đàm Thanh Hoa';
+
+  /* --- nhận diện thiết bị --- */
+  function doanDienThoai(){
+    var ua = navigator.userAgent || '';
+    if (/Android|iPhone|iPod|Windows Phone|webOS|BlackBerry/i.test(ua)) return true;
+    if (/iPad/i.test(ua)) return true;
+    // iPad đời mới báo là Mac -> nhận thêm bằng cảm ứng
+    if (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1) return true;
+    var cham = window.matchMedia && window.matchMedia('(pointer:coarse)').matches;
+    return !!(cham && window.innerWidth < 900);
+  }
+
+  var laDienThoai = doanDienThoai();
+  var epKieu = (location.search.match(/[?&]may=(dt|pc)/) || [])[1];
+  if (epKieu === 'dt') laDienThoai = true;
+  if (epKieu === 'pc') laDienThoai = false;
+
+  /* --- gắn link --- */
+  if (q.app) {
+    hien($('khoiApp'), true); hien($('khoiDienThoai'), false); hien($('khoiMayTinh'), false);
+    $('nutApp').href = q.app;
+    $('nhanThietBi').textContent = 'Mở thẳng, không cần tải';
+    $('doiMay').innerHTML = '';
+    return;
+  }
+
+  var base = 'https://docs.google.com/spreadsheets/d/' + q.sheet;
+  var linkCopy = base + '/copy';
+  var linkXem  = base + '/edit?usp=sharing';
+  var linkTai  = base + '/export?format=xlsx';
+
+  $('nutCopy1').href = linkCopy;  $('nutXem1').href = linkXem;
+  $('nutCopy2').href = linkCopy;  $('nutXem2').href = linkXem;  $('nutTai2').href = linkTai;
+
+  hien($('khoiApp'), false);
+  hien($('khoiDienThoai'), laDienThoai);
+  hien($('khoiMayTinh'), !laDienThoai);
+  $('nhanThietBi').textContent = laDienThoai ? '📱 Bạn đang dùng điện thoại' : '💻 Bạn đang dùng máy tính';
+
+  /* --- cho khách tự đổi nếu nhận sai --- */
+  var khac = laDienThoai ? 'pc' : 'dt';
+  var chuKhac = laDienThoai ? 'Mình đang ngồi máy tính →' : 'Mình đang dùng điện thoại →';
+  $('doiMay').innerHTML = '<a id="doiLink">' + chuKhac + '</a>';
+  $('doiLink').addEventListener('click', function(){
+    location.search = '?q=' + ma + '&may=' + khac;
+  });
+
+  /* --- thêm lối tải file cho điện thoại, đặt cuối, chữ nhỏ --- */
+  if (laDienThoai) {
+    var p = document.createElement('p');
+    p.className = 'doi-may';
+    p.style.marginTop = '4px';
+    p.innerHTML = '<a href="' + linkTai + '">Hoặc tải file Excel về máy</a>';
+    $('khoiDienThoai').appendChild(p);
+  }
+})();
+</script>
+</body>
+</html>
