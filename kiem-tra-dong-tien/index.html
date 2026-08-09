@@ -229,6 +229,13 @@ var CONFIG = {
   apiUrl: "https://script.google.com/macros/s/AKfycbyb1PHX-8JF4lAxAgph-ONsskBAO8XU6yf8PWPsKdx19yzO2nqle_swCDIlIaGw1PCQ/exec",   // Apps Script Web App (nhận lead + gửi mail xác nhận)
   nguon : "trang-qt001"
 };
+/* Nếu link có ?tu=... thì ghi kèm vào nguồn — để biết khách đến từ đâu (Group, video, bio…).
+   Chỉ nhận chữ/số/gạch ngang, tối đa 16 ký tự → chặn rác. Không đụng backend. */
+(function(){
+  var tu = (location.search.match(/[?&]tu=([A-Za-z0-9-]{1,16})/) || [])[1];
+  if (tu) CONFIG.nguon += '-' + tu.toLowerCase();
+})();
+
 
 /* Ẩn thanh CTA khi khách đã cuộn tới ô điền thông tin — khỏi che chữ */
 (function(){
