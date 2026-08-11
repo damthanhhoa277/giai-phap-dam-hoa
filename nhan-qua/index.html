@@ -202,11 +202,14 @@ function ghiNhan(ma, viec, may, tu){
                    'QT-003':'../7-viec-giu-khach/',   'QT-004':'../sop-3-ngay/' };
 
   if (!maKhoa){
+    /* thiếu mã → đưa THẲNG về trang form của quà (Hoa chốt 11/08: không dừng ở trang trung gian).
+       Khối khoiKhoa chỉ lóe làm dự phòng nếu chuyển trang bị chặn. 250ms đủ cho beacon đo lường bay đi. */
     ghiNhan(ma, 'chan_thieu_ma', loaiMay, nguon);
     hien($('khoiKhoa'), true);
     $('nhanThietBi').textContent = '🎁 Quà gửi qua email';
-    $('nutVeForm').href = (FORM_QUA[ma] || FORM_QUA['QT-001']) + (nguon ? '?tu=' + nguon : '');
-    theoDoi('nutVeForm', 've_form_dien');
+    var veForm = (FORM_QUA[ma] || FORM_QUA['QT-001']) + (nguon ? '?tu=' + nguon : '');
+    $('nutVeForm').href = veForm;
+    setTimeout(function(){ location.replace(veForm); }, 250);
     return;
   }
 
