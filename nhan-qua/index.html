@@ -105,6 +105,14 @@
     <a class="btn btn-1" id="nutApp" href="#">Mở quà</a>
   </div>
 
+  <!-- KHÓA MỀM: mở trang mà thiếu mã trong email → mời về form (giữ lead) -->
+  <div class="card an" id="khoiKhoa">
+    <h2 style="font-size:18.5px;color:var(--olive-deep)">Quà này được gửi qua email</h2>
+    <p class="sub" style="margin-top:8px">Bạn điền form nhận quà (30 giây) — quà sẽ về thẳng hộp thư của bạn, kèm nút mở quà dành riêng cho bạn.</p>
+    <a class="btn btn-1" id="nutVeForm" href="#">Nhận quà miễn phí</a>
+    <div class="luuy">📮 Bạn <b>đã đăng ký rồi</b>? Mở lại email <b>“Quà của bạn đây”</b> và bấm nút trong thư — hoặc điền lại form, hệ thống nhận ra bạn và gửi lại quà ngay.</div>
+  </div>
+
   <p class="doi-may" id="doiMay"></p>
 
   <a class="zalo-fab" href="https://zalo.me/0912088869" target="_blank" rel="noopener" aria-label="Nhắn Zalo cho Đàm Thanh Hoa">Zalo</a>
@@ -174,19 +182,41 @@ function ghiNhan(ma, viec, may, tu){
   var loaiMay = laDienThoai ? 'dienthoai' : 'maytinh';
   var nguon = ((location.search.match(/[?&]tu=([A-Za-z0-9-]{1,24})/) || [])[1]) || '';
 
-  /* ghi nhận: khách đã MỞ trang nhận quà */
-  ghiNhan(ma, 'mo_trang', loaiMay, nguon);
-
   /* gắn ghi nhận vào mọi nút — không cản đường đi của khách */
   function theoDoi(id, viec){
     var el = $(id);
     if (el) el.addEventListener('click', function(){ ghiNhan(ma, viec, loaiMay, nguon); });
   }
 
+  /* --- KHÓA MỀM: link quà chỉ hiện khi có mã trong email ---
+     Mã = cột "Mã xác nhận" trong sổ lead (backend gắn &ma= vào nút email).
+     Thiếu mã → không đưa link quà, mời về đúng trang form (giữ lead).
+     localStorage nhớ mã → khách mở lại bookmark trên cùng máy vẫn xem được. */
+  var maKhoa = ((location.search.match(/[?&]ma=([A-Za-z0-9]{16,})/) || [])[1]) || '';
+  try{
+    if (maKhoa) localStorage.setItem('qt_ma', maKhoa);
+    else maKhoa = localStorage.getItem('qt_ma') || '';
+  }catch(er){}
+
+  var FORM_QUA = { 'QT-001':'../kiem-tra-dong-tien/', 'QT-002':'../3-lo-thung/',
+                   'QT-003':'../7-viec-giu-khach/',   'QT-004':'../sop-3-ngay/' };
+
+  if (!maKhoa){
+    ghiNhan(ma, 'chan_thieu_ma', loaiMay, nguon);
+    hien($('khoiKhoa'), true);
+    $('nhanThietBi').textContent = '🎁 Quà gửi qua email';
+    $('nutVeForm').href = (FORM_QUA[ma] || FORM_QUA['QT-001']) + (nguon ? '?tu=' + nguon : '');
+    theoDoi('nutVeForm', 've_form_dien');
+    return;
+  }
+
+  /* ghi nhận: khách đã MỞ trang nhận quà (có mã hợp lệ) */
+  ghiNhan(ma, 'mo_trang', loaiMay, nguon);
+
   /* --- gắn link --- */
   if (q.app) {
     hien($('khoiApp'), true); hien($('khoiDienThoai'), false); hien($('khoiMayTinh'), false);
-    $('nutApp').href = q.app;
+    $('nutApp').href = q.app + '?ma=' + encodeURIComponent(maKhoa);
     $('nhanThietBi').textContent = 'Mở thẳng, không cần tải';
     $('doiMay').innerHTML = '';
     theoDoi('nutApp', 'mo_app');
@@ -216,7 +246,7 @@ function ghiNhan(ma, viec, may, tu){
   $('doiMay').innerHTML = '<a id="doiLink">' + chuKhac + '</a>';
   $('doiLink').addEventListener('click', function(){
     ghiNhan(ma, 'doi_thiet_bi', loaiMay, nguon);
-    location.search = '?q=' + ma + '&may=' + khac + (nguon ? '&tu=' + nguon : '');
+    location.search = '?q=' + ma + '&may=' + khac + (nguon ? '&tu=' + nguon : '') + '&ma=' + maKhoa;
   });
 
   /* --- thêm lối tải file cho điện thoại, đặt cuối, chữ nhỏ --- */

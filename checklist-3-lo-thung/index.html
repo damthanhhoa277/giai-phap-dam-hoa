@@ -5,6 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Checklist 3 Lỗ Thủng Đang Rút Cạn Tiền Spa — Đàm Thanh Hoa</title>
 <meta name="description" content="Tự soi 5 phút: spa của bạn đang thiếu hệ thống giữ khách, bán hàng hay vận hành — và tiền đang rò qua lỗ nào.">
+<script>
+/* KHÓA MỀM (11/08/2026): app chỉ mở từ email quà — thiếu mã → về trang nhận quà
+   (trang đó sẽ mời điền form nếu chưa đăng ký). Mã nhớ trong localStorage nên
+   khách đã mở hợp lệ một lần, mở lại bookmark trên cùng máy vẫn vào thẳng. */
+(function(){
+  var m = ((location.search.match(/[?&]ma=([A-Za-z0-9]{16,})/) || [])[1]) || '';
+  try{
+    if (m) localStorage.setItem('qt_ma', m);
+    else m = localStorage.getItem('qt_ma') || '';
+  }catch(e){}
+  if (!m) location.replace('../nhan-qua/?q=QT-002');
+})();
+</script>
 <!--
   QT-002 · Checklist 3 Lỗ Thủng Đang Rút Cạn Tiền Spa — APP DIGITAL-FIRST (CANONICAL · SSOT)
   Owner: BÌNH (P3) · Đàm Thanh Hoa
