@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chẩn Đoán Sức Khoẻ Spa — Mô Hình 5 Trụ | Đàm Thanh Hoa</title>
+<meta name="description" content="23 câu hỏi, khoảng 7 phút. Bạn nhận lại điểm số 5 trụ của spa mình, trụ nào đang hổng nặng nhất, vòng lặp đang kẹt ở đâu và 3 việc nên làm trong 90 ngày tới.">
+<meta property="og:title" content="Spa bạn đang khoẻ hay đang bệnh — ở trụ nào?">
+<meta property="og:description" content="Không phải bài trắc nghiệm cho vui. 23 câu để soi 5 trụ của spa và chỉ ra vòng lặp đang làm bạn kẹt. Miễn phí.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quatang.damthanhhoa.com/chan-doan/">
+<link rel="canonical" href="https://quatang.damthanhhoa.com/chan-doan/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩺</text></svg>">
+<!--
+  TRANG CHẨN ĐOÁN SỨC KHOẺ SPA — cửa ngõ Tệp 1
+  Nguồn chân lý thiết kế: KHO-TRI-THUC/wiki/02-Kinh doanh/chan-doan-suc-khoe-spa-thiet-ke-san-pham.md
+  Bản giao việc:          KHO-TRI-THUC/wiki/03-Marketing/giao-viec-binh-p3-cua-ngo-t1.md (A2)
+  Đây là bản DEPLOY. Sửa ở vault site-quatang/ rồi git push repo damthanhhoa277/giai-phap-dam-hoa.
+
+  ⛔ RANH GIỚI đã cài sẵn trong trang này (đừng gỡ):
+     - KHÔNG hiện giá bất kỳ sản phẩm nào (ranh giới §6.3 bản giao việc).
+     - KHÔNG hứa con số khách/doanh thu cho bất kỳ sản phẩm nào (§6.5).
+     - Nhánh T1 dẫn về cuộc chẩn đoán 30 phút qua Zalo (trang đặt lịch B1 chưa có).
+     - Nhánh T2 dẫn về quà MIỄN PHÍ khớp trụ yếu nhất — không dẫn thẳng vào trang bán.
+-->
+<style>
+  :root{
+    --cream:#FAF6EC; --cream2:#F2ECDC; --paper:#FFFDF7;
+    --olive:#3E5541; --olive-deep:#2C3E2F; --olive-soft:#6E8168;
+    --gold:#B98A3E; --clay:#B5673D; --line:#D9D0BA;
+    --ink:#2B322A; --ink-soft:#5A6156;
+    --do:#B5673D; --vang:#C89A34; --xanh:#4C7A52;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+  body{font-family:"Segoe UI","Helvetica Neue",Arial,"Noto Sans",sans-serif;
+    background:var(--cream2);color:var(--ink);line-height:1.55;}
+  .wrap{max-width:680px;margin:0 auto;padding:16px 14px 96px;}
+  .brandbar{display:flex;justify-content:space-between;align-items:center;font-size:10px;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--olive-soft);margin-bottom:12px;}
+  .brandbar b{color:var(--olive);}
+  .card{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;
+    padding:22px 18px;margin-bottom:14px;box-shadow:0 3px 14px rgba(44,62,47,.07);}
+  h1{font-size:clamp(23px,6vw,33px);line-height:1.16;color:var(--olive-deep);font-weight:800;letter-spacing:-.4px;}
+  h1 .hl{color:var(--clay);}
+  h2{font-size:clamp(18px,4.6vw,22px);color:var(--olive-deep);font-weight:800;line-height:1.25;}
+  h3{font-size:16px;color:var(--olive-deep);font-weight:800;line-height:1.3;}
+  .sub{font-size:15px;color:var(--ink-soft);margin-top:10px;}
+  .rule{height:3px;width:58px;background:var(--gold);border-radius:3px;margin:13px 0;}
+  p+p{margin-top:11px;}
+  .hookbox{background:var(--olive-deep);color:#F3EEDF;border-radius:13px;padding:17px;
+    font-size:15px;line-height:1.62;margin:16px 0 4px;}
+  .hookbox b{color:#F4D48A;}
+  .hookbox p+p{margin-top:11px;}
+  .who li{list-style:none;padding:9px 0 9px 27px;position:relative;font-size:15px;border-bottom:1px dashed var(--line);}
+  .who li:last-child{border-bottom:none;}
+  .who li::before{content:"✓";position:absolute;left:2px;top:9px;color:var(--gold);font-weight:900;}
+  .notfor{background:var(--cream);border:1px dashed var(--line);border-radius:11px;padding:13px 14px;
+    font-size:13.7px;color:var(--ink-soft);margin-top:14px;}
+
+  label{display:block;font-size:12.5px;font-weight:800;color:var(--olive-deep);margin:13px 0 5px;letter-spacing:.02em;}
+  input{width:100%;font-family:inherit;font-size:16px;padding:12px 13px;border-radius:11px;
+    border:1.6px solid var(--line);background:var(--paper);color:var(--ink);}
+  input:focus{outline:none;border-color:var(--olive);box-shadow:0 0 0 3px rgba(62,85,65,.12);}
+  input.err{border-color:var(--clay);box-shadow:0 0 0 3px rgba(181,103,61,.16);}
+  select{width:100%;font-family:inherit;font-size:16px;padding:12px 38px 12px 13px;border-radius:11px;
+    border:1.6px solid var(--line);background-color:var(--paper);color:var(--ink);
+    -webkit-appearance:none;-moz-appearance:none;appearance:none;
+    background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath fill='%233E5541' d='M0 0h10L5 6z'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 14px center;background-size:10px 6px;}
+  select:focus{outline:none;border-color:var(--olive);box-shadow:0 0 0 3px rgba(62,85,65,.12);}
+  select.err{border-color:var(--clay);box-shadow:0 0 0 3px rgba(181,103,61,.16);}
+  select.chuachon{color:var(--ink-soft);}
+  .agree{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;color:var(--ink-soft);
+    line-height:1.5;font-weight:400;margin:14px 0;}
+  .agree input{width:18px;height:18px;flex:none;margin-top:2px;accent-color:var(--olive);}
+  .agree.err-box{color:var(--clay);}
+  .agree a{color:var(--olive);font-weight:600;}
+  .btn{display:block;width:100%;border:none;cursor:pointer;font-family:inherit;font-weight:800;
+    border-radius:12px;background:var(--gold);color:#fff;font-size:17px;padding:15px 20px;margin-top:18px;
+    box-shadow:0 4px 13px rgba(185,138,62,.32);transition:transform .08s ease;text-align:center;text-decoration:none;}
+  .btn:active{transform:translateY(1px);}
+  .btn.phu{background:var(--paper);color:var(--olive-deep);border:1.6px solid var(--line);box-shadow:none;font-size:15px;}
+  .btn[disabled]{opacity:.55;cursor:default;}
+  .msg{margin-top:13px;font-size:14.5px;border-radius:11px;padding:12px 13px;display:none;}
+  .msg.no{display:block;background:#FBEDE6;border:1px solid #E5C3B0;color:#8A4526;}
+  .msg.ok{display:block;background:#EAF1E7;border:1px solid #BFD2BB;color:#2F5433;}
+  .privacy{font-size:12.5px;color:var(--ink-soft);margin-top:14px;line-height:1.5;}
+
+  /* ---- phần bài chẩn đoán ---- */
+  .thanhtd{position:sticky;top:0;z-index:9;background:var(--cream2);padding:8px 0 10px;margin:-8px 0 6px;}
+  .thanhtd .chu{display:flex;justify-content:space-between;font-size:11.5px;font-weight:800;
+    color:var(--olive-soft);letter-spacing:.04em;text-transform:uppercase;margin-bottom:6px;}
+  .ray{height:7px;background:var(--cream);border:1px solid var(--line);border-radius:99px;overflow:hidden;}
+  .ray i{display:block;height:100%;width:0;background:var(--gold);border-radius:99px;transition:width .25s ease;}
+  .cauhoi{font-size:17px;font-weight:800;color:var(--olive-deep);line-height:1.32;}
+  .dapan{margin-top:14px;}
+  .dapan button{display:block;width:100%;text-align:left;font-family:inherit;font-size:15px;line-height:1.45;
+    color:var(--ink);background:var(--paper);border:1.6px solid var(--line);border-radius:12px;
+    padding:13px 14px;margin-bottom:9px;cursor:pointer;transition:border-color .12s,background .12s;}
+  .dapan button:hover{border-color:var(--olive-soft);}
+  .dapan button.chon{border-color:var(--olive);background:#F0F4EE;box-shadow:0 0 0 3px rgba(62,85,65,.1);}
+  .dieuhuong{display:flex;gap:10px;margin-top:6px;}
+  .dieuhuong button{flex:1;font-family:inherit;font-weight:800;font-size:15px;border-radius:11px;
+    padding:12px;cursor:pointer;border:1.6px solid var(--line);background:var(--paper);color:var(--olive-deep);}
+  .dieuhuong button.chinh{background:var(--gold);color:#fff;border-color:var(--gold);}
+  .dieuhuong button[disabled]{opacity:.45;cursor:default;}
+
+  /* ---- báo cáo ---- */
+  .tongdiem{text-align:center;padding:6px 0 2px;}
+  .tongdiem .so{font-size:54px;font-weight:800;color:var(--olive-deep);line-height:1;letter-spacing:-2px;}
+  .tongdiem .so span{font-size:22px;color:var(--olive-soft);font-weight:700;letter-spacing:0;}
+  .nhan{display:inline-block;font-size:14px;font-weight:800;border-radius:99px;padding:6px 15px;margin-top:11px;}
+  .radar{display:block;margin:6px auto 2px;max-width:330px;width:100%;height:auto;}
+  .tru{padding:12px 0;border-bottom:1px dashed var(--line);}
+  .tru:last-child{border-bottom:none;}
+  .tru .dau{display:flex;justify-content:space-between;align-items:baseline;gap:10px;}
+  .tru .ten{font-weight:800;font-size:15px;color:var(--olive-deep);}
+  .tru .diem{font-weight:800;font-size:14px;white-space:nowrap;}
+  .cot{height:9px;background:var(--cream);border:1px solid var(--line);border-radius:99px;overflow:hidden;margin:7px 0 8px;}
+  .cot i{display:block;height:100%;border-radius:99px;}
+  .tru .loi{font-size:14px;color:var(--ink-soft);line-height:1.5;}
+  .cbao{background:#FBEDE6;border:1px solid #E5C3B0;border-radius:12px;padding:14px;margin-top:14px;font-size:14.5px;color:#8A4526;}
+  .buoc{display:flex;gap:13px;align-items:flex-start;padding:13px 0;border-bottom:1px dashed var(--line);}
+  .buoc:last-child{border-bottom:none;padding-bottom:2px;}
+  .buoc .stt{flex:none;width:27px;height:27px;border-radius:50%;background:var(--olive-deep);color:#F3EEDF;
+    font-weight:800;font-size:13.5px;display:flex;align-items:center;justify-content:center;margin-top:1px;}
+  .buoc .t{font-weight:800;color:var(--olive-deep);font-size:15px;}
+  .buoc .d{font-size:14px;color:var(--ink-soft);margin-top:3px;line-height:1.5;}
+
+  .zalo-fab{position:fixed;right:14px;bottom:16px;z-index:20;background:#0068FF;color:#fff;
+    font-weight:800;font-size:14px;border-radius:99px;padding:12px 18px;text-decoration:none;
+    box-shadow:0 6px 18px rgba(0,104,255,.34);}
+  .an{display:none !important;}
+  .chan{text-align:center;font-size:12px;color:var(--olive-soft);margin-top:18px;line-height:1.6;}
+  .chan a{color:var(--olive);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="brandbar">
+    <span><b>ĐÀM THANH HOA</b></span>
+    <span>Chuyên gia xây hệ thống vận hành spa</span>
+  </div>
+
+  <!-- ================= MÀN MỞ ================= -->
+  <div id="man0">
+    <div class="card">
+      <h1>Spa bạn đang khoẻ hay đang bệnh — <span class="hl">và bệnh ở trụ nào?</span></h1>
+      <div class="rule"></div>
+      <p class="sub">Phần lớn chủ spa biết mình đang mệt, nhưng không chỉ ra được mệt vì đâu. Nên cứ vá chỗ này thì thủng chỗ kia.</p>
+      <div class="hookbox">
+        <p>Mình làm nghề spa 15 năm, có lúc chạy <b>6 chi nhánh</b>. Và mình học được một điều đắt tiền: <b>spa hiếm khi chết vì một lý do</b>. Nó chết vì một <b>vòng lặp</b> — trụ này yếu kéo trụ kia yếu theo, mình cứ chữa triệu chứng mà không chạm được vào gốc.</p>
+        <p>Bài này soi spa của bạn theo <b>5 trụ</b>, rồi chỉ ra bạn đang kẹt trong vòng lặp nào.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Bạn nhận lại được gì</h2>
+      <div class="rule"></div>
+      <ul class="who">
+        <li>Điểm số <b>từng trụ</b> — không phải một con số chung chung</li>
+        <li><b>Trụ hổng nặng nhất</b>: chỗ nên xử lý trước, và vì sao là chỗ đó</li>
+        <li><b>Vòng lặp</b> spa bạn đang mắc — giải thích cơ chế, không chỉ liệt kê triệu chứng</li>
+        <li><b>3 việc cụ thể</b> cho 90 ngày tới</li>
+      </ul>
+      <div class="notfor">Mình nói thật để bạn đỡ mất thời gian: đây <b>không phải</b> bài trắc nghiệm cho vui, cũng <b>không phải</b> buổi tư vấn. Nó chỉ ra <b>bệnh ở đâu</b> — chứ chưa chữa. Muốn có ích thì bạn trả lời đúng thực tế, kể cả những câu bạn phải chọn "tôi không biết". Chọn "không biết" cũng là một thông tin quan trọng.
+      </div>
+      <p class="sub" style="margin-top:15px;font-size:14px;"><b>23 câu · khoảng 7 phút.</b> Không cần chuẩn bị số liệu — cứ trả lời theo cảm nhận thật của bạn.</p>
+      <button class="btn" id="batdau">Bắt đầu chẩn đoán →</button>
+    </div>
+  </div>
+
+  <!-- ================= MÀN HỎI ================= -->
+  <div id="man1" class="an">
+    <div class="thanhtd">
+      <div class="chu"><span id="tenPhan">Phần 1 · Về spa của bạn</span><span id="demCau">1/23</span></div>
+      <div class="ray"><i id="rayTien"></i></div>
+    </div>
+    <div class="card">
+      <div class="cauhoi" id="chuHoi"></div>
+      <div class="dapan" id="oDapAn"></div>
+      <div class="dieuhuong">
+        <button id="nutLui">← Quay lại</button>
+        <button id="nutToi" class="chinh">Tiếp →</button>
+      </div>
+    </div>
+    <div class="card an" id="oHook">
+      <div class="hookbox" style="margin:0;">
+        <p id="chuHook"></p>
+      </div>
+      <button class="btn" id="nutHook">Mình hiểu rồi, đi tiếp →</button>
+    </div>
+  </div>
+
+  <!-- ================= MÀN LẤY THÔNG TIN ================= -->
+  <div id="man2" class="an">
+    <div class="card">
+      <h2>Xong rồi. Bạn cho mình xin thông tin để mở báo cáo</h2>
+      <div class="rule"></div>
+      <p class="sub" style="margin-top:0;font-size:14.5px;">Bấm xong là <b>báo cáo hiện ra ngay trên màn hình này</b> — bạn không phải chờ email. Mình xin email để gửi bạn một bản lưu, và thỉnh thoảng gửi nội dung hữu ích cho chủ spa.</p>
+      <form id="fLead" novalidate>
+        <label for="ten">Mình gọi bạn là gì?</label>
+        <input id="ten" name="ten" type="text" autocomplete="name" placeholder="Ví dụ: Lan" required>
+
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="ten@gmail.com" required>
+
+        <label for="sdt">Số điện thoại <span style="font-weight:600;color:var(--ink-soft);">(không bắt buộc)</span></label>
+        <input id="sdt" name="sdt" type="tel" autocomplete="tel" inputmode="tel" placeholder="Để mình tiện liên hệ khi bạn cần">
+
+        <label class="agree" id="agreeBox"><input id="dongy" name="dongy" type="checkbox"><span>Mình đồng ý để Đàm Thanh Hoa gửi báo cáo và email nội dung hữu ích cho chủ spa, theo <a href="https://quatang.damthanhhoa.com/chinh-sach-bao-mat/" target="_blank" rel="noopener">Chính sách bảo mật</a> &amp; Luật Bảo vệ dữ liệu cá nhân 91/2025/QH15.</span></label>
+
+        <button class="btn" type="submit" id="nutMo">Mở báo cáo của tôi →</button>
+      </form>
+      <div class="msg" id="msg"></div>
+      <p class="privacy">🔒 Mình dùng thông tin này <b>chỉ để gửi báo cáo và nội dung hữu ích cho chủ spa</b>. Mình không bán, không cho ai khác dữ liệu của bạn. Bạn muốn dừng nhận thư lúc nào cũng được — nhắn mình một câu là xong.</p>
+    </div>
+  </div>
+
+  <!-- ================= MÀN BÁO CÁO ================= -->
+  <div id="man3" class="an">
+    <div class="card">
+      <h2 id="chaoTen">Báo cáo sức khoẻ spa của bạn</h2>
+      <div class="rule"></div>
+      <div class="tongdiem">
+        <div class="so" id="soTong">–<span>/100</span></div>
+        <div><span class="nhan" id="nhanNhom"></span></div>
+      </div>
+      <svg class="radar" id="radar" viewBox="0 0 300 280" role="img" aria-label="Sơ đồ 5 trụ sức khoẻ spa"></svg>
+      <p class="sub" id="chuTong" style="font-size:14.5px;"></p>
+    </div>
+
+    <div class="card">
+      <h2>Điểm từng trụ</h2>
+      <div class="rule"></div>
+      <div id="oTru"></div>
+      <div class="cbao an" id="oCanhBao"></div>
+    </div>
+
+    <div class="card">
+      <h2 id="tenVongLap">Vòng lặp bạn đang mắc</h2>
+      <div class="rule"></div>
+      <div class="hookbox" style="margin-top:0;"><p id="chuVongLap"></p></div>
+      <p class="sub" id="chuDiemMu" style="font-size:14.5px;"></p>
+    </div>
+
+    <div class="card">
+      <h2>3 việc cho 90 ngày tới</h2>
+      <div class="rule"></div>
+      <div id="oBuoc"></div>
+    </div>
+
+    <div class="card" id="oCta">
+      <h2 id="ctaTieuDe"></h2>
+      <div class="rule"></div>
+      <p class="sub" id="ctaChu" style="margin-top:0;"></p>
+      <a class="btn" id="ctaNut" href="#" target="_blank" rel="noopener"></a>
+      <a class="btn phu" id="ctaNutPhu" href="#" target="_blank" rel="noopener"></a>
+      <p class="privacy" id="ctaChan"></p>
+    </div>
+  </div>
+
+  <div class="chan">
+    Đàm Thanh Hoa · Chuyên gia xây hệ thống vận hành spa<br>
+    <a href="https://quatang.damthanhhoa.com/chinh-sach-bao-mat/" target="_blank" rel="noopener">Chính sách bảo mật</a>
+  </div>
+</div>
+
+<a class="zalo-fab" id="zalo" href="https://zalo.me/0912088869" target="_blank" rel="noopener">Zalo</a>
+
+<script>
+/* ================= CẤU HÌNH — sửa 1 chỗ ================= */
+var CONFIG = {
+  apiUrl: "https://script.google.com/macros/s/AKfycbyb1PHX-8JF4lAxAgph-ONsskBAO8XU6yf8PWPsKdx19yzO2nqle_swCDIlIaGw1PCQ/exec",
+  qua   : "CD-001",
+  nguon : "trang-chan-doan",
+  zalo  : "https://zalo.me/0912088869"
+};
+/* Nếu link có ?tu=... thì ghi kèm vào nguồn — để biết khách đến từ đâu.
+   Chỉ nhận chữ/số/gạch ngang, tối đa 16 ký tự → chặn rác. Dùng chung bảng mã với 4 trang quà. */
+(function(){
+  var tu = (location.search.match(/[?&]tu=([A-Za-z0-9-]{1,16})/) || [])[1];
+  if (tu) CONFIG.nguon += '-' + tu.toLowerCase();
+})();
+
+/* ================= 5 CÂU HỒ SƠ (không tính điểm — chỉ phân loại T1/T2) ================= */
+var HOSO = [
+  { id:'coso', hoi:'Spa của bạn hiện có bao nhiêu cơ sở?', dap:[
+      ['chua-mo','Chưa mở / đang chuẩn bị'], ['1','1 cơ sở'], ['2','2 cơ sở'], ['3+','3 cơ sở trở lên'] ] },
+  { id:'doanhthu', hoi:'Doanh thu trung bình mỗi tháng của spa (cả hệ thống)?', dap:[
+      ['0','Chưa có doanh thu'], ['<50','Dưới 50 triệu'], ['50-200','50 – 200 triệu'],
+      ['200-500','200 – 500 triệu'], ['500+','Trên 500 triệu'] ] },
+  { id:'nam', hoi:'Spa bạn hoạt động được bao lâu rồi?', dap:[
+      ['chua','Chưa mở'], ['<1','Dưới 1 năm'], ['1-3','1 – 3 năm'], ['3-7','3 – 7 năm'], ['7+','Trên 7 năm'] ] },
+  { id:'nhanvien', hoi:'Spa bạn có bao nhiêu nhân viên?', dap:[
+      ['1','Chỉ mình tôi'], ['2-5','2 – 5 người'], ['6-15','6 – 15 người'], ['15+','Trên 15 người'] ] },
+  { id:'vaitro', hoi:'Hằng ngày bạn đóng vai nào trong spa?', dap:[
+      ['lam','Tôi trực tiếp làm dịch vụ cho khách'],
+      ['ca-hai','Tôi vừa quản lý vừa làm dịch vụ'],
+      ['quanly','Tôi chỉ quản lý, không làm dịch vụ'] ] }
+];
+
+/* ================= 18 CÂU CHẤM ĐIỂM — 5 TRỤ =================
+   Chọn từ bộ 25 câu trong thiết kế chốt 13/07, theo đúng hạn ngạch T1×4 · T2×4 · T3×3 · T4×4 · T5×3.
+   Thang điểm: đáp án đầu = 1đ ... đáp án cuối = 5đ. */
+var TRU = [
+  { ma:'T1', ten:'Thu hút khách', cauhoi:[
+    { hoi:'Mỗi tháng spa bạn có bao nhiêu khách MỚI (chưa đến bao giờ)?', dap:[
+      'Tôi không đếm / không biết chắc','Dưới 5 khách mới','6 – 15 khách mới','16 – 30 khách mới','Trên 30 khách mới — và biết rõ từ kênh nào'] },
+    { hoi:'Khách mới đến spa bạn chủ yếu từ đâu?', dap:[
+      'Tôi không rõ, họ tự tìm đến','Khách quen giới thiệu — không kiểm soát được','Đang thử TikTok/Facebook nhưng chưa ổn định','Có 1 – 2 kênh rõ ràng, khách đến đều hàng tháng','Đa kênh, đo được chi phí để có 1 khách mới'] },
+    { hoi:'Bạn có biết mình tốn bao nhiêu tiền để có 1 khách mới không?', dap:[
+      'Không biết','Biết mơ hồ, không có con số cụ thể','Ước được nhưng không theo dõi đều','Có theo dõi, biết con số cụ thể','Biết và đang tối ưu liên tục để giảm chi phí'] },
+    { hoi:'Bạn có biết rõ "khách lý tưởng" của mình là ai không?', dap:[
+      'Không — ai đến cũng phục vụ','Cảm nhận được nhưng chưa viết ra cụ thể','Có mô tả chung (nữ, 25 – 45 tuổi…)','Biết rõ độ tuổi, thu nhập và nỗi lo chính của họ','Biết rất rõ — nội dung và kênh đều nhắm đúng nhóm này'] }
+  ]},
+  { ma:'T2', ten:'Bán hàng & chốt', cauhoi:[
+    { hoi:'Trong 10 khách đến tư vấn, bạn chốt được mấy người?', dap:[
+      'Không đếm / không biết','1 – 3 người','4 – 5 người','6 – 7 người','8 – 10 người — có quy trình tư vấn chuẩn'] },
+    { hoi:'Nhân viên tư vấn khách theo quy trình chuẩn hay tự phát?', dap:[
+      'Tự phát hoàn toàn — ai quen gì bán nấy','Có vài điểm hướng dẫn nhưng không thành quy trình','Có quy trình nhưng chưa ai theo đều','Có quy trình chuẩn, nhân viên làm tương đối đều','Có kịch bản + đào tạo + đo kết quả từng người'] },
+    { hoi:'Bạn có bán gói dịch vụ và mời khách nâng cấp không?', dap:[
+      'Không — khách muốn gì thì bán nấy','Có gói nhưng hiếm khi đề xuất','Đôi khi đề xuất, không thành nếp','Có chiến lược gói rõ ràng, đề xuất đều','Có lộ trình nâng cấp từng bước, đo được tỷ lệ'] },
+    { hoi:'Khi khách nói "để suy nghĩ" hoặc "đắt quá", nhân viên xử lý thế nào?', dap:[
+      'Không làm gì — để khách về','Giảm giá ngay','Giải thích thêm, nhưng mỗi người một kiểu','Có 2 – 3 câu trả lời chuẩn cho tình huống hay gặp','Có bộ xử lý từ chối đầy đủ + theo dõi khách chưa chốt'] }
+  ]},
+  { ma:'T3', ten:'Giữ chân khách', cauhoi:[
+    { hoi:'Trong 10 khách đã dùng dịch vụ, bao nhiêu người quay lại lần 2?', dap:[
+      'Không theo dõi / không biết','Khoảng 1 – 3 người','Khoảng 4 – 5 người','Khoảng 6 – 7 người','8 – 10 người — có hệ thống chăm sóc sau dịch vụ'] },
+    { hoi:'Bạn làm gì để kéo khách quay lại?', dap:[
+      'Không làm gì — chờ họ tự liên hệ','Thỉnh thoảng nhắn tin thủ công','Có nhắc định kỳ nhưng không đều','Có lịch chăm sóc: nhắn sau 3 ngày, 2 tuần, 1 tháng…','Chăm sóc tự động + cá nhân hoá theo từng khách'] },
+    { hoi:'Trải nghiệm của khách tại spa có đồng đều không?', dap:[
+      'Phụ thuộc hoàn toàn vào kỹ thuật viên hôm đó','Tương đối đồng đều nhưng vẫn có lúc không ổn','Có quy trình nhưng chưa đào tạo đủ','Có quy trình từng bước, khách nào cũng được như nhau','Có quy trình + chấm điểm trải nghiệm định kỳ + cải tiến'] }
+  ]},
+  { ma:'T4', ten:'Vận hành & nhân sự', cauhoi:[
+    { hoi:'Nếu bạn nghỉ 1 tuần không vào spa, chuyện gì xảy ra?', dap:[
+      'Spa không vận hành được','Mọi thứ lộn xộn, phải gọi điện xử lý liên tục','Vận hành được nhưng chất lượng giảm rõ','Vận hành ổn, chỉ vài quyết định cần hỏi tôi','Spa chạy bình thường hoàn toàn — tôi không cần lo'] },
+    { hoi:'Trong 12 tháng qua, bạn mất bao nhiêu nhân viên?', dap:[
+      'Không nhớ / không theo dõi','Mất hơn một nửa đội','Mất khoảng 30 – 50% đội','Mất khoảng 10 – 30% đội','Dưới 10% — đội ngũ rất ổn định'] },
+    { hoi:'Quy trình làm việc của spa được viết ra ở đâu chưa?', dap:[
+      'Chỉ trong đầu tôi','Có vài ghi chú rải rác','Có file nhưng chưa đầy đủ, chưa ai quen dùng','Có quy trình cho các việc chính, nhân viên làm theo','Có quy trình đầy đủ + đào tạo + bảng kiểm hằng ngày'] },
+    { hoi:'Bạn đào tạo nhân viên mới như thế nào?', dap:[
+      'Để người cũ kèm, không có hệ thống','Có vài bước hướng dẫn cơ bản','Có tài liệu nhưng chất lượng phụ thuộc người kèm','Có lộ trình nhận việc chuẩn trong 30 – 60 ngày','Có hệ thống đào tạo + đánh giá + lộ trình thăng tiến rõ'] }
+  ]},
+  { ma:'T5', ten:'Tài chính', cauhoi:[
+    { hoi:'Bạn có biết chính xác tháng này spa lãi hay lỗ bao nhiêu không?', dap:[
+      'Không biết — chỉ thấy có tiền hay không','Biết mơ hồ nhưng không có con số chính xác','Tính được nhưng mất nhiều thời gian, không đều đặn','Biết lãi lỗ hằng tháng — có bảng theo dõi','Biết gần như tức thì — có bảng tự động'] },
+    { hoi:'Bạn có bao giờ bị "doanh thu cao nhưng hết tiền mặt" không?', dap:[
+      'Thường xuyên — không hiểu tại sao','Đôi khi — lo lắng nhưng chưa giải quyết được','Đã hiểu nguyên nhân nhưng chưa kiểm soát tốt','Hiếm khi — có quản lý dòng tiền cơ bản','Không — có dự báo dòng tiền 3 tháng tới'] },
+    { hoi:'Bạn có biết mỗi tháng cần bao nhiêu doanh thu để "đủ chi phí" không?', dap:[
+      'Không biết','Ước được nhưng không tự tin','Biết con số nhưng không theo dõi đều','Biết điểm hoà vốn và theo dõi hằng tháng','Biết chi tiết + có kế hoạch tăng lợi nhuận'] }
+  ]}
+];
+
+/* Hook giữa bài — hiện sau câu chấm điểm thứ 8 */
+var CHU_HOOK = 'Tới đây mình dừng một nhịp. Hai trụ vừa rồi — <b>thu hút</b> và <b>bán hàng</b> — là hai trụ chủ spa hay đổ tiền vào nhất. Nhưng theo những gì mình thấy suốt 15 năm, <b>phần lớn spa mệt không phải vì thiếu khách</b>. Ba trụ tiếp theo mới là chỗ tiền âm thầm rò đi.';
+
+/* ================= LỜI NHẬN XÉT TỪNG TRỤ (theo mức điểm) ================= */
+var LOI = {
+  T1:['Bạn gần như chưa kiểm soát được đầu vào — khách đến hay không phần lớn là may rủi.',
+      'Có khách nhưng nguồn chưa ổn định, tháng được tháng mất.',
+      'Đầu vào bắt đầu có nếp, nhưng chưa đo được nên chưa nhân lên được.',
+      'Bạn kiểm soát được đầu vào khá tốt — đủ nền để tăng quy mô.'],
+  T2:['Khách vào tới nơi rồi mà vẫn rơi ở bàn tư vấn — đây là chỗ mất tiền nhanh nhất.',
+      'Chốt được nhưng phụ thuộc vào người tư vấn hôm đó.',
+      'Có quy trình, còn thiếu phần đo và luyện cho đều tay.',
+      'Khâu bán hàng của bạn đang chạy có hệ thống.'],
+  T3:['Khách đến rồi đi và bạn không biết vì sao — mọi đồng tiền kéo khách mới đang chảy qua chỗ này.',
+      'Có giữ được một phần, nhưng bằng trí nhớ chứ chưa bằng hệ thống.',
+      'Đã có nếp chăm sóc, cần làm cho đều và đo được.',
+      'Giữ chân là điểm mạnh của bạn — đây là tài sản thật.'],
+  T4:['Spa đang chạy bằng sức của bạn. Bạn rời ra là mọi thứ lệch.',
+      'Có người phụ nhưng việc vẫn dội hết về bạn.',
+      'Đã có quy trình, còn thiếu phần đào tạo và kiểm cho thành nếp.',
+      'Đội ngũ và quy trình đủ vững để bạn rời tay mà spa vẫn chạy.'],
+  T5:['Bạn đang chạy trong bóng tối về tiền — không biết thật sự lãi hay lỗ.',
+      'Bạn cảm được tình hình tiền nhưng chưa có con số để quyết.',
+      'Có theo dõi, còn thiếu sự đều đặn để ra quyết định kịp.',
+      'Bạn nắm được bức tranh tiền — quyết định dựa trên số, không dựa cảm giác.']
+};
+
+/* ================= 4 NHÓM KẾT QUẢ ================= */
+var NHOM = [
+  { max:39,  ten:'Nền tảng chưa vững', mau:'#B5673D', nen:'#FBEDE6',
+    chu:'Spa bạn đang chạy phần lớn bằng cảm tính và sức của chính bạn. Đây không phải lời chê — gần như spa nào cũng bắt đầu từ đây. Nhưng nếu giữ nguyên cách này mà tăng quy mô thì càng to càng mệt.' },
+  { max:59,  ten:'Vận hành thủ công', mau:'#C89A34', nen:'#FBF3DF',
+    chu:'Spa bạn có kết quả thật, nhưng kết quả đó đang phụ thuộc vào người — chủ yếu là bạn. Cái gì phụ thuộc người thì không nhân bản được, và cũng không nghỉ được.' },
+  { max:79,  ten:'Hệ thống hoá một phần', mau:'#6E8168', nen:'#EFF3ED',
+    chu:'Bạn đã có vài trụ chạy bằng hệ thống, nhưng vẫn còn trụ hổng rõ. Ở mức này, việc đáng làm nhất không phải là làm thêm nhiều thứ — mà là vá đúng chỗ hổng, vì chính nó đang kéo các trụ khác xuống.' },
+  { max:100, ten:'Sẵn sàng nhân bản', mau:'#4C7A52', nen:'#EAF1E7',
+    chu:'Nền của bạn vững. Ở mức này câu hỏi không còn là "làm sao cho spa chạy được", mà là "làm sao nhân cái đang chạy được này lên mà không vỡ".' }
+];
+
+/* ================= VÒNG LẶP BỆNH ================= */
+function timVongLap(d){
+  var t1=d.T1, t2=d.T2, t3=d.T3, t4=d.T4, t5=d.T5;
+  var thap=function(x){ return x < 10; }, on=function(x){ return x >= 13; };
+  if (thap(t1) && thap(t2) && thap(t3))
+    return { ten:'Vòng lặp "mọi thứ đang chạy bằng may mắn"',
+      chu:'Cả ba trụ khách — <b>kéo khách, chốt khách, giữ khách</b> — đều đang yếu cùng lúc. Nghĩa là spa chưa có hệ thống nào thật sự chạy; mỗi tháng bạn đang bắt đầu lại gần như từ đầu. Tin tốt: khi cả ba cùng yếu thì <b>không cần chữa cả ba</b>. Vá trụ giữ chân trước là rẻ nhất, vì khách cũ không tốn tiền tìm lại.',
+      mu:'Điểm mù thường gặp ở tình trạng này: chủ spa nghĩ mình thiếu khách, nên dồn tiền chạy quảng cáo. Nhưng đổ khách vào một cái spa chưa giữ được khách thì tiền đi nhanh hơn, chứ vấn đề không hết.' };
+  if (on(t1) && thap(t3))
+    return { ten:'Vòng lặp "rót nước vào cái xô thủng"',
+      chu:'Bạn <b>kéo khách giỏi</b> nhưng <b>giữ khách yếu</b>. Khách vào cửa trước rồi ra cửa sau, nên tháng nào bạn cũng phải kéo mẻ khách mới chỉ để đứng yên tại chỗ. Đây là kiểu mệt tốn tiền nhất: càng chạy càng phải chạy thêm.',
+      mu:'Giữ một khách cũ rẻ hơn tìm khách mới nhiều lần. Trước khi tăng thêm một đồng quảng cáo, chỗ đáng sửa là quy trình sau dịch vụ.' };
+  if (on(t1) && thap(t2))
+    return { ten:'Vòng lặp "tiền rơi ngay tại quầy"',
+      chu:'Khách đã đến tận nơi, nghĩa là phần khó và tốn tiền nhất bạn làm được rồi. Nhưng tới bàn tư vấn thì rơi. Vấn đề của bạn <b>không nằm ở kênh</b> — nằm ở <b>khâu tư vấn</b>.',
+      mu:'Đây là chỗ dễ sửa nhất trong 5 trụ và cho kết quả nhanh nhất, vì bạn không cần thêm một khách nào mới cả — chỉ cần giữ lại những người đã đến.' };
+  if (thap(t4) && on(t1) && on(t3))
+    return { ten:'Vòng lặp "bạn đang sở hữu một công việc, không phải một doanh nghiệp"',
+      chu:'Các trụ về khách của bạn đều ổn — spa có khách, khách quay lại. Nhưng <b>toàn bộ đang chạy bằng bạn</b>. Bạn rời ra là mọi thứ lệch. Nghĩa là bạn không sở hữu một doanh nghiệp, bạn đang giữ một chỗ làm không được phép nghỉ.',
+      mu:'Nút thắt không phải là bạn thiếu người giỏi. Là những việc bạn làm mỗi ngày <b>chưa được viết ra khỏi đầu bạn</b>, nên không ai nhận lại được.' };
+  if (thap(t5))
+    return { ten:'Vòng lặp "chạy mù về tiền"',
+      chu:'Doanh thu là con số dễ thấy, còn lợi nhuận mới là sự thật. Khi trụ tài chính yếu, mọi quyết định khác — tuyển thêm người, mở thêm cơ sở, giảm giá hút khách — đều đang được ra <b>trong bóng tối</b>.',
+      mu:'Chuyện hay gặp nhất: tiền khách trả trước cho gói bị tiêu vào chi phí tháng này. Sổ vẫn thấy có tiền, nhưng thật ra bạn đang tiêu một khoản mình còn nợ dịch vụ.' };
+  if (thap(t4))
+    return { ten:'Vòng lặp "spa phụ thuộc chủ"',
+      chu:'Trụ vận hành đang là chỗ hổng lớn nhất. Việc chưa ra khỏi đầu bạn, nên người mới vào không nhận lại được, và bạn thì không rời tay được.',
+      mu:'Chừng nào quy trình còn nằm trong đầu một người, chừng đó mỗi lần có người nghỉ là spa lại mất một phần trí nhớ.' };
+  return { ten:'Không có vòng lặp nào đang kẹt nặng',
+      chu:'Không trụ nào của bạn đang hổng tới mức kéo các trụ khác xuống. Ở tình trạng này, việc đáng làm không phải là chữa — mà là <b>làm sâu thêm trụ mạnh nhất</b> và chuẩn hoá lại để nhân lên.',
+      mu:'Khi không có chỗ nào chảy máu, rủi ro lớn nhất lại là đứng yên quá lâu vì thấy mọi thứ vẫn ổn.' };
+}
+
+/* ================= 3 VIỆC 90 NGÀY — theo trụ yếu nhất ================= */
+var BUOC = {
+  T1:[['Chọn đúng 1 kênh, bỏ phần còn lại trong 90 ngày','Làm sâu một kênh còn hơn có mặt hời hợt ở bốn kênh. Chọn kênh mà khách của bạn thật sự ở đó.'],
+      ['Viết ra khách lý tưởng của bạn là ai','Bao nhiêu tuổi, làm gì, đang lo điều gì. Chưa gọi tên được họ thì nội dung nào cũng chung chung.'],
+      ['Hỏi 10 khách gần nhất: "Vì sao chị chọn bên em?"','Câu trả lời của họ chính là câu quảng cáo tốt nhất bạn có — và nó miễn phí.']],
+  T2:[['Ghi lại 5 câu từ chối bạn hay nghe nhất','Nghe là ghi, một tuần là đủ. Đây là dữ liệu thật, không phải phỏng đoán.'],
+      ['Soạn câu trả lời chuẩn cho từng câu đó','Không phải để đối phó khách — để nhân viên nào cũng trả lời được như bạn.'],
+      ['Đếm tỷ lệ chốt mỗi tuần','Chỉ cần hai con số: bao nhiêu người tư vấn, bao nhiêu người chốt. Đo được mới cải thiện được.']],
+  T3:[['Lập sổ khách và ghi ngày làm gần nhất','Chỉ cần tên, điện thoại, dịch vụ, ngày. Có sổ này là bạn thôi phụ thuộc trí nhớ.'],
+      ['Đặt 3 mốc nhắn tin: sau 3 ngày, 2 tuần, 1 tháng','Nhắn hỏi thăm, không chào bán. Đây là việc rẻ nhất mà hiệu quả nhất trong 5 trụ.'],
+      ['Gọi lại 20 khách đã lâu không quay lại','Đừng mời mua. Hỏi thăm và nghe. Bạn sẽ biết vì sao họ đi — thứ mà không bảng khảo sát nào cho bạn.']],
+  T4:[['Viết ra 10 việc mà chỉ mình bạn biết làm','Cứ liệt kê thô, chưa cần đẹp. Đây là danh sách những chỗ spa đang phụ thuộc bạn.'],
+      ['Mỗi tuần đưa 1 việc ra khỏi đầu bạn thành giấy','Ai làm, làm lúc nào, làm thế nào, thế nào là xong. Mười tuần là hết danh sách.'],
+      ['Thử nghỉ 2 ngày liền và ghi lại chuyện gì hỏng','Chỗ hỏng chính là chỗ cần viết quy trình tiếp theo. Rẻ hơn nhiều so với nghỉ một tuần rồi mới biết.']],
+  T5:[['Tách tiền khách trả trước ra khỏi tiền tiêu được','Đây là chỗ rò nguy hiểm nhất. Tiền gói là tiền bạn còn nợ dịch vụ, chưa phải tiền của bạn.'],
+      ['Tính điểm hoà vốn tháng của spa','Mỗi tháng cần bao nhiêu doanh thu để không lỗ. Biết con số này là biết mình đang ở đâu.'],
+      ['Ghi thu chi đều đặn 30 ngày liền','Chưa cần phần mềm. Một bảng đơn giản, ghi mỗi ngày. Ba mươi ngày là bạn thấy tiền đi đâu.']]
+};
+
+/* Quà miễn phí khớp trụ yếu nhất — dùng cho nhánh T2 */
+var QUA_THEO_TRU = {
+  T1:['Bộ Khung SOP 3 Ngày Cho Nhân Viên Mới','https://quatang.damthanhhoa.com/sop-3-ngay/'],
+  T2:['Checklist 3 Lỗ Thủng Đang Rút Cạn Tiền Spa','https://quatang.damthanhhoa.com/3-lo-thung/'],
+  T3:['7 Việc Giữ Khách Quay Lại Với Spa','https://quatang.damthanhhoa.com/7-viec-giu-khach/'],
+  T4:['Bộ Khung SOP 3 Ngày Cho Nhân Viên Mới','https://quatang.damthanhhoa.com/sop-3-ngay/'],
+  T5:['Kiểm Tra Nhanh Sức Khoẻ Dòng Tiền Spa','https://quatang.damthanhhoa.com/kiem-tra-dong-tien/']
+};
+
+/* ================= BỘ MÁY ================= */
+var traLoi = {}, diemCau = [], viTri = 0, ketQua = null;
+var danhSach = [];
+HOSO.forEach(function(c){ danhSach.push({ loai:'hoso', d:c }); });
+TRU.forEach(function(t){ t.cauhoi.forEach(function(c, i){ danhSach.push({ loai:'diem', tru:t, d:c, chiSo:i }); }); });
+var TONG = danhSach.length;
+var SAU_CAU_HOOK = HOSO.length + 8;   /* hook hiện sau câu chấm điểm thứ 8 */
+var daHienHook = false;
+
+function $(id){ return document.getElementById(id); }
+function hien(el, co){ el.classList.toggle('an', !co); }
+
+function ve(){
+  var m = danhSach[viTri];
+  $('chuHoi').innerHTML = m.d.hoi;
+  $('demCau').textContent = (viTri + 1) + '/' + TONG;
+  $('tenPhan').textContent = m.loai === 'hoso' ? 'Phần 1 · Về spa của bạn' : ('Trụ ' + m.tru.ma.slice(1) + '/5 · ' + m.tru.ten);
+  $('rayTien').style.width = ((viTri) / TONG * 100) + '%';
+
+  var o = $('oDapAn'); o.innerHTML = '';
+  var daChon = m.loai === 'hoso' ? traLoi[m.d.id] : diemCau[viTri - HOSO.length];
+  var ds = m.loai === 'hoso' ? m.d.dap : m.d.dap;
+  ds.forEach(function(x, i){
+    var b = document.createElement('button');
+    b.type = 'button';
+    var gt = m.loai === 'hoso' ? x[0] : (i + 1);
+    b.textContent = m.loai === 'hoso' ? x[1] : x;
+    if (daChon === gt) b.className = 'chon';
+    b.addEventListener('click', function(){
+      if (m.loai === 'hoso') traLoi[m.d.id] = gt; else diemCau[viTri - HOSO.length] = gt;
+      [].forEach.call(o.children, function(c){ c.className = ''; });
+      b.className = 'chon';
+      setTimeout(tienLen, 190);
+    });
+    o.appendChild(b);
+  });
+  $('nutLui').disabled = viTri === 0;
+  $('nutToi').textContent = viTri === TONG - 1 ? 'Xem báo cáo →' : 'Tiếp →';
+}
+
+function daTraLoi(){
+  var m = danhSach[viTri];
+  return m.loai === 'hoso' ? !!traLoi[m.d.id] : !!diemCau[viTri - HOSO.length];
+}
+
+function tienLen(){
+  if (!daTraLoi()){
+    var o = $('oDapAn');
+    o.style.transition = 'none'; o.style.opacity = '.35';
+    setTimeout(function(){ o.style.transition = 'opacity .2s'; o.style.opacity = '1'; }, 90);
+    return;
+  }
+  if (viTri === TONG - 1){ moManLead(); return; }
+  if (!daHienHook && viTri + 1 === SAU_CAU_HOOK){
+    daHienHook = true;
+    $('chuHook').innerHTML = CHU_HOOK;
+    hien($('oHook'), true);
+    $('oHook').scrollIntoView({ block:'center', behavior:'smooth' });
+    return;
+  }
+  viTri++; ve(); window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+$('batdau').addEventListener('click', function(){
+  hien($('man0'), false); hien($('man1'), true); ve(); window.scrollTo({ top:0 });
+});
+$('nutToi').addEventListener('click', tienLen);
+$('nutLui').addEventListener('click', function(){
+  if (viTri > 0){ viTri--; ve(); window.scrollTo({ top:0, behavior:'smooth' }); }
+});
+$('nutHook').addEventListener('click', function(){
+  hien($('oHook'), false); viTri++; ve(); window.scrollTo({ top:0, behavior:'smooth' });
+});
+
+/* ---- tính điểm ---- */
+function tinh(){
+  var d = {}, k = 0;
+  TRU.forEach(function(t){
+    var tho = 0;
+    t.cauhoi.forEach(function(){ tho += (diemCau[k] || 1); k++; });
+    d[t.ma] = Math.round(tho / (t.cauhoi.length * 5) * 20 * 10) / 10;   /* quy về /20 */
+  });
+  var tong = Math.round(d.T1 + d.T2 + d.T3 + d.T4 + d.T5);
+  return { tru:d, tong:tong };
+}
+
+/* ---- nhánh T1/T2: khớp đúng quy ước của 4 trang thu lead, cộng thêm doanh thu ---- */
+function tinhNhanh(){
+  var cs = traLoi.coso, nv = traLoi.nhanvien, dt = traLoi.doanhthu;
+  return (cs === '2' || cs === '3+' || nv === '6-15' || nv === '15+' || dt === '200-500' || dt === '500+') ? 'T1' : 'T2';
+}
+
+function moManLead(){
+  ketQua = tinh();
+  $('rayTien').style.width = '100%';
+  hien($('man1'), false); hien($('man2'), true);
+  window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+/* ---- vẽ radar 5 trụ ---- */
+function veRadar(d){
+  var cx = 150, cy = 138, R = 104, n = 5;
+  var ten = ['Thu hút','Bán hàng','Giữ chân','Vận hành','Tài chính'];
+  var ma = ['T1','T2','T3','T4','T5'];
+  var goc = function(i){ return -Math.PI / 2 + i * 2 * Math.PI / n; };
+  var diem = function(i, r){ return [cx + Math.cos(goc(i)) * r, cy + Math.sin(goc(i)) * r]; };
+  var s = '';
+  [0.25, 0.5, 0.75, 1].forEach(function(t){
+    var p = [];
+    for (var i = 0; i < n; i++){ var q = diem(i, R * t); p.push(q[0].toFixed(1) + ',' + q[1].toFixed(1)); }
+    s += '<polygon points="' + p.join(' ') + '" fill="none" stroke="#D9D0BA" stroke-width="1"/>';
+  });
+  for (var i = 0; i < n; i++){
+    var q = diem(i, R);
+    s += '<line x1="' + cx + '" y1="' + cy + '" x2="' + q[0].toFixed(1) + '" y2="' + q[1].toFixed(1) + '" stroke="#D9D0BA" stroke-width="1"/>';
+  }
+  var p2 = [];
+  for (var j = 0; j < n; j++){
+    var r = R * Math.max(d[ma[j]] / 20, 0.04);
+    var q2 = diem(j, r); p2.push(q2[0].toFixed(1) + ',' + q2[1].toFixed(1));
+  }
+  s += '<polygon points="' + p2.join(' ') + '" fill="rgba(62,85,65,.22)" stroke="#3E5541" stroke-width="2.2" stroke-linejoin="round"/>';
+  for (var m2 = 0; m2 < n; m2++){
+    var q3 = diem(m2, R * Math.max(d[ma[m2]] / 20, 0.04));
+    var yeu = d[ma[m2]] < 8;
+    s += '<circle cx="' + q3[0].toFixed(1) + '" cy="' + q3[1].toFixed(1) + '" r="4" fill="' + (yeu ? '#B5673D' : '#3E5541') + '"/>';
+    var q4 = diem(m2, R + 26);
+    var neo = Math.abs(q4[0] - cx) < 12 ? 'middle' : (q4[0] > cx ? 'start' : 'end');
+    if (neo === 'start') q4[0] -= 12; if (neo === 'end') q4[0] += 12;
+    s += '<text x="' + q4[0].toFixed(1) + '" y="' + (q4[1] + 4).toFixed(1) + '" text-anchor="' + neo + '" font-size="12.5" font-weight="700" fill="' + (yeu ? '#B5673D' : '#5A6156') + '" font-family="Segoe UI,Arial,sans-serif">' + ten[m2] + '</text>';
+  }
+  $('radar').innerHTML = s;
+}
+
+/* ---- dựng báo cáo ---- */
+function veBaoCao(tenKhach){
+  var d = ketQua.tru, tong = ketQua.tong;
+  var ma = ['T1','T2','T3','T4','T5'];
+
+  $('chaoTen').textContent = tenKhach ? ('Báo cáo sức khoẻ spa — gửi ' + tenKhach) : 'Báo cáo sức khoẻ spa của bạn';
+  $('soTong').innerHTML = tong + '<span>/100</span>';
+
+  var nhom = NHOM.find(function(x){ return tong <= x.max; });
+  var el = $('nhanNhom');
+  el.textContent = nhom.ten; el.style.color = nhom.mau; el.style.background = nhom.nen;
+  $('chuTong').textContent = nhom.chu;
+
+  veRadar(d);
+
+  /* trụ yếu nhất / mạnh nhất */
+  var yeu = ma.slice().sort(function(a,b){ return d[a] - d[b]; })[0];
+  var manh = ma.slice().sort(function(a,b){ return d[b] - d[a]; })[0];
+
+  var o = $('oTru'); o.innerHTML = '';
+  TRU.forEach(function(t){
+    var v = d[t.ma], pct = v / 20 * 100;
+    var mau = v < 8 ? 'var(--do)' : (v < 13 ? 'var(--vang)' : 'var(--xanh)');
+    var muc = v < 6 ? 0 : (v < 11 ? 1 : (v < 15 ? 2 : 3));
+    var nhanPhu = t.ma === yeu ? ' · <span style="color:var(--do);">xử lý trước</span>'
+                : (t.ma === manh ? ' · <span style="color:var(--xanh);">lợi thế</span>' : '');
+    var div = document.createElement('div');
+    div.className = 'tru';
+    div.innerHTML = '<div class="dau"><span class="ten">' + t.ten + nhanPhu + '</span>'
+      + '<span class="diem" style="color:' + mau + '">' + v.toFixed(1) + '/20</span></div>'
+      + '<div class="cot"><i style="width:' + pct + '%;background:' + mau + '"></i></div>'
+      + '<div class="loi">' + LOI[t.ma][muc] + '</div>';
+    o.appendChild(div);
+  });
+
+  /* cảnh báo: có trụ dưới 40% dù điểm tổng cao */
+  var duoi40 = ma.filter(function(x){ return d[x] < 8; });
+  if (duoi40.length && tong >= 60){
+    var tenYeu = duoi40.map(function(x){ return TRU.find(function(t){ return t.ma === x; }).ten; }).join(' · ');
+    $('oCanhBao').innerHTML = '<b>Điểm tổng của bạn khá, nhưng đừng để nó ru ngủ.</b> Trụ <b>' + tenYeu
+      + '</b> đang dưới 40%. Một trụ hổng sâu đủ sức kéo cả bốn trụ còn lại xuống theo — điểm tổng đẹp chỉ đang che nó đi.';
+    hien($('oCanhBao'), true);
+  }
+
+  var vl = timVongLap(d);
+  $('tenVongLap').textContent = vl.ten;
+  $('chuVongLap').innerHTML = vl.chu;
+  $('chuDiemMu').innerHTML = '<b>Điểm mù:</b> ' + vl.mu;
+
+  var ob = $('oBuoc'); ob.innerHTML = '';
+  BUOC[yeu].forEach(function(b, i){
+    var div = document.createElement('div');
+    div.className = 'buoc';
+    div.innerHTML = '<div class="stt">' + (i + 1) + '</div><div><div class="t">' + b[0] + '</div><div class="d">' + b[1] + '</div></div>';
+    ob.appendChild(div);
+  });
+
+  /* ---- CTA theo nhánh ----
+     T1 → cuộc chẩn đoán 30 phút qua Zalo (trang đặt lịch chưa có).
+     T2 → quà miễn phí khớp trụ yếu nhất. KHÔNG hiện giá, KHÔNG hứa con số. */
+  var tenTruYeu = TRU.find(function(t){ return t.ma === yeu; }).ten.toLowerCase();
+  if (tinhNhanh() === 'T1'){
+    $('ctaTieuDe').textContent = 'Bước tiếp theo cho bạn: một cuộc chẩn đoán 30 phút';
+    $('ctaChu').innerHTML = 'Bạn đang vận hành ở quy mô mà một bài chẩn đoán tự động không nói hết được — nhiều cơ sở hoặc đội ngũ đông thì vấn đề thường nằm ở chỗ <b>các cơ sở lệch nhau</b>, chứ không nằm trong một trụ đơn lẻ. Mình dành 30 phút soi trực tiếp cùng bạn, dựa trên chính báo cáo này. Miễn phí, và mình không bán gì trong cuộc đó.';
+    $('ctaNut').textContent = 'Nhắn Zalo đặt cuộc chẩn đoán 30 phút';
+    $('ctaNut').href = CONFIG.zalo;
+    var qT1 = QUA_THEO_TRU[yeu];
+    $('ctaNutPhu').textContent = 'Trong lúc chờ, lấy bộ công cụ về ' + tenTruYeu;
+    $('ctaNutPhu').href = qT1[1];
+    $('ctaChan').textContent = 'Bạn nhắn Zalo kèm một câu: "Mình vừa làm bài chẩn đoán, điểm ' + ketQua.tong + '/100" — để mình mở đúng báo cáo của bạn ra xem trước.';
+  } else {
+    var q = QUA_THEO_TRU[yeu];
+    $('ctaTieuDe').textContent = 'Bước tiếp theo cho bạn: vá đúng trụ ' + tenTruYeu;
+    $('ctaChu').innerHTML = 'Biết bệnh rồi thì việc còn lại là bắt tay vào. Mình có sẵn một bộ công cụ miễn phí đúng cho trụ này — bạn lấy về dùng luôn, không mất phí gì cả.';
+    $('ctaNut').textContent = 'Lấy: ' + q[0];
+    $('ctaNut').href = q[1];
+    $('ctaNutPhu').textContent = 'Có gì chưa rõ, nhắn mình qua Zalo';
+    $('ctaNutPhu').href = CONFIG.zalo;
+    $('ctaChan').textContent = 'Mình không có lời hứa nào về con số cho bạn — cái mình chắc là bạn vừa nhìn ra chỗ hổng của mình, và đó là chỗ bắt đầu.';
+  }
+
+  hien($('man2'), false); hien($('man3'), true);
+  window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+/* ---- gửi lead rồi mở báo cáo ---- */
+(function(){
+  var f = $('fLead'), btn = $('nutMo'), msg = $('msg');
+  function bao(kieu, chu){ msg.className = 'msg ' + kieu; msg.innerHTML = chu; }
+  function hopLeEmail(v){ return /^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(v); }
+
+  f.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    var ten = $('ten'), email = $('email'), sdt = $('sdt');
+    [ten, email].forEach(function(o){ o.classList.remove('err'); });
+    if (!ten.value.trim()){ ten.classList.add('err'); ten.focus(); return bao('no','Bạn cho mình xin tên với nhé.'); }
+    if (!hopLeEmail(email.value.trim())){ email.classList.add('err'); email.focus(); return bao('no','Email chưa đúng định dạng, bạn kiểm tra lại giúp mình nhé.'); }
+    var dongy = $('dongy'), agreeBox = $('agreeBox');
+    agreeBox.classList.remove('err-box');
+    if (!dongy.checked){ agreeBox.classList.add('err-box'); dongy.focus(); return bao('no','Bạn tick ô đồng ý giúp mình nhé — có vậy mình mới được phép gửi báo cáo qua email.'); }
+
+    btn.disabled = true; btn.textContent = 'Đang mở báo cáo…';
+
+    var goi = {
+      ten: ten.value.trim(), sdt: sdt.value.trim(),
+      email: email.value.trim().toLowerCase(),
+      qua: CONFIG.qua, nguon: CONFIG.nguon,
+      coso: traLoi.coso || '', nhanvien: traLoi.nhanvien || '',
+      diem: ketQua.tong, diemTru: ketQua.tru,
+      doanhthu: traLoi.doanhthu || '', nam: traLoi.nam || '', vaitro: traLoi.vaitro || ''
+    };
+
+    /* Báo cáo KHÔNG phụ thuộc mạng: gửi được hay không thì khách vẫn xem được ngay.
+       Khách vừa bỏ ra 7 phút — bắt họ chờ email mới thấy kết quả là mất người. */
+    var xong = false;
+    function moBaoCao(){ if (!xong){ xong = true; veBaoCao(ten.value.trim()); } }
+    setTimeout(moBaoCao, 3500);
+
+    fetch(CONFIG.apiUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(goi)
+    }).then(function(r){ return r.json(); })
+      .then(function(){ moBaoCao(); })
+      .catch(function(){ moBaoCao(); });
+  });
+})();
+</script>
+</body>
+</html>
