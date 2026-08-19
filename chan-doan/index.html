@@ -295,7 +295,7 @@ var HOSO = [
   { id:'nam', hoi:'Spa bạn hoạt động được bao lâu rồi?', dap:[
       ['chua','Chưa mở'], ['<1','Dưới 1 năm'], ['1-3','1 – 3 năm'], ['3-7','3 – 7 năm'], ['7+','Trên 7 năm'] ] },
   { id:'nhanvien', hoi:'Spa bạn có bao nhiêu nhân viên?', dap:[
-      ['1','Chỉ mình tôi'], ['2-5','2 – 5 người'], ['6-15','6 – 15 người'], ['15+','Trên 15 người'] ] },
+      ['1','Chỉ mình tôi'], ['2-5','2 – 5 người'], ['6-9','6 – 9 người'], ['10-20','10 – 20 người'], ['20+','Trên 20 người'] ] },
   { id:'vaitro', hoi:'Hằng ngày bạn đóng vai nào trong spa?', dap:[
       ['lam','Tôi trực tiếp làm dịch vụ cho khách'],
       ['ca-hai','Tôi vừa quản lý vừa làm dịch vụ'],
@@ -470,7 +470,17 @@ var BUOC = {
       ['Ghi thu chi đều đặn 30 ngày liền','Chưa cần phần mềm. Một bảng đơn giản, ghi mỗi ngày. Ba mươi ngày là bạn thấy tiền đi đâu.']]
 };
 
-/* Quà miễn phí khớp trụ yếu nhất — dùng cho nhánh T2 */
+/* Bộ công cụ TRẢ PHÍ khớp trụ yếu nhất (Hoa chốt 19/08: nhánh T2 dẫn về trang bán).
+   Chỉ có 3 trụ có bộ công cụ thật. Trụ Thu hút và Bán hàng CHƯA CÓ sản phẩm
+   -> vẫn dẫn về quà miễn phí, KHÔNG đẩy bừa sang bộ khác cho có
+   (luật: không dẫn khách tới đích không tồn tại). */
+var BO_TRA_PHI = {
+  T3:['Bộ Công Cụ Giữ Khách Quay Lại','https://giaiphap.damthanhhoa.com/giu-khach'],
+  T4:['Bộ Công Cụ Vận Hành &amp; Nhân Sự','https://giaiphap.damthanhhoa.com/van-hanh'],
+  T5:['Bộ Công Cụ Quản Trị Dòng Tiền','https://giaiphap.damthanhhoa.com/dong-tien']
+};
+
+/* Quà miễn phí khớp trụ yếu nhất */
 var QUA_THEO_TRU = {
   T1:['Bộ Khung SOP 3 Ngày Cho Nhân Viên Mới','https://quatang.damthanhhoa.com/sop-3-ngay/'],
   T2:['Checklist 3 Lỗ Thủng Đang Rút Cạn Tiền Spa','https://quatang.damthanhhoa.com/3-lo-thung/'],
@@ -568,7 +578,10 @@ function tinh(){
 /* ---- nhánh T1/T2: khớp đúng quy ước của 4 trang thu lead, cộng thêm doanh thu ---- */
 function tinhNhanh(){
   var cs = traLoi.coso, nv = traLoi.nhanvien, dt = traLoi.doanhthu;
-  return (cs === '2' || cs === '3+' || nv === '6-15' || nv === '15+' || dt === '200-500' || dt === '500+') ? 'T1' : 'T2';
+  /* Hoa chốt 19/08: ngưỡng nhân viên là ≥10 (không phải ≥6).
+     Một spa 1 cơ sở mà 10+ người đã to bằng nguyên một chi nhánh của avatar T1 (3 CN / 25-35 người).
+     Vẫn giữ tiêu chí cơ sở bằng HOẶC: nỗi đau "mỗi CN một kiểu" chỉ có khi ≥2 cơ sở. */
+  return (cs === '2' || cs === '3+' || nv === '10-20' || nv === '20+' || dt === '200-500' || dt === '500+') ? 'T1' : 'T2';
 }
 
 function moManLead(){
@@ -689,14 +702,27 @@ function veBaoCao(tenKhach){
     $('ctaNutPhu').href = qT1[1];
     $('ctaChan').textContent = 'Bạn nhắn Zalo kèm một câu: "Mình vừa làm bài chẩn đoán, điểm ' + ketQua.tong + '/100" — để mình mở đúng báo cáo của bạn ra xem trước.';
   } else {
-    var q = QUA_THEO_TRU[yeu];
+    var q = QUA_THEO_TRU[yeu], bo = BO_TRA_PHI[yeu];
     $('ctaTieuDe').textContent = 'Bước tiếp theo cho bạn: vá đúng trụ ' + tenTruYeu;
-    $('ctaChu').innerHTML = 'Biết bệnh rồi thì việc còn lại là bắt tay vào. Mình có sẵn một bộ công cụ miễn phí đúng cho trụ này — bạn lấy về dùng luôn, không mất phí gì cả.';
-    $('ctaNut').textContent = 'Lấy: ' + q[0];
-    $('ctaNut').href = q[1];
-    $('ctaNutPhu').textContent = 'Có gì chưa rõ, nhắn mình qua Zalo';
-    $('ctaNutPhu').href = CONFIG.zalo;
-    $('ctaChan').textContent = 'Mình không có lời hứa nào về con số cho bạn — cái mình chắc là bạn vừa nhìn ra chỗ hổng của mình, và đó là chỗ bắt đầu.';
+    if (bo){
+      /* Nói thật đây là bộ trả phí. Vừa cho miễn phí 7 phút xong mà đẩy nút im lặng
+         sang trang bán thì khách thấy bị gài — hỏng đúng chỗ mình đang xây lòng tin. */
+      $('ctaChu').innerHTML = 'Biết bệnh rồi thì việc còn lại là bắt tay vào. Mình có sẵn <b>' + bo[0]
+        + '</b> — đúng cái trụ bạn đang hổng. Đây là <b>bộ trả phí</b>, mình nói trước để bạn không bất ngờ; giá và chi tiết bên trong bạn xem rồi quyết.';
+      $('ctaNut').textContent = 'Xem ' + bo[0];
+      $('ctaNut').href = bo[1];
+      $('ctaNutPhu').textContent = 'Hoặc lấy bản miễn phí trước: ' + q[0];
+      $('ctaNutPhu').href = q[1];
+      $('ctaChan').textContent = 'Chưa muốn mua cũng không sao — bản miễn phí ở nút dưới đủ để bạn bắt đầu. Mình không hứa con số nào với bạn cả.';
+    } else {
+      /* Trụ Thu hút / Bán hàng: chưa có bộ công cụ nào đúng trụ -> không bán bừa. */
+      $('ctaChu').innerHTML = 'Biết bệnh rồi thì việc còn lại là bắt tay vào. Trụ này mình <b>chưa có bộ công cụ riêng</b> — nói thật luôn thay vì đẩy bạn sang thứ không đúng. Bạn lấy bộ miễn phí này dùng trước nha.';
+      $('ctaNut').textContent = 'Lấy: ' + q[0];
+      $('ctaNut').href = q[1];
+      $('ctaNutPhu').textContent = 'Có gì chưa rõ, nhắn mình qua Zalo';
+      $('ctaNutPhu').href = CONFIG.zalo;
+      $('ctaChan').textContent = 'Mình không có lời hứa nào về con số cho bạn — cái mình chắc là bạn vừa nhìn ra chỗ hổng của mình, và đó là chỗ bắt đầu.';
+    }
   }
 
   hien($('man2'), false); hien($('man3'), true);
