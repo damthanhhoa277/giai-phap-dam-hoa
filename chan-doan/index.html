@@ -421,6 +421,31 @@ function timVongLap(d){
     return { ten:'Vòng lặp "spa phụ thuộc chủ"',
       chu:'Trụ vận hành đang là chỗ hổng lớn nhất. Việc chưa ra khỏi đầu bạn, nên người mới vào không nhận lại được, và bạn thì không rời tay được.',
       mu:'Chừng nào quy trình còn nằm trong đầu một người, chừng đó mỗi lần có người nghỉ là spa lại mất một phần trí nhớ.' };
+  /* Truoc khi ket luan "khong co gi ket": neu con tru nao duoi 40% thi VAN dang ket,
+     chi la khong roi vao cap doi nao o tren. Noi "khong co van de" luc do la tu mau thuan
+     voi chinh dong "tru yeu nhat - xu ly truoc" ngay phia tren bao cao. */
+  var ma5 = ['T1','T2','T3','T4','T5'];
+  var yeuNhat = ma5.slice().sort(function(a,b){ return d[a] - d[b]; })[0];
+  if (d[yeuNhat] < 10){
+    var RIENG = {
+      T1:{ ten:'Vòng lặp "đầu vào bấp bênh"',
+        chu:'Các trụ khác của bạn không tệ, nhưng <b>đầu vào đang bấp bênh</b>. Spa có nội lực mà không có dòng khách đều thì tháng nào cũng phải gồng lại từ đầu — và nội lực đó không được dùng tới.',
+        mu:'Khi đầu vào phập phù, chủ spa hay đổ lỗi cho thị trường. Nhưng thứ thiếu thường chỉ là <b>một kênh được làm cho tới</b>, thay vì bốn kênh làm nửa vời.' },
+      T2:{ ten:'Vòng lặp "tiền rơi ngay tại quầy"',
+        chu:'Khách đã đến tận nơi — phần khó và tốn tiền nhất bạn làm được rồi. Nhưng tới bàn tư vấn thì rơi. Vấn đề của bạn <b>không nằm ở kênh</b>, nằm ở <b>khâu tư vấn</b>.',
+        mu:'Đây là chỗ dễ sửa nhất trong 5 trụ và cho kết quả nhanh nhất, vì bạn không cần thêm một khách nào mới cả — chỉ cần giữ lại những người đã đến.' },
+      T3:{ ten:'Vòng lặp "rót nước vào cái xô thủng"',
+        chu:'Trụ <b>giữ chân</b> của bạn đang hổng sâu nhất. Khách vào cửa trước rồi ra cửa sau, nên tháng nào bạn cũng phải kéo mẻ khách mới chỉ để đứng yên tại chỗ. Đây là kiểu mệt tốn tiền nhất: càng chạy càng phải chạy thêm.',
+        mu:'Giữ một khách cũ rẻ hơn tìm khách mới nhiều lần. Trước khi tăng thêm một đồng quảng cáo, chỗ đáng sửa là quy trình sau dịch vụ.' },
+      T4:{ ten:'Vòng lặp "spa phụ thuộc chủ"',
+        chu:'Trụ vận hành đang là chỗ hổng lớn nhất. Việc chưa ra khỏi đầu bạn, nên người mới vào không nhận lại được, và bạn thì không rời tay được.',
+        mu:'Chừng nào quy trình còn nằm trong đầu một người, chừng đó mỗi lần có người nghỉ là spa lại mất một phần trí nhớ.' },
+      T5:{ ten:'Vòng lặp "chạy mù về tiền"',
+        chu:'Trụ tài chính đang hổng sâu nhất. Doanh thu là con số dễ thấy, còn lợi nhuận mới là sự thật — khi trụ này yếu, mọi quyết định khác đều đang được ra <b>trong bóng tối</b>.',
+        mu:'Chuyện hay gặp nhất: tiền khách trả trước cho gói bị tiêu vào chi phí tháng này. Sổ vẫn thấy có tiền, nhưng thật ra bạn đang tiêu một khoản mình còn nợ dịch vụ.' }
+    };
+    return RIENG[yeuNhat];
+  }
   return { ten:'Không có vòng lặp nào đang kẹt nặng',
       chu:'Không trụ nào của bạn đang hổng tới mức kéo các trụ khác xuống. Ở tình trạng này, việc đáng làm không phải là chữa — mà là <b>làm sâu thêm trụ mạnh nhất</b> và chuẩn hoá lại để nhân lên.',
       mu:'Khi không có chỗ nào chảy máu, rủi ro lớn nhất lại là đứng yên quá lâu vì thấy mọi thứ vẫn ổn.' };
@@ -625,10 +650,15 @@ function veBaoCao(tenKhach){
 
   /* cảnh báo: có trụ dưới 40% dù điểm tổng cao */
   var duoi40 = ma.filter(function(x){ return d[x] < 8; });
-  if (duoi40.length && tong >= 60){
+  /* Canh bao nay phai hien BAT KE diem tong. Chan no lai khi tong thap la im lang
+     dung luc tinh trang te nhat. Chi doi cach noi cho hop canh. */
+  if (duoi40.length){
     var tenYeu = duoi40.map(function(x){ return TRU.find(function(t){ return t.ma === x; }).ten; }).join(' · ');
-    $('oCanhBao').innerHTML = '<b>Điểm tổng của bạn khá, nhưng đừng để nó ru ngủ.</b> Trụ <b>' + tenYeu
-      + '</b> đang dưới 40%. Một trụ hổng sâu đủ sức kéo cả bốn trụ còn lại xuống theo — điểm tổng đẹp chỉ đang che nó đi.';
+    $('oCanhBao').innerHTML = tong >= 60
+      ? ('<b>Điểm tổng của bạn khá, nhưng đừng để nó ru ngủ.</b> Trụ <b>' + tenYeu
+        + '</b> đang dưới 40%. Một trụ hổng sâu đủ sức kéo cả bốn trụ còn lại xuống theo — điểm tổng đẹp chỉ đang che nó đi.')
+      : ('<b>Trụ <b>' + tenYeu + '</b> đang dưới 40% — hổng sâu hơn hẳn các trụ còn lại.</b> '
+        + 'Bạn đừng cố sửa cả năm trụ cùng lúc. Một trụ hổng tới mức này sẽ kéo công sức bạn bỏ vào các trụ khác trôi đi theo, nên vá nó trước là rẻ nhất.');
     hien($('oCanhBao'), true);
   }
 
