@@ -62,6 +62,14 @@
     border:1.6px solid var(--line);background:var(--paper);color:var(--ink);}
   input:focus{outline:none;border-color:var(--olive);box-shadow:0 0 0 3px rgba(62,85,65,.12);}
   input.err{border-color:var(--clay);box-shadow:0 0 0 3px rgba(181,103,61,.16);}
+  select{width:100%;font-family:inherit;font-size:16px;padding:12px 38px 12px 13px;border-radius:11px;
+    border:1.6px solid var(--line);background-color:var(--paper);color:var(--ink);
+    -webkit-appearance:none;-moz-appearance:none;appearance:none;
+    background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath fill='%233E5541' d='M0 0h10L5 6z'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 14px center;background-size:10px 6px;}
+  select:focus{outline:none;border-color:var(--olive);box-shadow:0 0 0 3px rgba(62,85,65,.12);}
+  select.err{border-color:var(--clay);box-shadow:0 0 0 3px rgba(181,103,61,.16);}
+  select.chuachon{color:var(--ink-soft);}
   .agree{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;color:var(--ink-soft);
     line-height:1.5;font-weight:400;margin:2px 0 14px;}
   .agree input{width:18px;height:18px;flex:none;margin-top:2px;accent-color:var(--olive);}
@@ -160,6 +168,7 @@
       <li>Bạn hay phải kèm người mới mà không có thời gian</li>
       <li>Nhân viên nghỉ là công việc rối tung lên</li>
       <li>Bạn muốn nghỉ vài hôm mà không dám vì sợ spa chạy sai</li>
+      <li>Hoặc bạn đang có <b>nhiều cơ sở</b> — mỗi nơi đang dạy nhân viên mới một kiểu</li>
     </ul>
     <div class="notfor">Mình nói thật: đây <b>không</b> phải bộ SOP viết sẵn để bạn chép về dùng luôn — vì spa của bạn có cách làm riêng, chép của người khác vào là hỏng. Đây là <b>cái khung</b> để bạn lấy việc trong đầu mình ra và đặt lên giấy. Phần viết vẫn là bạn viết, nhưng có khung thì viết nhanh hơn nhiều.</div>
   </div>
@@ -179,6 +188,24 @@
 
       <label for="email">Email để nhận quà</label>
       <input id="email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="ten@gmail.com" required>
+
+      <label for="coso">Spa của bạn hiện có bao nhiêu cơ sở?</label>
+      <select id="coso" name="coso" class="chuachon" required>
+        <option value="" selected disabled>— Bạn chọn giúp mình —</option>
+        <option value="chua-mo">Chưa mở / đang chuẩn bị</option>
+        <option value="1">1 cơ sở</option>
+        <option value="2">2 cơ sở</option>
+        <option value="3+">3 cơ sở trở lên</option>
+      </select>
+
+      <label for="nhanvien">Spa bạn có bao nhiêu nhân viên? <span style="font-weight:600;color:var(--ink-soft);">(không bắt buộc)</span></label>
+      <select id="nhanvien" name="nhanvien" class="chuachon">
+        <option value="" selected disabled>— Bạn chọn giúp mình —</option>
+        <option value="1">Chỉ mình tôi</option>
+        <option value="2-5">2–5 người</option>
+        <option value="6-15">6–15 người</option>
+        <option value="15+">Trên 15 người</option>
+      </select>
 
       <label class="agree" id="agreeBox"><input id="dongy" name="dongy" type="checkbox"><span>Mình đồng ý để Đàm Thanh Hoa gửi quà và email nội dung hữu ích cho chủ spa, theo <a href="https://quatang.damthanhhoa.com/chinh-sach-bao-mat/" target="_blank" rel="noopener">Chính sách bảo mật</a> &amp; Luật Bảo vệ dữ liệu cá nhân 91/2025/QH15.</span></label>
 
@@ -271,6 +298,10 @@ var CONFIG = {
 
     if (!ten.value.trim()){ ten.classList.add('err'); ten.focus(); return bao('no','Bạn cho mình xin tên với nhé.'); }
     if (!hopLeEmail(email.value.trim())){ email.classList.add('err'); email.focus(); return bao('no','Email chưa đúng định dạng, bạn kiểm tra lại giúp mình nhé.'); }
+    var coso = document.getElementById('coso'), nhanvien = document.getElementById('nhanvien');
+    coso.classList.remove('err');
+    if (!coso.value){ coso.classList.add('err'); coso.focus();
+      return bao('no','Bạn chọn giúp mình số cơ sở spa nhé — để mình gửi đúng thứ hợp với bạn.'); }
     var dongy = document.getElementById('dongy'), agreeBox = document.getElementById('agreeBox');
     if (agreeBox) agreeBox.classList.remove('err-box');
     if (dongy && !dongy.checked){ if (agreeBox) agreeBox.classList.add('err-box'); dongy.focus(); return bao('no','Bạn tick ô đồng ý giúp mình nhé — có vậy mình mới được phép gửi quà qua email.'); }
@@ -281,7 +312,8 @@ var CONFIG = {
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify({
         ten: ten.value.trim(), sdt: sdt.value.trim(),
-        email: email.value.trim().toLowerCase(), qua: CONFIG.qua, nguon: CONFIG.nguon
+        email: email.value.trim().toLowerCase(), qua: CONFIG.qua, nguon: CONFIG.nguon,
+        coso: coso.value, nhanvien: nhanvien.value
       })
     })
     .then(function(r){ return r.json(); })
@@ -298,6 +330,15 @@ var CONFIG = {
       btn.disabled = false; btn.textContent = 'Nhận quà miễn phí 🎁';
       bao('no','Mạng đang trục trặc nên chưa gửi được. Bạn thử lại giúp mình, hoặc nhắn trực tiếp cho mình cũng được nhé.');
     });
+  });
+})();
+
+/* O chon: chua chon thi chu xam, chon roi thi chu den */
+(function(){
+  ['coso','nhanvien'].forEach(function(id){
+    var o = document.getElementById(id);
+    if (!o) return;
+    o.addEventListener('change', function(){ o.classList.toggle('chuachon', !o.value); });
   });
 })();
 </script>
