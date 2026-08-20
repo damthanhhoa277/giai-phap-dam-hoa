@@ -307,8 +307,8 @@ var HOSO = [
    Thang điểm: đáp án đầu = 1đ ... đáp án cuối = 5đ. */
 var TRU = [
   { ma:'T1', ten:'Thu hút khách', cauhoi:[
-    { hoi:'Mỗi tháng spa bạn có bao nhiêu khách MỚI (chưa đến bao giờ)?', dap:[
-      'Tôi không đếm / không biết chắc','Dưới 5 khách mới','6 – 15 khách mới','16 – 30 khách mới','Trên 30 khách mới — và biết rõ từ kênh nào'] },
+    { hoi:'Mỗi tháng spa bạn đón bao nhiêu khách MỚI — người chưa từng tới spa bạn lần nào?', dap:[
+      'Tôi không theo dõi số này / không biết chắc','Dưới 5 khách mới','6 – 15 khách mới','16 – 30 khách mới','Trên 30 khách mới — và biết rõ từ kênh nào'] },
     { hoi:'Khách mới đến spa bạn chủ yếu từ đâu?', dap:[
       'Tôi không rõ, họ tự tìm đến','Khách quen giới thiệu — không kiểm soát được','Đang thử TikTok/Facebook nhưng chưa ổn định','Có 1 – 2 kênh rõ ràng, khách đến đều hàng tháng','Đa kênh, đo được chi phí để có 1 khách mới'] },
     { hoi:'Bạn có biết mình tốn bao nhiêu tiền để có 1 khách mới không?', dap:[
@@ -318,7 +318,7 @@ var TRU = [
   ]},
   { ma:'T2', ten:'Bán hàng & chốt', cauhoi:[
     { hoi:'Trong 10 khách đến tư vấn, bạn chốt được mấy người?', dap:[
-      'Không đếm / không biết','1 – 3 người','4 – 5 người','6 – 7 người','8 – 10 người — có quy trình tư vấn chuẩn'] },
+      'Tôi không theo dõi số này / không biết','1 – 3 người','4 – 5 người','6 – 7 người','8 – 10 người — có quy trình tư vấn chuẩn'] },
     { hoi:'Nhân viên tư vấn khách theo quy trình chuẩn hay tự phát?', dap:[
       'Tự phát hoàn toàn — ai quen gì bán nấy','Có vài điểm hướng dẫn nhưng không thành quy trình','Có quy trình nhưng chưa ai theo đều','Có quy trình chuẩn, nhân viên làm tương đối đều','Có kịch bản + đào tạo + đo kết quả từng người'] },
     { hoi:'Bạn có bán gói dịch vụ và mời khách nâng cấp không?', dap:[
@@ -491,6 +491,7 @@ var QUA_THEO_TRU = {
 
 /* ================= BỘ MÁY ================= */
 var traLoi = {}, diemCau = [], viTri = 0, ketQua = null;
+var nhanhEp = null;   /* khi mở lại báo cáo từ link thì nhánh lấy từ mã, không tính lại */
 var danhSach = [];
 HOSO.forEach(function(c){ danhSach.push({ loai:'hoso', d:c }); });
 TRU.forEach(function(t){ t.cauhoi.forEach(function(c, i){ danhSach.push({ loai:'diem', tru:t, d:c, chiSo:i }); }); });
@@ -577,12 +578,51 @@ function tinh(){
 
 /* ---- nhánh T1/T2: khớp đúng quy ước của 4 trang thu lead, cộng thêm doanh thu ---- */
 function tinhNhanh(){
+  if (nhanhEp) return nhanhEp;
   var cs = traLoi.coso, nv = traLoi.nhanvien, dt = traLoi.doanhthu;
   /* Hoa chốt 19/08: ngưỡng nhân viên là ≥10 (không phải ≥6).
      Một spa 1 cơ sở mà 10+ người đã to bằng nguyên một chi nhánh của avatar T1 (3 CN / 25-35 người).
      Vẫn giữ tiêu chí cơ sở bằng HOẶC: nỗi đau "mỗi CN một kiểu" chỉ có khi ≥2 cơ sở. */
   return (cs === '2' || cs === '3+' || nv === '10-20' || nv === '20+' || dt === '200-500' || dt === '500+') ? 'T1' : 'T2';
 }
+
+/* ===== MÃ KẾT QUẢ =====
+   Báo cáo trước đây chỉ sống trong màn hình — đóng tab là mất, thư gửi về không mang theo gì.
+   Nay gói 5 điểm trụ + nhánh thành một mã ngắn đặt trong đường dẫn, để thư gửi khách
+   mở lại ĐÚNG báo cáo của họ. Mã không chứa thông tin cá nhân nào. */
+var MA_KQ = /^(\d{3}-){5}[12]$/;
+
+function taoMaKQ(){
+  var ma = ['T1','T2','T3','T4','T5'].map(function(m){
+    var x = Math.round(ketQua.tru[m] * 10);
+    return (x < 10 ? '00' : (x < 100 ? '0' : '')) + x;
+  });
+  ma.push(tinhNhanh() === 'T1' ? '1' : '2');
+  return ma.join('-');
+}
+
+function docMaKQ(ma){
+  if (!MA_KQ.test(ma)) return false;
+  var p = ma.split('-'), d = {}, tong = 0;
+  ['T1','T2','T3','T4','T5'].forEach(function(m, i){
+    var v = Number(p[i]) / 10;
+    if (v > 20) return;
+    d[m] = v; tong += v;
+  });
+  if (Object.keys(d).length !== 5) return false;
+  ketQua = { tru:d, tong:Math.round(tong) };
+  nhanhEp = p[5] === '1' ? 'T1' : 'T2';
+  return true;
+}
+
+/* Mở trang kèm ?kq=... -> hiện thẳng báo cáo, không bắt làm lại bài */
+(function(){
+  var ma = (location.search.match(/[?&]kq=([0-9-]{20,26})/) || [])[1];
+  if (ma && docMaKQ(ma)){
+    hien($('man0'), false);
+    veBaoCao('');
+  }
+})();
 
 function moManLead(){
   ketQua = tinh();
@@ -752,7 +792,7 @@ function veBaoCao(tenKhach){
       email: email.value.trim().toLowerCase(),
       qua: CONFIG.qua, nguon: CONFIG.nguon,
       coso: traLoi.coso || '', nhanvien: traLoi.nhanvien || '',
-      diem: ketQua.tong, diemTru: ketQua.tru,
+      diem: ketQua.tong, diemTru: ketQua.tru, kq: taoMaKQ(),
       doanhthu: traLoi.doanhthu || '', nam: traLoi.nam || '', vaitro: traLoi.vaitro || ''
     };
 
