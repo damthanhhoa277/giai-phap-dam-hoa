@@ -228,7 +228,7 @@
         <div class="so" id="soTong">–<span>/100</span></div>
         <div><span class="nhan" id="nhanNhom"></span></div>
       </div>
-      <svg class="radar" id="radar" viewBox="0 0 300 280" role="img" aria-label="Sơ đồ 5 trụ sức khoẻ spa"></svg>
+      <svg class="radar" id="radar" viewBox="-42 0 384 280" role="img" aria-label="Sơ đồ 5 trụ sức khoẻ spa"></svg>
       <p class="sub" id="chuTong" style="font-size:14.5px;"></p>
     </div>
 
@@ -394,9 +394,31 @@ var NHOM = [
 ];
 
 /* ================= VÒNG LẶP BỆNH ================= */
-function timVongLap(d){
+var VONG_LAP = {
+  phuThuocChu: function(cacTruKhacOn){
+    return cacTruKhacOn
+      ? { ten:'Vòng lặp "bạn đang sở hữu một công việc, không phải một doanh nghiệp"',
+          chu:'Các trụ về khách của bạn đều ổn — spa có khách, khách quay lại. Nhưng <b>toàn bộ đang chạy bằng bạn</b>. Bạn rời ra là mọi thứ lệch. Nghĩa là bạn không sở hữu một doanh nghiệp, bạn đang giữ một chỗ làm không được phép nghỉ.',
+          mu:'Nút thắt không phải là bạn thiếu người giỏi. Là những việc bạn làm mỗi ngày <b>chưa được viết ra khỏi đầu bạn</b>, nên không ai nhận lại được.' }
+      : { ten:'Vòng lặp "spa phụ thuộc chủ"',
+          chu:'Trụ vận hành đang là chỗ hổng lớn nhất của bạn. Việc chưa ra khỏi đầu bạn, nên người mới vào không nhận lại được, và bạn thì không rời tay được. Mọi trụ khác có khá lên thì cũng khá lên bằng sức của bạn.',
+          mu:'Chừng nào quy trình còn nằm trong đầu một người, chừng đó mỗi lần có người nghỉ là spa lại mất một phần trí nhớ.' };
+  },
+  muTien: function(){
+    return { ten:'Vòng lặp "chạy mù về tiền"',
+      chu:'Doanh thu là con số dễ thấy, còn lợi nhuận mới là sự thật. Khi trụ tài chính là chỗ hổng nhất, mọi quyết định khác — tuyển thêm người, mở thêm cơ sở, giảm giá hút khách — đều đang được ra <b>trong bóng tối</b>.',
+      mu:'Chuyện hay gặp nhất: tiền khách trả trước cho gói bị tiêu vào chi phí tháng này. Sổ vẫn thấy có tiền, nhưng thật ra bạn đang tiêu một khoản mình còn nợ dịch vụ.' };
+  }
+};
+
+/* yeu = mã trụ hổng nhất. Cho vòng lặp của chính trụ đó được xét TRƯỚC,
+   để phần "vòng lặp" và phần "3 việc 90 ngày" nói cùng một chuyện.
+   Trước đây hai phần này đá nhau: vòng lặp bàn chuyện bán hàng còn 3 việc bàn chuyện vận hành. */
+function timVongLap(d, yeu){
   var t1=d.T1, t2=d.T2, t3=d.T3, t4=d.T4, t5=d.T5;
   var thap=function(x){ return x < 10; }, on=function(x){ return x >= 13; };
+  if (yeu === 'T4' && thap(t4)) return VONG_LAP.phuThuocChu(on(t1) && on(t3));
+  if (yeu === 'T5' && thap(t5)) return VONG_LAP.muTien();
   if (thap(t1) && thap(t2) && thap(t3))
     return { ten:'Vòng lặp "mọi thứ đang chạy bằng may mắn"',
       chu:'Cả ba trụ khách — <b>kéo khách, chốt khách, giữ khách</b> — đều đang yếu cùng lúc. Nghĩa là spa chưa có hệ thống nào thật sự chạy; mỗi tháng bạn đang bắt đầu lại gần như từ đầu. Tin tốt: khi cả ba cùng yếu thì <b>không cần chữa cả ba</b>. Vá trụ giữ chân trước là rẻ nhất, vì khách cũ không tốn tiền tìm lại.',
@@ -409,18 +431,9 @@ function timVongLap(d){
     return { ten:'Vòng lặp "tiền rơi ngay tại quầy"',
       chu:'Khách đã đến tận nơi, nghĩa là phần khó và tốn tiền nhất bạn làm được rồi. Nhưng tới bàn tư vấn thì rơi. Vấn đề của bạn <b>không nằm ở kênh</b> — nằm ở <b>khâu tư vấn</b>.',
       mu:'Đây là chỗ dễ sửa nhất trong 5 trụ và cho kết quả nhanh nhất, vì bạn không cần thêm một khách nào mới cả — chỉ cần giữ lại những người đã đến.' };
-  if (thap(t4) && on(t1) && on(t3))
-    return { ten:'Vòng lặp "bạn đang sở hữu một công việc, không phải một doanh nghiệp"',
-      chu:'Các trụ về khách của bạn đều ổn — spa có khách, khách quay lại. Nhưng <b>toàn bộ đang chạy bằng bạn</b>. Bạn rời ra là mọi thứ lệch. Nghĩa là bạn không sở hữu một doanh nghiệp, bạn đang giữ một chỗ làm không được phép nghỉ.',
-      mu:'Nút thắt không phải là bạn thiếu người giỏi. Là những việc bạn làm mỗi ngày <b>chưa được viết ra khỏi đầu bạn</b>, nên không ai nhận lại được.' };
-  if (thap(t5))
-    return { ten:'Vòng lặp "chạy mù về tiền"',
-      chu:'Doanh thu là con số dễ thấy, còn lợi nhuận mới là sự thật. Khi trụ tài chính yếu, mọi quyết định khác — tuyển thêm người, mở thêm cơ sở, giảm giá hút khách — đều đang được ra <b>trong bóng tối</b>.',
-      mu:'Chuyện hay gặp nhất: tiền khách trả trước cho gói bị tiêu vào chi phí tháng này. Sổ vẫn thấy có tiền, nhưng thật ra bạn đang tiêu một khoản mình còn nợ dịch vụ.' };
-  if (thap(t4))
-    return { ten:'Vòng lặp "spa phụ thuộc chủ"',
-      chu:'Trụ vận hành đang là chỗ hổng lớn nhất. Việc chưa ra khỏi đầu bạn, nên người mới vào không nhận lại được, và bạn thì không rời tay được.',
-      mu:'Chừng nào quy trình còn nằm trong đầu một người, chừng đó mỗi lần có người nghỉ là spa lại mất một phần trí nhớ.' };
+  if (thap(t4) && on(t1) && on(t3)) return VONG_LAP.phuThuocChu(true);
+  if (thap(t5)) return VONG_LAP.muTien();
+  if (thap(t4)) return VONG_LAP.phuThuocChu(false);
   /* Truoc khi ket luan "khong co gi ket": neu con tru nao duoi 40% thi VAN dang ket,
      chi la khong roi vao cap doi nao o tren. Noi "khong co van de" luc do la tu mau thuan
      voi chinh dong "tru yeu nhat - xu ly truoc" ngay phia tren bao cao. */
@@ -715,7 +728,7 @@ function veBaoCao(tenKhach){
     hien($('oCanhBao'), true);
   }
 
-  var vl = timVongLap(d);
+  var vl = timVongLap(d, yeu);
   $('tenVongLap').textContent = vl.ten;
   $('chuVongLap').innerHTML = vl.chu;
   $('chuDiemMu').innerHTML = '<b>Điểm mù:</b> ' + vl.mu;
