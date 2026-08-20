@@ -590,7 +590,7 @@ function tinhNhanh(){
    Báo cáo trước đây chỉ sống trong màn hình — đóng tab là mất, thư gửi về không mang theo gì.
    Nay gói 5 điểm trụ + nhánh thành một mã ngắn đặt trong đường dẫn, để thư gửi khách
    mở lại ĐÚNG báo cáo của họ. Mã không chứa thông tin cá nhân nào. */
-var MA_KQ = /^(\d{3}-){5}[12]$/;
+var MA_KQ = /^([0-9]{3}-){5}[12]$/;
 
 function taoMaKQ(){
   var ma = ['T1','T2','T3','T4','T5'].map(function(m){
