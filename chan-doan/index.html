@@ -134,6 +134,27 @@
   .an{display:none !important;}
   .chan{text-align:center;font-size:12px;color:var(--olive-soft);margin-top:18px;line-height:1.6;}
   .chan a{color:var(--olive);}
+
+  /* --- The Zalo cho may tinh (Hoa bao 20/08: bam link tren may tinh bi Zalo bat dang nhap) --- */
+  .zbox{position:fixed;inset:0;z-index:60;background:rgba(30,38,30,.55);
+    display:none;align-items:center;justify-content:center;padding:20px;}
+  .zbox.mo{display:flex;}
+  .zbox-in{background:var(--paper);border:1.5px solid var(--line);border-radius:18px;
+    padding:24px 22px;max-width:340px;width:100%;text-align:center;box-shadow:0 12px 40px rgba(30,38,30,.3);}
+  .zbox-in h3{font-size:18px;font-weight:800;color:var(--olive-deep);margin-bottom:6px;}
+  .zbox-in p{font-size:14px;color:var(--ink-soft);line-height:1.55;}
+  .zbox-in img{width:186px;height:186px;display:block;margin:14px auto 10px;
+    border:1px solid var(--line);border-radius:12px;}
+  .zbox-hay{display:flex;align-items:center;gap:10px;margin:16px 0 10px;color:var(--olive-soft);
+    font-size:12px;font-weight:700;letter-spacing:.08em;}
+  .zbox-hay::before,.zbox-hay::after{content:"";flex:1;height:1px;background:var(--line);}
+  .zbox-so{display:flex;align-items:center;justify-content:center;gap:9px;flex-wrap:wrap;}
+  .zbox-so b{font-size:20px;font-weight:800;color:var(--olive-deep);letter-spacing:.5px;}
+  .zbox-so button{font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;
+    border:1.5px solid var(--line);background:var(--cream);color:var(--olive-deep);
+    border-radius:9px;padding:7px 13px;}
+  .zbox-dong{margin-top:18px;width:100%;font-family:inherit;font-size:15px;font-weight:800;cursor:pointer;
+    border:none;border-radius:11px;padding:12px;background:var(--olive);color:#fff;}
 </style>
 </head>
 <body>
@@ -822,6 +843,63 @@ function veBaoCao(tenKhach){
     }).then(function(r){ return r.json(); })
       .then(function(){ moBaoCao(); })
       .catch(function(){ moBaoCao(); });
+  });
+})();
+</script>
+
+<div class="zbox" id="zbox" role="dialog" aria-modal="true" aria-label="Cach nhan Zalo cho Dam Thanh Hoa">
+  <div class="zbox-in">
+    <h3>M&#7903; Zalo b&#7857;ng &#273;i&#7879;n tho&#7841;i</h3>
+    <p>B&#7841;n &#273;ang xem tr&#234;n m&#225;y t&#237;nh. Qu&#233;t m&#227; n&#224;y b&#7857;ng <b>camera &#273;i&#7879;n tho&#7841;i</b> l&#224; m&#7903; th&#7859;ng Zalo c&#7911;a m&#236;nh &#8212; kh&#244;ng ph&#7843;i &#273;&#259;ng nh&#7853;p g&#236; c&#7843;.</p>
+    <img id="zqr" alt="M&#227; QR Zalo c&#7911;a &#272;&#224;m Thanh Hoa" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOgAAADoCAIAAABqyz8vAAADZUlEQVR42u3dMU4rQRBF0WfEdshJWTkpOYtxZJkVEAzqpqpmzon/twb7qtUqtXpuz8c9MM2LrwDhgnBBuAgXhAvCRbggXBAuCBfhgnBBuAgXeng9+h/ePt5H/GHfn19Lnv+3z6ny2/Ov+nu7/V5WXGwVQLggXIQLwgXhwvE5bprNO7vNZY/OWau+5ym/lxUXWwUQLggX4YJwQbiwbo6bzXO7VXPH3edZj35Ot3PD3X4vKy62CiBcEC7CBeGCcGH/HDcnvW/Bc1pxQbgIF4QLwkW4vgKECzHHTee5abd7c624IFwQLggX4YJwQbjEHDez7mHNonsVzvq+tOnPacXFVgGEC8JFuCBcEC4xx03Vvard7L7Xtuq87/Tfy4qLcEG4IFyEC8IF4XIht+fj7luI94pZcUG4IFyEC8IF4SJcyGnO4646n1o1B919f8Kqv3f3e85WPWdVD1ZcbBVAuCBchAvCBeES53HT7fxrNs87q86z7n7OVZ+/+34Jc1xsFUC4IFyEC8IF4ULancdNszno7uc86323VT1YcbFVAOGCcBEuCBeES5zHzZRzt3Gfbsvzu1ZcEC7CBeGCcBEuCBdSNsedcv616h6GqvOpVfcTp+heXisutgogXBAuwgXhgnCJexWy+3xn1fu0dp837XZuePfvUnXPgxUXWwUQLggX4YJwQbjEedxUzeeq5rvdzvue9X1szuNiqwDCBeGCcBEuCBfiftxh97xWnaOdPle24mKrAMIF4SJcEC4Il7hXIVXncaefE50+l+12n4YVF1sFEC4IF+GCcEG4sP9+3BS9tyxD7uut+h6qzum6VwFbBRAuCBeEi3BBuJDLncdNs7nmlPPKU+6RsOJiqwDCBeEiXBAuCBeOz3Hj/Vv/cv/u9PtrrbggXIQLwgXhIlwQLqTdHDfmkaXz2qudA7biYqsAwgXhIlwQLgiXmOOSWeeGq+bKVfNjKy62CiBcEC7CBeGCcIk5bq42T+32nrBsnu+u+vdHn8d7zrBVAOGCcEG4CBeEC2k3x+12H0LVOdcUneututdi9/djxcVWAYQLwkW4IFwQLjHHzfT7WXefK73a/cGrztE6j4utAggXhAvCRbggXDjs9nzcfQtYcUG4IFyEC8IF4SJcEC4IF4SLcEG4IFyEC8KFv/kBb7Nqej4U+w8AAAAASUVORK5CYII=">
+    <div class="zbox-hay">HO&#7862;C</div>
+    <p>M&#7903; app Zalo tr&#234;n &#273;i&#7879;n tho&#7841;i r&#7891;i t&#236;m s&#7889;:</p>
+    <div class="zbox-so"><b>0912 088 869</b><button type="button" id="zcopy">Sao ch&#233;p</button></div>
+    <button type="button" class="zbox-dong" id="zdong">&#272;&#243;ng</button>
+  </div>
+</div>
+
+<script>
+/* Zalo tren MAY TINH: chan lai, hien QR + so.
+   Vi sao: link zalo.me theo so dien thoai mo tren may tinh thi Zalo bat dang nhap bang QR
+   roi moi cho vao chat -> khach bo di. Tren dien thoai thi link chay tot, giu nguyen. */
+(function(){
+  function laDienThoai(){
+    var ua = navigator.userAgent || '';
+    if (/Android|iPhone|iPod|Windows Phone|webOS|BlackBerry/i.test(ua)) return true;
+    if (/iPad/i.test(ua)) return true;
+    if (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1) return true;
+    var cham = window.matchMedia && window.matchMedia('(pointer:coarse)').matches;
+    return !!(cham && window.innerWidth < 900);
+  }
+  var box = document.getElementById('zbox');
+  if (!box) return;
+  var ep = (location.search.match(/[?&]may=(dt|pc)/) || [])[1];
+  var dt = ep === 'dt' ? true : (ep === 'pc' ? false : laDienThoai());
+  if (dt) return;                      /* dien thoai: de link chay binh thuong */
+
+  document.addEventListener('click', function(ev){
+    var a = ev.target.closest ? ev.target.closest('a[href*="zalo.me"]') : null;
+    if (!a) return;
+    ev.preventDefault();
+    box.classList.add('mo');
+  });
+  function dong(){ box.classList.remove('mo'); }
+  document.getElementById('zdong').addEventListener('click', dong);
+  box.addEventListener('click', function(e){ if (e.target === box) dong(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') dong(); });
+
+  document.getElementById('zcopy').addEventListener('click', function(){
+    var nut = this;
+    var xong = function(){ nut.textContent = 'Đã chép!'; setTimeout(function(){ nut.textContent = 'Sao chép'; }, 1800); };
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText('0912088869').then(xong, xong);
+    } else {
+      var o = document.createElement('textarea');
+      o.value = '0912088869'; document.body.appendChild(o); o.select();
+      try { document.execCommand('copy'); } catch(e){}
+      o.remove(); xong();
+    }
   });
 })();
 </script>
