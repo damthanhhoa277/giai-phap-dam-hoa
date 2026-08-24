@@ -182,14 +182,17 @@
       <h1>Spa bạn đang khoẻ hay đang bệnh — <span class="hl">và bệnh ở trụ nào?</span></h1>
       <div class="rule"></div>
       <p class="sub">Phần lớn chủ spa biết mình đang mệt, nhưng không chỉ ra được mệt vì đâu. Nên cứ vá chỗ này thì thủng chỗ kia.</p>
-      <div class="hookbox">
-        <p>Mình làm nghề spa 15 năm, có lúc chạy <b>6 chi nhánh</b>. Và mình học được một điều đắt tiền: <b>spa hiếm khi chết vì một lý do</b>. Nó chết vì một <b>vòng lặp</b> — trụ này yếu kéo trụ kia yếu theo, mình cứ chữa triệu chứng mà không chạm được vào gốc.</p>
-        <p>Bài này soi spa của bạn theo <b>5 trụ</b>, rồi chỉ ra bạn đang kẹt trong vòng lặp nào.</p>
-      </div>
+      <p class="sub" style="margin-top:15px;font-size:14px;"><b>23 câu · khoảng 7 phút.</b> Không cần chuẩn bị số liệu — cứ trả lời theo cảm nhận thật của bạn.</p>
+      <button class="btn" id="batdau">Bắt đầu chẩn đoán →</button>
     </div>
 
     <div class="card">
-      <h2>Bạn nhận lại được gì</h2>
+      <div class="hookbox" style="margin-top:0;">
+        <p>Mình làm nghề spa 15 năm, có lúc chạy <b>6 chi nhánh</b>. Và mình học được một điều đắt tiền: <b>spa hiếm khi chết vì một lý do</b>. Nó chết vì một <b>vòng lặp</b> — trụ này yếu kéo trụ kia yếu theo, mình cứ chữa triệu chứng mà không chạm được vào gốc.</p>
+        <p>Bài này soi spa của bạn theo <b>5 trụ</b>, rồi chỉ ra bạn đang kẹt trong vòng lặp nào.</p>
+      </div>
+
+      <h2 style="margin-top:22px;">Bạn nhận lại được gì</h2>
       <div class="rule"></div>
       <ul class="who">
         <li>Điểm số <b>từng trụ</b> — không phải một con số chung chung</li>
@@ -199,8 +202,7 @@
       </ul>
       <div class="notfor">Mình nói thật để bạn đỡ mất thời gian: đây <b>không phải</b> bài trắc nghiệm cho vui, cũng <b>không phải</b> buổi tư vấn. Nó chỉ ra <b>bệnh ở đâu</b> — chứ chưa chữa. Muốn có ích thì bạn trả lời đúng thực tế, kể cả những câu bạn phải chọn "tôi không biết". Chọn "không biết" cũng là một thông tin quan trọng.
       </div>
-      <p class="sub" style="margin-top:15px;font-size:14px;"><b>23 câu · khoảng 7 phút.</b> Không cần chuẩn bị số liệu — cứ trả lời theo cảm nhận thật của bạn.</p>
-      <button class="btn" id="batdau">Bắt đầu chẩn đoán →</button>
+      <button class="btn" id="batdauDuoi">Bắt đầu chẩn đoán →</button>
     </div>
   </div>
 
@@ -606,6 +608,11 @@ function tienLen(){
 $('batdau').addEventListener('click', function(){
   hien($('man0'), false); hien($('man1'), true); ve(); window.scrollTo({ top:0 });
 });
+/* 24/08: nut chinh #batdau da dua len man hinh dau. Nut lap lai o cuoi trang
+   (#batdauDuoi) chi kich chinh nut #batdau — dung chung CA handler mo bai LAN
+   listener GA4 cd_bat_dau_bai, nen khong nhan ban logic va khong dem doi. */
+var bdDuoi = $('batdauDuoi');
+if (bdDuoi) bdDuoi.addEventListener('click', function(){ $('batdau').click(); });
 $('nutToi').addEventListener('click', tienLen);
 $('nutLui').addEventListener('click', function(){
   if (viTri > 0){ viTri--; ve(); window.scrollTo({ top:0, behavior:'smooth' }); }
