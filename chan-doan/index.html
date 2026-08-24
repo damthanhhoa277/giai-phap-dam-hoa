@@ -10,6 +10,17 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://quatang.damthanhhoa.com/chan-doan/">
 <link rel="canonical" href="https://quatang.damthanhhoa.com/chan-doan/">
+
+<!-- Google tag (gtag.js) — GA4 G-1NBNYDV27T (cung ma voi blog damthanhhoa.com) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1NBNYDV27T"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1NBNYDV27T');
+  /* Ban tat neu GA4 chua tai xong — de trang khong bao gio vo vi do luong */
+  function doPheu(ten, kem){ try { if (typeof gtag === 'function') gtag('event', ten, kem || {}); } catch(e){} }
+</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩺</text></svg>">
 <!--
   TRANG CHẨN ĐOÁN SỨC KHOẺ SPA — cửa ngõ Tệp 1
@@ -530,6 +541,11 @@ var danhSach = [];
 HOSO.forEach(function(c){ danhSach.push({ loai:'hoso', d:c }); });
 TRU.forEach(function(t){ t.cauhoi.forEach(function(c, i){ danhSach.push({ loai:'diem', tru:t, d:c, chiSo:i }); }); });
 var TONG = danhSach.length;
+/* GA4: dem nguoi bam nut Bat dau — chan dau tien cua pheu */
+document.addEventListener('DOMContentLoaded', function(){
+  var b = document.getElementById('batdau');
+  if (b) b.addEventListener('click', function(){ doPheu('cd_bat_dau_bai'); });
+});
 var SAU_CAU_HOOK = HOSO.length + 8;   /* hook hiện sau câu chấm điểm thứ 8 */
 var daHienHook = false;
 
@@ -659,6 +675,8 @@ function docMaKQ(ma){
 })();
 
 function moManLead(){
+  /* GA4: da tra loi het 23 cau — chan giua cua pheu */
+  doPheu('cd_xong_bai');
   ketQua = tinh();
   $('rayTien').style.width = '100%';
   hien($('man1'), false); hien($('man2'), true);
@@ -833,7 +851,10 @@ function veBaoCao(tenKhach){
     /* Báo cáo KHÔNG phụ thuộc mạng: gửi được hay không thì khách vẫn xem được ngay.
        Khách vừa bỏ ra 7 phút — bắt họ chờ email mới thấy kết quả là mất người. */
     var xong = false;
-    function moBaoCao(){ if (!xong){ xong = true; veBaoCao(ten.value.trim()); } }
+    function moBaoCao(){ if (!xong){ xong = true;
+      /* GA4: lead da vao so — chan cuoi cua pheu */
+      doPheu('cd_gui_lead', { coso: traLoi.coso || '', nhanh: (traLoi.coso === '2' || traLoi.coso === '3+') ? 'T1' : 'T2' });
+      veBaoCao(ten.value.trim()); } }
     setTimeout(moBaoCao, 3500);
 
     fetch(CONFIG.apiUrl, {
