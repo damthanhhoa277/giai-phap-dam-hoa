@@ -24,17 +24,16 @@
 </script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%BF%3C/text%3E%3C/svg%3E">
 <!--
-  TRANG BAN B2 — HE THONG VAN HANH SPA · KEM XAY 90 NGAY
-  Chu goc (Hoa duyet 27/08/2026): KHO-TRI-THUC/wiki/02-Kinh doanh/trang-ban-b2-kem-xay-90-ngay.md
-  Day la ban DEPLOY. Sua o vault site-quatang/ roi git push repo damthanhhoa277/giai-phap-dam-hoa.
+  TRANG BAN B2 — HE THONG VAN HANH SPA · KEM XAY 90 NGAY  (BAN V2, 28/08/2026)
+  Chu goc: KHO-TRI-THUC/wiki/02-Kinh doanh/trang-ban-b2-kem-xay-90-ngay.md  muc "CHU TREN TRANG - BAN V2"
+  Day la ban DEPLOY. Nguon deploy DUY NHAT: assets/salepage/worker-bo-file-day-du/ — deploy TOAN BO thu muc.
 
-  RANH GIOI da cai san trong trang nay (dung go):
+  RANH GIOI da cai san (dung go):
      - noindex: trang KHONG duoc len Google. Chi gui link sau cuoc chan doan 30 phut.
-     - KHONG gan trang nay vao menu / bio / bat ky trang qua nao.
+     - KHONG gan trang nay vao menu / bio / trang qua / index cua giaiphap.
      - Dich den DUY NHAT: Zalo 0912088869. Khong form, khong link ra trang khac.
-     - CHI MOT muc gia tren trang — luat: khong bao gio dua hai gia cung luc.
-       (Bac do gia thap hon KHONG duoc nhac o day, ke ca trong ghi chu ma nguon.)
-     - Gia goc gach ngang; gia uu dai noi bat hon. Con so lay tu file chu goc.
+     - Gia 3 bac: goc gach ngang, gia ra mat noi bat, bac giua nam trong 1 cau giai thich.
+     - Con so lay tu file chu goc. Gia 3 bo toolkit doi chieu duoc tai giaiphap.damthanhhoa.com.
 -->
 <style>
   :root{
@@ -46,8 +45,7 @@
   *{box-sizing:border-box;margin:0;padding:0;}
   html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
   body{font-family:"Segoe UI","Helvetica Neue",Arial,"Noto Sans",sans-serif;
-    background:var(--cream2);color:var(--ink);line-height:1.55;
-    overflow-x:hidden;}
+    background:var(--cream2);color:var(--ink);line-height:1.55;overflow-x:hidden;}
   .wrap{max-width:680px;margin:0 auto;padding:16px 14px 96px;}
   .brandbar{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:10px;
     letter-spacing:.12em;text-transform:uppercase;color:var(--olive-soft);margin-bottom:12px;}
@@ -68,22 +66,40 @@
   .note{background:var(--cream);border:1px dashed var(--line);border-radius:11px;
     padding:13px 14px;font-size:13.8px;color:var(--ink-soft);margin-top:16px;font-style:italic;line-height:1.55;}
 
-  /* khoi 3 — ba thu nhan duoc */
+  /* khoi 1 — dong chu nho TREN tit */
+  .eyebrow{font-size:11.5px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;
+    color:var(--gold);line-height:1.5;margin-bottom:10px;}
+
+  /* khoi 6 — pha niem tin cu */
+  .nt{margin-top:16px;}
+  .nt .m{background:var(--cream);border-left:4px solid var(--gold);border-radius:0 12px 12px 0;
+    padding:15px 16px;margin-bottom:12px;}
+  .nt .m:last-child{margin-bottom:0;}
+  .nt .m .tin{font-size:15.5px;font-weight:800;color:var(--olive-deep);margin-bottom:7px;}
+  .nt .m p{font-size:15px;color:var(--ink-soft);}
+
+  /* khoi 7 — ba thu + vi sao chay */
   .ba{margin-top:16px;}
   .ba .m{padding:15px 0;border-bottom:1px dashed var(--line);}
   .ba .m:last-of-type{border-bottom:none;}
   .ba .m h3{margin-bottom:6px;}
   .ba .m p{font-size:15px;color:var(--ink-soft);}
+  .vsc{background:var(--cream);border:1px solid var(--line);border-radius:12px;
+    padding:16px 15px;margin-top:16px;}
+  .vsc h3{margin-bottom:10px;}
+  .vsc p{font-size:15px;}
+  .vsc p+p{margin-top:10px;}
   .canhbao{background:var(--cream);border-left:4px solid var(--clay);border-radius:0 11px 11px 0;
     padding:15px 16px;margin-top:16px;}
   .canhbao p{font-size:15px;}
   .canhbao p+p{margin-top:9px;}
 
-  /* khoi 4 — ba moc */
+  /* khoi 7b — ba moc */
   .moc{margin-top:16px;}
   .moc .m{background:var(--cream);border:1px solid var(--line);border-radius:13px;
     padding:16px 15px;margin-bottom:12px;}
   .moc .m:last-child{margin-bottom:0;}
+  .moc .m.nhanmanh{border-color:var(--gold);border-width:2px;background:#FBF4E4;}
   .moc .ten{font-size:12px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
     color:var(--gold);margin-bottom:5px;}
   .moc .m h3{margin-bottom:7px;}
@@ -91,24 +107,42 @@
   .moc .co{font-size:14.8px;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);}
   .moc .co b{color:var(--olive-deep);}
 
-  /* khoi 5 — tuan 11 */
+  /* khoi 7c — tuan 11 */
   .hookbox{background:var(--olive-deep);color:#F3EEDF;border-radius:13px;padding:19px 17px;
-    font-size:15.5px;line-height:1.62;margin-top:14px;}
+    font-size:15.5px;line-height:1.62;margin-top:14px;margin-bottom:14px;}
   .hookbox h2{color:#FFFDF7;}
   .hookbox .rule{background:#F4D48A;}
   .hookbox b{color:#F4D48A;}
   .hookbox p{font-size:15.5px;}
   .hookbox p+p{margin-top:12px;}
 
-  /* khoi 6 — khong danh cho ai */
-  .khong li{list-style:none;padding:12px 0 12px 25px;position:relative;font-size:15px;
-    border-bottom:1px dashed var(--line);}
-  .khong li:last-child{border-bottom:none;}
-  .khong li::before{content:"\2022";position:absolute;left:5px;top:11px;color:var(--clay);
-    font-weight:900;font-size:18px;}
-  .khong li b{color:var(--olive-deep);}
+  /* khoi 10 — xep chong gia tri (dang danh sach, khong dung bang -> khong tran o 375px) */
+  .xc{margin-top:16px;}
+  .xc .d{padding:14px 0;border-bottom:1px dashed var(--line);}
+  .xc .d:last-child{border-bottom:none;}
+  .xc .ten{font-size:15.5px;font-weight:800;color:var(--olive-deep);line-height:1.35;}
+  .xc .ten::before{content:"\2713";color:var(--gold);font-weight:900;margin-right:8px;}
+  .xc .kq{font-size:14.8px;color:var(--ink-soft);margin-top:5px;padding-left:22px;line-height:1.5;}
 
-  /* khoi 8 — hoc phi */
+  /* khoi 11 — qua tang */
+  .qua{margin-top:16px;}
+  .qua .m{background:#FBF4E4;border:1.5px solid var(--gold);border-radius:13px;
+    padding:16px 15px;margin-bottom:12px;}
+  .qua .m:last-child{margin-bottom:0;}
+  .qua .nhan{font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:6px;}
+  .qua .m h3{margin-bottom:7px;}
+  .qua .m p{font-size:15px;color:var(--ink-soft);}
+  .qua .m p+p{margin-top:8px;}
+  .qua .trigia{font-size:16px;font-weight:800;color:var(--clay);}
+
+  /* khoi 12 — cam ket */
+  .camket{background:var(--paper);border:2px solid var(--olive);border-radius:16px;
+    padding:22px 18px;margin-bottom:14px;box-shadow:0 3px 14px rgba(44,62,47,.07);}
+  .camket .to{font-size:17.5px;font-weight:800;color:var(--olive-deep);
+    margin-top:14px;line-height:1.4;}
+
+  /* khoi 13 — hoc phi */
   .gia{text-align:center;margin:6px 0 4px;}
   .gia .cu{font-size:16px;color:var(--ink-soft);}
   .gia .cu s{text-decoration:line-through;text-decoration-thickness:2px;}
@@ -116,11 +150,20 @@
   .gia .moi{font-size:clamp(30px,9vw,42px);font-weight:800;color:var(--clay);
     line-height:1.1;margin-top:4px;letter-spacing:-.5px;}
   .gia .don{font-size:18px;font-weight:800;color:var(--clay);}
+  .gia .sau{font-size:14px;color:var(--ink-soft);margin-top:12px;font-style:italic;line-height:1.5;}
   .tran{background:var(--cream);border:1px solid var(--line);border-radius:11px;
     padding:14px 15px;margin-top:18px;font-size:15px;}
   .tran b{color:var(--olive-deep);}
 
-  /* khoi 9 — bat dau */
+  /* khoi 13b — khong danh cho ai */
+  .khong li{list-style:none;padding:12px 0 12px 25px;position:relative;font-size:15px;
+    border-bottom:1px dashed var(--line);}
+  .khong li:last-child{border-bottom:none;}
+  .khong li::before{content:"\2022";position:absolute;left:5px;top:11px;color:var(--clay);
+    font-weight:900;font-size:18px;}
+  .khong li b{color:var(--olive-deep);}
+
+  /* khoi 13c — bat dau */
   .buoc{counter-reset:b;margin-top:14px;}
   .buoc .d{position:relative;padding:11px 0 11px 38px;font-size:15px;
     border-bottom:1px dashed var(--line);}
@@ -135,10 +178,14 @@
   .btn:active{transform:translateY(1px);}
   .duoinut{text-align:center;font-size:14px;color:var(--ink-soft);margin-top:10px;}
 
-  /* khoi 10 — hoi dap */
+  /* khoi 14 — hoi dap + tai but */
   .hd .q{font-size:15.5px;font-weight:800;color:var(--olive-deep);margin-top:16px;line-height:1.35;}
   .hd .q:first-child{margin-top:6px;}
   .hd .a{font-size:15px;color:var(--ink-soft);margin-top:7px;}
+  .tb{border-top:1px dashed var(--line);margin-top:20px;padding-top:16px;}
+  .tb p{font-size:15px;}
+  .tb p+p{margin-top:11px;}
+  .tb b{color:var(--olive-deep);}
 
   .zalo-fab{position:fixed;right:14px;bottom:16px;z-index:20;background:#0068FF;color:#fff;
     font-weight:800;font-size:14px;border-radius:99px;padding:12px 18px;text-decoration:none;
@@ -175,28 +222,58 @@
     <span>Chuyên gia xây hệ thống vận hành spa</span>
   </div>
 
-  <!-- ===== KHOI 1 · MO DAU ===== -->
+  <!-- ===== KHOI 1 (dong chu nho) + KHOI 2 (tit) + KHOI 3 (tit phu) ===== -->
   <div class="card">
+    <div class="eyebrow">Dành cho chủ spa đang có từ 2 cơ sở,<br>hoặc 1 cơ sở với đội từ 10 người</div>
     <h1>Sau 90 ngày, bạn rời spa một tuần mà nó vẫn chạy đúng</h1>
     <div class="rule"></div>
+    <p>Bằng cách đưa những thứ đang nằm trong đầu bạn ra thành hệ thống trên giấy — <b>do chính người của bạn viết</b> — trong 90 ngày, mà <b>không cần tuyển thêm quản lý</b> và <b>không cần đổi phần mềm</b>.</p>
     <p class="prog">Chương trình <b>Hệ Thống Vận Hành Spa — Kèm Xây 90 Ngày</b></p>
-    <p class="sub">Dành cho chủ spa đang có từ 2 cơ sở, hoặc 1 cơ sở với đội từ 10 người.</p>
     <div class="note">Trang này mình gửi riêng cho bạn sau buổi nói chuyện. Nếu bạn tới đây mà chưa nói chuyện với mình, bạn nhắn Zalo 0912088869 nhé — mình cần biết spa bạn đang tắc ở đâu trước đã.</div>
   </div>
 
-  <!-- ===== KHOI 2 · CHO BAN DANG DUNG ===== -->
+  <!-- ===== KHOI 4 · KHOI NOI DAU ===== -->
   <div class="card">
     <h2>Chỗ bạn đang đứng</h2>
     <div class="rule"></div>
     <p>Bạn không thiếu khách. Bạn không thiếu tay nghề. Bạn thiếu một tuần được nghỉ mà không lo.</p>
     <p>Cơ sở nào cũng cần bạn có mặt mới yên. Người mới vào thì không có gì để bám, người cũ thì mỗi người làm một kiểu. Bạn là người duy nhất biết hết — nên bạn là người duy nhất không được nghỉ.</p>
-    <p>Mình từng ở đúng chỗ đó với 6 chi nhánh. Mất mấy năm mình mới hiểu vấn đề không nằm ở người: nó nằm ở chỗ <b>mọi thứ quan trọng đều nằm trong đầu mình, không nằm trên giấy</b>. Và mỗi lần mình nhảy vào sửa là mình siết cái vòng đó chặt thêm một vòng.</p>
+  </div>
+
+  <!-- ===== KHOI 5 · CAU CHUYEN CUA MINH ===== -->
+  <div class="card">
+    <h2>Mình từng đứng đúng chỗ đó</h2>
+    <div class="rule"></div>
+    <p class="prog"><b>15 năm trong nghề spa. Mình từng xây và vận hành 6 chi nhánh.</b></p>
+    <p style="margin-top:12px;">Và mình từng chạy như con thoi, vì việc gì cũng phải qua tay mình mới yên.</p>
+    <p>Mất mấy năm mình mới hiểu vấn đề không nằm ở người: nó nằm ở chỗ <b>mọi thứ quan trọng đều nằm trong đầu mình, không nằm trên giấy</b>. Và mỗi lần mình nhảy vào sửa là mình siết cái vòng đó chặt thêm một vòng.</p>
+    <p>Mình cũng đã trải qua giai đoạn đóng cửa và xây lại. Nên mình biết chỗ nào là chỗ vỡ — không phải vì đọc được ở đâu đó, mà vì mình đã vỡ ở đúng chỗ ấy.</p>
     <p>Chương trình này là cách gỡ cái vòng đó ra — trong 90 ngày, có mốc, có bài, có kiểm.</p>
   </div>
 
-  <!-- ===== KHOI 3 · BAN NHAN DUOC GI ===== -->
+  <!-- ===== KHOI 6 · PHA MOT NIEM TIN CU ===== -->
   <div class="card">
-    <h2>Bạn nhận được gì — nói thẳng, không giấu</h2>
+    <h2>Ba điều có thể bạn đang tin — mình xin nói lại</h2>
+    <div class="rule"></div>
+    <div class="nt">
+      <div class="m">
+        <div class="tin">① &ldquo;Tuyển được một quản lý giỏi là mình nhẹ.&rdquo;</div>
+        <p>Không có hệ thống thì quản lý giỏi chỉ <b>gánh thay bạn</b>, chứ không thay bạn được. Mọi thứ vẫn nằm trong đầu một người — chỉ là đổi từ đầu bạn sang đầu họ. Ngày họ nghỉ, spa về đúng chỗ cũ, và lần này bạn còn mệt hơn vì đã quen giao.</p>
+      </div>
+      <div class="m">
+        <div class="tin">② &ldquo;Người của mình không chịu làm theo quy trình.&rdquo;</div>
+        <p>Phần lớn spa mình gặp không phải nhân viên không chịu làm — mà là <b>chưa có quy trình viết bằng lời của spa mình</b>. Mẫu tải về trên mạng không ai làm theo được, vì nó không nói chuyện của tiệm mình, không gọi tên dịch vụ của mình, không hợp với người của mình.</p>
+      </div>
+      <div class="m">
+        <div class="tin">③ &ldquo;Chờ qua mùa cao điểm rồi làm.&rdquo;</div>
+        <p>Cao điểm chính là lúc chỗ hỏng lộ ra rõ nhất. Qua mùa rồi thì mọi thứ dịu xuống, và bạn quên mất nó đã hỏng ở đâu — đến mùa sau lại vỡ y hệt.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== KHOI 7 · GIAI PHAP + VI SAO NO CHAY ===== -->
+  <div class="card">
+    <h2>Chương trình này chạy thế nào</h2>
     <div class="rule"></div>
     <p><b>Ba thứ:</b></p>
     <div class="ba">
@@ -213,22 +290,29 @@
         <p>Người của bạn viết, mình soi và sửa. Riêng cho spa bạn, không dùng chung.</p>
       </div>
     </div>
+    <div class="vsc">
+      <h3>Vì sao cách này chạy, còn tải mẫu về thì không</h3>
+      <p><b>Vì người viết là người của bạn.</b> Cái gì họ tự viết ra thì họ dùng được, và họ nhớ. Mẫu tải về thì nằm im trong máy.</p>
+      <p><b>Vì mỗi tuần có người soi bài.</b> Chỗ chết của mọi hệ thống là làm được hai tuần rồi bỏ dở. Có người đợi bài mỗi tuần thì không bỏ dở được.</p>
+      <p><b>Vì cuối cùng có một phép thử thật.</b> Tuần 11 bạn rời spa. Không thử thì đến cuối 90 ngày bạn chỉ cầm về một tập giấy, và không ai biết nó có chạy hay không.</p>
+    </div>
     <div class="canhbao">
       <p>⚠️ <b>Và đây là điều mình nói rõ trước:</b> mình <b>không viết hộ bạn</b>. Người của spa bạn là người viết, người làm. Mình dạy, mình soi, mình sửa.</p>
       <p>Vì cái gì bạn không tự làm được trong 90 ngày thì sau 90 ngày bạn vẫn không làm được. Nên mình để bạn làm.</p>
     </div>
   </div>
 
-  <!-- ===== KHOI 4 · BA MOC ===== -->
+  <!-- ===== KHOI 7b · BA MOC (moc 1 co ket qua ngay thang dau) ===== -->
   <div class="card">
     <h2>Ba mốc — mỗi mốc bạn cầm về được cái gì</h2>
     <div class="rule"></div>
     <div class="moc">
-      <div class="m">
+      <div class="m nhanmanh">
         <div class="ten">Mốc 1 · Ngày 1–30</div>
-        <h3>Nhìn cho rõ</h3>
-        <p class="lam">Buổi chẩn đoán riêng · soi cơ sở yếu nhất và tốt nhất · đo mốc gốc.</p>
-        <p class="co"><b>Bạn có:</b> bản đồ 5 trụ · vòng lặp đang giữ spa bạn ở chỗ cũ · thứ tự sửa 90 ngày · bảng số gốc để 3 tháng sau so lại.</p>
+        <h3>Nhìn cho rõ, và gỡ việc đầu tiên ra khỏi tay bạn</h3>
+        <p class="lam">Buổi chẩn đoán riêng · soi cơ sở yếu nhất và tốt nhất · đo mốc gốc.<br>
+        Rồi <b>ngay trong tháng đầu</b>: chọn <b>một việc đang ngốn thời gian bạn nhất</b>, viết SOP cho nó, giao cho người khác làm và kiểm thử.</p>
+        <p class="co"><b>Bạn có:</b> bản đồ 5 trụ · vòng lặp đang giữ spa bạn ở chỗ cũ · thứ tự sửa 90 ngày · bảng số gốc để 3 tháng sau so lại · và <b>một việc đã rời khỏi tay bạn</b> — cuối tháng đầu bạn nói được: <i>&ldquo;việc này giờ không cần tôi nữa.&rdquo;</i></p>
       </div>
       <div class="m">
         <div class="ten">Mốc 2 · Ngày 31–60</div>
@@ -245,7 +329,7 @@
     </div>
   </div>
 
-  <!-- ===== KHOI 5 · TUAN THU 11 ===== -->
+  <!-- ===== KHOI 7c · TUAN THU 11 ===== -->
   <div class="hookbox">
     <h2>Nói về tuần thứ 11 — vì đây là chỗ ai cũng ngại</h2>
     <div class="rule"></div>
@@ -255,8 +339,100 @@
     <p>Bạn không cần đi đâu xa. Chỉ cần không đến spa và không trả lời việc vặt. Chọn tuần thấp điểm, và luôn có kênh khẩn cấp cho việc thật sự cần bạn.</p>
   </div>
 
-  <!-- ===== KHOI 6 · KHONG DANH CHO AI ===== -->
-  <div class="card" style="margin-top:14px;">
+  <!-- ===== KHOI 8+9 · BANG CHUNG & LOI CHUNG THUC (noi dung sự thật, khong bia) ===== -->
+  <div class="card">
+    <h2>Mình nói thật với bạn mấy điều</h2>
+    <div class="rule"></div>
+    <p><b>Việc xây hệ thống vận hành thì mình đã làm rồi — và không chỉ cho chuỗi của mình.</b> Mình đã làm việc này cho spa của người khác. Chỉ là trước đây mình làm theo tiến độ riêng của từng nơi, tuỳ chỗ đó cần gì và đi được nhanh chậm ra sao — <b>không đóng gói thành 90 ngày có mốc như thế này.</b></p>
+    <p><b>Còn chương trình 90 ngày này thì mới.</b> Chưa có ai đi hết trọn 90 ngày để mình đưa bạn xem kết quả của họ. Mình không dựng lên một lời khen nào để lấp chỗ đó.</p>
+    <div class="canhbao" style="border-left-color:#B98A3E;">
+      <p><b>Thứ mình đưa bạn xem được là buổi chẩn đoán bạn vừa trải qua.</b> Bạn đã ngồi nói chuyện với mình rồi — bạn tự biết mình có nhìn ra chỗ hỏng của spa bạn hay không. Với mình, đó là bằng chứng thật hơn bất kỳ lời khen nào đi mượn.</p>
+    </div>
+  </div>
+
+  <!-- ===== KHOI 10 · XEP CHONG GIA TRI ===== -->
+  <div class="card">
+    <h2>Bạn nhận trọn những gì</h2>
+    <div class="rule"></div>
+    <div class="xc">
+      <div class="d">
+        <div class="ten">Buổi chẩn đoán riêng 2 giờ với mình</div>
+        <div class="kq">Bản đồ 5 trụ của spa bạn trên một trang giấy — biết sửa gì trước, sửa gì sau.</div>
+      </div>
+      <div class="d">
+        <div class="ten">13 buổi Zoom soi bài — mỗi tuần một buổi, suốt 90 ngày</div>
+        <div class="kq">Không bỏ dở giữa chừng, và học được từ chỗ hỏng của spa khác mà không phải trả giá.</div>
+      </div>
+      <div class="d">
+        <div class="ten">Mình sửa bài riêng cho spa bạn mỗi tuần</div>
+        <div class="kq">SOP viết bằng lời của spa bạn, dùng được thật, không phải mẫu tải về.</div>
+      </div>
+      <div class="d">
+        <div class="ten">Bộ khung đào tạo người mới 3 ngày</div>
+        <div class="kq">Người mới vào có cái để bám, bạn không phải kèm tay từng người.</div>
+      </div>
+      <div class="d">
+        <div class="ten">Bảng phân việc + nhịp họp tuần 15 phút</div>
+        <div class="kq">Việc rời khỏi tay bạn mà vẫn kiểm được.</div>
+      </div>
+      <div class="d">
+        <div class="ten">Tuần thử thật ở tuần 11</div>
+        <div class="kq">Biết hệ thống chạy thật hay chỉ nằm trên giấy — lúc còn kịp vá.</div>
+      </div>
+      <div class="d">
+        <div class="ten">Bảng so số trước/sau + kế hoạch 30/60/90 ngày</div>
+        <div class="kq">Biết mình đã đi được bao xa, và ba tháng tới đi tiếp thế nào.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== KHOI 11 · TANG KEM ===== -->
+  <div class="card">
+    <h2>Tặng kèm khi bạn ghi danh</h2>
+    <div class="rule"></div>
+    <div class="qua">
+      <div class="m">
+        <div class="nhan">Quà 1</div>
+        <h3>Trọn 3 bộ công cụ đang bán — Vận hành · Dòng tiền · Giữ khách</h3>
+        <p>Đây là 3 bộ mình đang bán <b>1.758.000đ mỗi bộ</b> tại giaiphap.damthanhhoa.com — bạn vào xem được giá ngay.</p>
+        <p class="trigia">Trị giá 5.274.000đ</p>
+        <p>Bạn dùng chúng làm nguyên liệu ngay từ tuần đầu, thay vì bắt đầu từ trang giấy trắng.</p>
+      </div>
+      <div class="m">
+        <div class="nhan">Quà 2</div>
+        <h3>Một buổi soát lại sau khi kết thúc 90 ngày</h3>
+        <p>Hết chương trình rồi, mình vẫn ngồi với bạn thêm một buổi để xem hệ thống có còn chạy không, chỗ nào bắt đầu trôi. Vì chỗ chết của mọi hệ thống là 1–2 tháng sau lại về nếp cũ.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== KHOI 12 · CAM KET ===== -->
+  <div class="camket">
+    <h2>Mình gánh rủi ro cùng bạn</h2>
+    <div class="rule"></div>
+    <p class="to">Bạn học thử buổi đầu tiên rồi quyết.</p>
+    <p style="margin-top:12px;">Sau buổi chẩn đoán riêng 2 giờ — buổi nặng nhất, và cũng là buổi bạn thấy rõ nhất mình làm việc thế nào — nếu bạn thấy chương trình này không hợp với mình, <b>bạn nhắn mình, mình hoàn lại học phí.</b></p>
+    <p>Bạn vẫn giữ bản đồ 5 trụ của spa bạn. Mình không đòi lại.</p>
+    <p>Mình để điều kiện đúng như vậy vì mình tin buổi đầu tiên đủ để bạn biết. Và nếu không hợp thì mình muốn bạn dừng sớm, hơn là đi hết 90 ngày trong ấm ức.</p>
+  </div>
+
+  <!-- ===== KHOI 13 · HOC PHI (GIA 3 BAC) ===== -->
+  <div class="card">
+    <h2>Học phí</h2>
+    <div class="rule"></div>
+    <div class="gia">
+      <div class="cu">Học phí chương trình: <s>50.000.000đ</s></div>
+      <div class="uudai">Ưu đãi 8 người đầu tiên — phí còn</div>
+      <div class="moi">16.886.000<span class="don">đ</span></div>
+      <div class="sau">Sau nhóm 8 người đầu, chương trình về mức 28.886.000đ. Nội dung y như nhau.</div>
+    </div>
+    <p style="margin-top:18px;"><b>Vì sao có mức ưu đãi này:</b> chương trình vừa ra mắt, và mình cần kết quả thật để kể lại. Bạn cho mình đo số của spa bạn ở đầu và cuối chương trình, và cho mình kể lại kết quả 90 ngày — <b>bạn chọn ẩn tên hoặc nêu tên spa, và bạn được đọc trước khi mình công bố bất cứ gì</b>.</p>
+    <p>Mức ưu đãi này dành cho những chủ spa đồng ý điều đó. Khi mình đã có đủ kết quả để đưa người sau xem, học phí về đúng mức chương trình.</p>
+    <div class="tran"><b>Chương trình nhận tối đa 8 người cùng lúc.</b> Không phải để tạo cảm giác gấp — mà vì mỗi tuần mình sửa bài riêng cho từng spa, quá 8 người thì mỗi người được ít quá.</div>
+  </div>
+
+  <!-- ===== KHOI 13b · KHONG DANH CHO AI ===== -->
+  <div class="card">
     <h2>Chương trình này KHÔNG dành cho ai</h2>
     <div class="rule"></div>
     <p>Mình nói thẳng để bạn khỏi mất tiền và mất 90 ngày:</p>
@@ -268,32 +444,7 @@
     <p style="margin-top:14px;">Nếu bạn thuộc ba nhóm trên, mình sẽ nói thẳng ở buổi nói chuyện chứ không nhận.</p>
   </div>
 
-  <!-- ===== KHOI 7 · VI SAO LA MINH ===== -->
-  <div class="card">
-    <h2>Vì sao là mình</h2>
-    <div class="rule"></div>
-    <p class="prog"><b>15 năm trong nghề spa. Lúc đông nhất: 6 chi nhánh.</b></p>
-    <p style="margin-top:12px;">Mình không dạy điều đọc được ở đâu đó. Mình dạy đúng cách mình đã làm — kể cả những cách mình làm sai và mất mấy năm mới nhận ra. Mình cũng đã trải qua giai đoạn đóng cửa và xây lại, nên mình biết chỗ nào là chỗ vỡ.</p>
-    <div class="canhbao" style="border-left-color:#B98A3E;">
-      <p><b>Và mình nói thật một điều:</b> chương trình này còn mới. Mình chưa có học viên nào đi hết 90 ngày để đưa bạn xem kết quả của họ. Thứ mình đưa bạn xem được là buổi chẩn đoán — bạn đã nói chuyện với mình rồi, bạn tự biết mình có nhìn ra chỗ hỏng của spa bạn hay không.</p>
-    </div>
-  </div>
-
-  <!-- ===== KHOI 8 · HOC PHI ===== -->
-  <div class="card">
-    <h2>Học phí</h2>
-    <div class="rule"></div>
-    <div class="gia">
-      <div class="cu">Học phí chương trình: <s>28.886.000đ</s></div>
-      <div class="uudai">Ưu đãi chương trình mới ra mắt — phí còn</div>
-      <div class="moi">16.886.000<span class="don">đ</span></div>
-    </div>
-    <p style="margin-top:18px;"><b>Vì sao có mức ưu đãi này:</b> chương trình vừa ra mắt, và mình cần kết quả thật để kể lại. Bạn cho mình đo số của spa bạn ở đầu và cuối chương trình, và cho mình kể lại kết quả 90 ngày — <b>bạn chọn ẩn tên hoặc nêu tên spa, và bạn được đọc trước khi mình công bố bất cứ gì</b>.</p>
-    <p>Mức ưu đãi này dành cho những chủ spa đồng ý điều đó. Khi mình đã có đủ kết quả để đưa người sau xem, học phí về đúng mức chương trình — nội dung y như nhau.</p>
-    <div class="tran"><b>Chương trình nhận tối đa 8 người cùng lúc.</b> Không phải để tạo cảm giác gấp — mà vì mỗi tuần mình sửa bài riêng cho từng spa, quá 8 người thì mỗi người được ít quá.</div>
-  </div>
-
-  <!-- ===== KHOI 9 · BAT DAU THE NAO ===== -->
+  <!-- ===== KHOI 13c · BAT DAU THE NAO + NUT ===== -->
   <div class="card">
     <h2>Bắt đầu thế nào</h2>
     <div class="rule"></div>
@@ -306,18 +457,26 @@
     <div class="duoinut">Zalo 0912088869</div>
   </div>
 
-  <!-- ===== KHOI 10 · BA CAU HAY DUOC HOI ===== -->
+  <!-- ===== KHOI 14 · HOI DAP + TAI BUT ===== -->
   <div class="card">
-    <h2>Ba câu hay được hỏi</h2>
+    <h2>Vài câu bạn có thể đang băn khoăn</h2>
     <div class="rule"></div>
     <div class="hd">
       <div class="q">&ldquo;Mình bận lắm, 2 giờ một tuần có làm được không?&rdquo;</div>
       <div class="a">Nếu bạn không có 2 giờ mỗi tuần cho việc này thì mình khuyên bạn đừng tham gia lúc này — không phải vì mình không muốn nhận, mà vì bạn sẽ mất tiền. Hai giờ đó là ít nhất, và phần lớn nằm ở người của bạn chứ không ở bạn.</div>
       <div class="q">&ldquo;Buổi Zoom chung thì có bị lộ chuyện spa mình không?&rdquo;</div>
       <div class="a">Trong nhóm không có hai spa cạnh tranh trực tiếp cùng khu — mình hỏi khu vực trước khi nhận. Còn chuyện số liệu, bạn chỉ nói ra phần bạn muốn nói. Phần mình sửa riêng cho spa bạn thì không ai thấy.</div>
+      <div class="q">&ldquo;Spa mình mới có 2 cơ sở, nhỏ thôi — có hợp không?&rdquo;</div>
+      <div class="a">Hợp. Điều kiện không nằm ở chỗ bạn to hay nhỏ, mà ở chỗ <b>bạn đã có người để giao việc chưa</b>. Hai cơ sở với một đội đủ người thì đúng là lúc nên làm — làm sớm còn dễ hơn, vì nếp chưa kịp đóng cứng.</div>
       <div class="q">&ldquo;Hết 90 ngày rồi sao nữa?&rdquo;</div>
       <div class="a">Hết 90 ngày bạn có nền vận hành cho những gì đang có, và một kế hoạch 30/60/90 ngày tự viết. Còn chuyện mở cơ sở tiếp mà không lặp lại mớ cũ thì là một bài khác — lúc đó nói tiếp.</div>
     </div>
+    <div class="tb">
+      <p><b>Tái bút 1 —</b> Nếu bạn đọc tới đây mà vẫn lăn tăn, thì thứ đáng hỏi không phải <i>&ldquo;16.886.000đ có đắt không&rdquo;</i>, mà là <i>&ldquo;một năm nữa mình vẫn là người duy nhất không được nghỉ thì tốn bao nhiêu.&rdquo;</i></p>
+      <p><b>Tái bút 2 —</b> Mình nhận tối đa 8 người cùng lúc, và mỗi tuần mình ngồi sửa bài cho từng spa. Bạn nhắn sớm thì mình còn chỗ để xếp buổi chẩn đoán trong tuần này.</p>
+    </div>
+    <a class="btn" href="https://zalo.me/0912088869" target="_blank" rel="noopener">Nhắn Zalo để nhận một suất</a>
+    <div class="duoinut">Zalo 0912088869</div>
   </div>
 
   <div class="chan">
