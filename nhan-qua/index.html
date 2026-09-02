@@ -90,6 +90,10 @@
   <!-- ĐIỆN THOẠI -->
   <div class="card an" id="khoiDienThoai">
     <h2 style="font-size:18.5px;color:var(--olive-deep)">Dùng ngay trên điện thoại</h2>
+    <div class="luuy an" id="nenMayTinh" style="margin-top:12px;margin-bottom:2px;">
+      💻 <b>Bảng này có các ô số để bạn điền.</b> Điện thoại vẫn mở được, nhưng gõ số trên màn hình nhỏ khá cực —
+      nếu tiện, bạn mở thư này trên <b>máy tính</b> rồi bấm nút, thao tác dễ hơn nhiều.
+    </div>
     <a class="btn btn-1" id="nutCopy1" href="#">Mở quà &amp; tạo bản của mình</a>
     <ol class="buoc">
       <li>Bấm nút trên — Google sẽ hỏi <b>“Tạo bản sao”</b>.</li>
@@ -146,9 +150,11 @@
 <script>
 /* ====== DANH MỤC QUÀ — thêm quà mới chỉ cần thêm 1 khối ====== */
 var QUA = {
+  /* goSo:true = qua phai GO SO vao bang -> tren dien thoai van chay duoc,
+     nhung go so tren dien thoai rat cuc. Hoa chot 02/09: khuyen khach mo bang may tinh. */
   'QT-001': { ten:'Kiểm Tra Nhanh Sức Khỏe Dòng Tiền Spa',
               mota:'Điền 6 con số của tháng vừa rồi, 5 phút là biết spa mình thật sự giữ được bao nhiêu tiền.',
-              sheet:'1jsaS6Rkz9fZ7PKongJIBGAZOWT58ow1GqLjEfM5T_Pc' },
+              sheet:'1jsaS6Rkz9fZ7PKongJIBGAZOWT58ow1GqLjEfM5T_Pc', goSo:true },
   'QT-002': { ten:'Checklist 3 Lỗ Thủng Đang Rút Cạn Tiền Spa',
               mota:'Trả lời 15 câu, thấy ngay tiền spa đang rò qua chỗ nào.',
               app:'../checklist-3-lo-thung/' },
@@ -257,6 +263,7 @@ function ghiNhan(ma, viec, may, tu){
 
   hien($('khoiApp'), false);
   hien($('khoiDienThoai'), laDienThoai);
+  hien($('nenMayTinh'), laDienThoai && !!q.goSo);
   hien($('khoiMayTinh'), !laDienThoai);
   $('nhanThietBi').textContent = laDienThoai ? '📱 Bạn đang dùng điện thoại' : '💻 Bạn đang dùng máy tính';
 
