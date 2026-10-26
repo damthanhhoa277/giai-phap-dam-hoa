@@ -9,14 +9,14 @@
 <meta property="og:description" content="Cộng Đồng Làm Ảnh/Video AI Bán Hàng – Đàm Hoa. Miễn phí, người mới cũng làm được.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://quatang.damthanhhoa.com/cong-dong/">
-<meta property="og:image" content="https://quatang.damthanhhoa.com/cong-dong/anh-hoa.jpg">
+<meta property="og:image" content="https://quatang.damthanhhoa.com/cong-dong/anh-2-ao-dai.jpg">
 <link rel="canonical" href="https://quatang.damthanhhoa.com/cong-dong/">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎁</text></svg>">
 <!--
   TRANG CỔNG QUÀ CHUNG — dự án xay-kenh (BÌNH, 26/10/2026)
   Nguồn chân lý: KHO-TRI-THUC/wiki/DU-AN-XAY-KENH/trang-cong-qua/site/ (vault).
   Trang CỐ ĐỊNH — quà theo đợt trend phát TRONG NHÓM ZALO, không sửa trang mỗi đợt.
-  Sửa 1 chỗ: CONFIG bên dưới (apiUrl · linkNhom · ảnh trước/sau).
+  Sửa 1 chỗ: CONFIG bên dưới (apiUrl · linkNhom). Ảnh đầu trang: thay file anh-1..6 cùng tên.
   Link gắn đuôi ?nguon=damhoa | ?nguon=xaykenh | ?nguon=… → ghi vào cột Nguồn của Sheet.
 -->
 <style>
@@ -44,12 +44,13 @@
   h2{font-size:clamp(18px,4.8vw,21px);color:var(--navy);font-weight:800;line-height:1.28;}
   .sub{font-size:15.5px;color:var(--ink-soft);margin-top:10px;}
   .rule{height:3px;width:56px;background:var(--gold);border-radius:3px;margin:13px 0;}
-  .ts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:16px 0 4px;}
-  .ts figure{position:relative;}
-  .ts img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:12px;border:1px solid var(--line);display:block;}
-  .ts figcaption{position:absolute;left:8px;top:8px;background:rgba(27,42,74,.82);color:#fff;font-size:11.5px;
-    font-weight:700;padding:3px 9px;border-radius:999px;}
-  .ts figure:last-child figcaption{background:var(--gold);}
+  .luoi{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:16px 0 4px;}
+  .luoi figure{position:relative;}
+  .luoi img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;border-radius:10px;border:1px solid var(--line);display:block;}
+  .luoi figcaption{position:absolute;left:5px;bottom:5px;background:rgba(27,42,74,.82);color:#fff;font-size:10.5px;
+    font-weight:700;padding:2px 7px;border-radius:999px;white-space:nowrap;}
+  .luoi .goc img{border:2px solid var(--gold);}
+  .luoi .goc figcaption{background:var(--gold);}
   .cap{font-size:12px;color:var(--navy-soft);text-align:center;font-style:italic;margin-top:6px;}
   .get li{list-style:none;padding:10px 0 10px 30px;position:relative;font-size:15px;border-bottom:1px dashed var(--line);}
   .get li:last-child{border-bottom:none;}
@@ -105,14 +106,16 @@
     <div class="rule"></div>
     <p class="sub">Bạn vào <b>Cộng Đồng Làm Ảnh/Video AI Bán Hàng – Đàm Hoa</b> trên Zalo. Mỗi đợt Hoa tặng một món quà mới theo trend — người mới, chưa biết gì về AI cũng làm theo được ngay trên điện thoại.</p>
 
-    <!-- Ảnh trước/sau: chỉ hiện khi CONFIG có ảnh -->
-    <div id="khuAnh" style="display:none;">
-      <div class="ts">
-        <figure><img id="anhTruoc" alt="Ảnh chụp bằng điện thoại, chưa làm gì" loading="eager"><figcaption>Trước</figcaption></figure>
-        <figure><img id="anhSau" alt="Cùng ảnh đó sau khi làm bằng AI" loading="eager"><figcaption>Sau</figcaption></figure>
-      </div>
-      <p class="cap" id="chuAnh">Ảnh thật chụp bằng điện thoại → làm lại bằng AI</p>
+    <!-- Lưới 1 ảnh gốc → nhiều chủ đề (chị Hoa duyệt 26/10). Đổi ảnh: thay file cùng tên. -->
+    <div class="luoi">
+      <figure class="goc"><img src="anh-1-goc.jpg" alt="Đàm Hoa — Ảnh gốc chụp bằng điện thoại" width="480" height="640" loading="eager"><figcaption>Ảnh gốc</figcaption></figure>
+      <figure><img src="anh-2-ao-dai.jpg" alt="Đàm Hoa — Áo dài sen bằng AI" width="480" height="640" loading="eager"><figcaption>Áo dài</figcaption></figure>
+      <figure><img src="anh-3-tet.jpg" alt="Đàm Hoa — Ảnh Tết bằng AI" width="480" height="640" loading="eager"><figcaption>Tết</figcaption></figure>
+      <figure><img src="anh-4-gia-dinh.jpg" alt="Đàm Hoa — Ảnh dã ngoại hoàng hôn bằng AI" width="480" height="640" loading="eager"><figcaption>Dã ngoại</figcaption></figure>
+      <figure><img src="anh-5-halloween.jpg" alt="Đàm Hoa — Ảnh Halloween bằng AI" width="480" height="640" loading="eager"><figcaption>Halloween</figcaption></figure>
+      <figure><img src="anh-6-thanh-long.jpg" alt="Đàm Hoa — Ảnh váy thanh long bằng AI" width="480" height="640" loading="eager"><figcaption>Váy thanh long</figcaption></figure>
     </div>
+    <p class="cap">Từ <b>1 tấm ảnh điện thoại</b> → mỗi đợt nhóm học làm một chủ đề mới</p>
     <a class="btn" href="#nhanqua">Điền 3 dòng để vào nhóm ↓</a>
   </div>
 
@@ -192,23 +195,11 @@
 /* ====== CẤU HÌNH — sửa 1 chỗ ====== */
 var CONFIG = {
   apiUrl  : "",   // Apps Script Web App (nhận form → Sheet → email). Trống = chế độ XEM THỬ, không gửi đi đâu.
-  linkNhom: "https://zalo.me/g/adohlltts6zacuoyoh0m",
-  anhTruoc: "",   // vd "anh-truoc.jpg" — trống thì ẩn khối ảnh
-  anhSau  : "",
-  chuAnh  : ""    // dòng chú thích dưới ảnh (trống = giữ câu mặc định)
+  linkNhom: "https://zalo.me/g/adohlltts6zacuoyoh0m"
 };
 
 /* Nguồn: ?nguon=damhoa | xaykenh | ... (chỉ nhận chữ/số/gạch ngang, tối đa 20 ký tự) */
 var NGUON = ((location.search.match(/[?&]nguon=([A-Za-z0-9-]{1,20})/) || [])[1] || 'khong-ro').toLowerCase();
-
-(function(){
-  if (CONFIG.anhTruoc && CONFIG.anhSau){
-    document.getElementById('anhTruoc').src = CONFIG.anhTruoc;
-    document.getElementById('anhSau').src = CONFIG.anhSau;
-    if (CONFIG.chuAnh) document.getElementById('chuAnh').textContent = CONFIG.chuAnh;
-    document.getElementById('khuAnh').style.display = 'block';
-  }
-})();
 
 function laDienThoai(){
   var ua = navigator.userAgent || '';
