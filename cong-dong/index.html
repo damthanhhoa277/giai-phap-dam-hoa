@@ -83,6 +83,12 @@
   .steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:8px;
     width:22px;height:22px;border-radius:50%;background:var(--ivory2);color:var(--navy);
     font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;}
+  .hai{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  @media(max-width:520px){ .hai{grid-template-columns:1fr;} }
+  .hop{background:var(--ivory);border:1px solid var(--line);border-radius:12px;padding:13px 14px;}
+  .hop .t{font-weight:800;color:var(--navy);font-size:15.5px;margin-bottom:6px;}
+  .hop li{list-style:none;position:relative;padding:4px 0 4px 18px;font-size:14px;color:var(--ink-soft);}
+  .hop li::before{content:"✓";position:absolute;left:0;top:4px;color:var(--gold);font-weight:900;}
   .author{display:flex;gap:14px;align-items:flex-start;}
   .author img{flex:none;width:58px;height:58px;border-radius:50%;object-fit:cover;border:2px solid var(--gold-soft);}
   .foot{text-align:center;font-size:11.5px;color:var(--navy-soft);margin-top:20px;line-height:1.6;}
@@ -104,7 +110,7 @@
     <span class="tag">🎁 QUÀ ĐANG CHỜ BẠN TRONG NHÓM</span>
     <h1>Tự làm ảnh AI lung linh<br><span class="hl">từ 1 tấm ảnh điện thoại</span></h1>
     <div class="rule"></div>
-    <p class="sub">Áo dài, ảnh Tết, ảnh gia đình, Halloween… Mỗi đợt Hoa tặng <b>một mẫu ảnh mới theo trend</b> trong nhóm Zalo — chưa biết gì về AI cũng làm theo được ngay trên điện thoại.</p>
+    <p class="sub">Áo dài, ảnh Tết, ảnh gia đình, Halloween… Mỗi đợt Hoa tặng <b>một mẫu ảnh mới theo trend</b> trong nhóm Zalo — chưa biết gì về AI cũng làm theo được ngay trên điện thoại. <b>Làm cho mình, cho gia đình hay để bán hàng đều được.</b></p>
 
     <!-- Lưới 1 ảnh gốc → nhiều chủ đề (chị Hoa duyệt 26/10). Đổi ảnh: thay file cùng tên. -->
     <div class="luoi">
@@ -119,6 +125,30 @@
     <a class="btn" href="#nhanqua">Điền 3 dòng để vào nhóm ↓</a>
   </div>
 
+  <!-- 2 NHÓM NGƯỜI -->
+  <div class="card">
+    <h2>Nhóm hợp với bạn nếu…</h2>
+    <div class="rule"></div>
+    <div class="hai">
+      <div class="hop">
+        <div class="t">🌸 Bạn muốn ảnh đẹp cho mình</div>
+        <ul>
+          <li>Ảnh áo dài, ảnh Tết, ảnh theo mùa, theo dịp</li>
+          <li>Ảnh gia đình, ảnh cho bé, ảnh kỷ niệm</li>
+          <li>Từ 1 tấm ảnh điện thoại — không cần ra studio</li>
+        </ul>
+      </div>
+      <div class="hop">
+        <div class="t">🛍️ Bạn đang bán hàng online</div>
+        <ul>
+          <li>Ảnh sản phẩm đẹp mà không cần thuê chụp</li>
+          <li>Ảnh người mẫu mặc đồ, cầm sản phẩm bằng AI</li>
+          <li>Video ngắn giới thiệu hàng để đăng Facebook, TikTok</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
   <!-- VÀO NHÓM ĐƯỢC GÌ -->
   <div class="card">
     <h2>Vào nhóm, bạn nhận được</h2>
@@ -126,7 +156,7 @@
     <ul class="get">
       <li><span class="i">🎁</span><b>Quà của đợt này</b> — cách làm mẫu ảnh đang hot, ghim sẵn ở đầu nhóm.</li>
       <li><span class="i">🔁</span><b>Quà mới mỗi đợt</b> — chủ đề đổi theo mùa, theo dịp: Tết, Trung thu, Noel, ảnh cưới, ảnh cho bé…</li>
-      <li><span class="i">💡</span><b>Mẹo AI nhỏ</b> — vài phút là xong: ảnh cho mình, cho gia đình; ai đang bán hàng thì làm luôn ảnh sản phẩm.</li>
+      <li><span class="i">💡</span><b>Mẹo AI nhỏ</b> — vài phút là xong: mẹo làm ảnh cho mình &amp; gia đình, và mẹo làm ảnh/video cho hàng bán.</li>
       <li><span class="i">👀</span><b>Xem mọi người khoe ảnh tự làm</b> — học từ bài thật của nhau.</li>
       <li><span class="i">📅</span><b>Buổi học Zoom miễn phí</b> — cho ai muốn học sâu hơn, báo trong nhóm khi có.</li>
     </ul>
