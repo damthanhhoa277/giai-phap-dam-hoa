@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kênh của bạn được mấy điểm? – Đàm Hoa</title>
+<meta name="description" content="Tự chấm điểm kênh video bán hàng 10 câu, 3 phút. Biết đúng chỗ cần sửa trước khi đăng thêm video. Miễn phí.">
+<meta property="og:title" content="Kênh của bạn được mấy điểm? Tự chấm 10 câu, 3 phút">
+<meta property="og:description" content="Đăng đều mà video mãi vài trăm lượt xem? Chấm thử để biết chỗ hở nằm ở đâu.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quatang.damthanhhoa.com/cong-dong/kiem-kenh.html">
+<meta property="og:image" content="https://quatang.damthanhhoa.com/cong-dong/kk-1-buon.jpg">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+<!-- QUÀ KIỂM KÊNH (trang Đàm Hoa) — BÌNH 04/11/2026. Nội dung: trang-cong-qua/qua-2-kiem-kenh-cham-diem-04-11.md (BẢN 2). Sửa câu hỏi/cách sửa: mảng CAU bên dưới. -->
+<link rel="stylesheet" href="bai-test.css">
+</head>
+<body>
+<div class="wrap">
+  <div class="brandbar"><span><b>Đàm Hoa</b> · Xây kênh bán hàng</span><span>Miễn phí</span></div>
+
+  <div id="khuGioiThieu">
+    <div class="card hero">
+      <img src="kk-1-buon.jpg" alt="Chủ shop buồn vì video ít người xem" width="900" height="900">
+      <div class="in">
+        <span class="tag">TỰ CHẤM KÊNH · 3 PHÚT</span>
+        <h1>Đăng đều mà video mãi <span class="hl">vài trăm lượt xem?</span></h1>
+        <div class="rule"></div>
+        <p class="sub">Thường không phải do bạn làm kém. Mà do 1–2 chỗ hở bạn không tự nhìn thấy: mở đầu chậm, kênh nói lẫn nhiều chuyện, hay video chỉ đến được người quen.</p>
+        <a class="btn" href="#test" id="nutBatDau">Chấm kênh của tôi ngay →</a>
+        <p class="mini">10 câu Có / Không · mở kênh ra nhìn là trả lời được</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Chấm xong, bạn biết ngay</h2>
+      <div class="rule"></div>
+      <ul class="get">
+        <li><span class="i">🎯</span><b>Kênh được mấy điểm /10</b> — đang khoẻ, đúng hướng hay đang chỉ nói cho người quen</li>
+        <li><span class="i">🔧</span><b>Chỗ nào cần sửa trước</b> và sửa thế nào — từng câu một, làm được ngay trên điện thoại</li>
+        <li><span class="i">⚠️</span><b>Kênh có đang bị nền tảng hạn chế</b> vì đăng lại nội dung không phải của mình</li>
+        <li><span class="i">📩</span><b>Bản đầy đủ gửi về email</b> — 2 tuần sau chấm lại để xem điểm lên bao nhiêu</li>
+      </ul>
+      <div class="hai">
+        <figure><img src="kk-1-buon.jpg" alt="" loading="lazy"><figcaption>Đăng mãi không ai xem</figcaption></figure>
+        <figure><img src="kk-2-vui.jpg" alt="" loading="lazy"><figcaption>Sửa đúng chỗ, quay tiếp vui hơn</figcaption></figure>
+      </div>
+      <p class="t">10 câu dựa trên những gì Facebook, TikTok công bố về cách đề xuất video và các số liệu có sẵn trong mục thống kê của kênh — không phải cảm tính.</p>
+    </div>
+  </div>
+
+  <!-- BÀI TEST -->
+  <div class="card" id="test">
+    <div id="khuHoi">
+      <div class="tien"><span id="soCau">Câu 1/10</span><span id="phanTram">0%</span></div>
+      <div class="thanh"><i id="thanh"></i></div>
+      <div class="hoi" id="hoi"></div>
+      <div class="xem" id="xem"></div>
+      <div class="lua" id="lua"></div>
+      <div class="dieu"><button type="button" id="nutLui">← Câu trước</button><span></span></div>
+    </div>
+
+    <div id="khuForm" class="an">
+      <div style="font-size:40px;line-height:1;">🎉</div>
+      <h2 style="margin-top:8px;">Xong 10 câu! Kết quả đã sẵn sàng</h2>
+      <div class="rule"></div>
+      <p class="t" style="margin-top:0;">Bạn để lại tên và email: kết quả hiện ngay bên dưới, <b>bản đầy đủ có cách sửa từng câu</b> gửi về email để bạn giữ lại.</p>
+      <form id="f" novalidate>
+        <label for="ten">Hoa gọi bạn là gì?</label>
+        <input id="ten" type="text" autocomplete="name" placeholder="Ví dụ: Lan" required>
+        <label for="email">Email nhận kết quả</label>
+        <input id="email" type="email" autocomplete="email" inputmode="email" placeholder="ten@gmail.com" required>
+        <label for="sdt">Số Zalo <span class="phu">(không bắt buộc)</span></label>
+        <input id="sdt" type="tel" autocomplete="tel" inputmode="tel" placeholder="Ví dụ: 0912 345 678">
+        <label class="agree" id="agreeBox"><input id="dongy" type="checkbox"><span>Mình đồng ý để Đàm Hoa gửi email, tin Zalo về kết quả và nội dung xây kênh bán hàng. Mình có thể dừng nhận bất cứ lúc nào.</span></label>
+        <button class="btn" type="submit" id="btn">Xem kết quả của tôi →</button>
+      </form>
+      <div class="msg" id="msg"></div>
+      <p class="privacy">🔒 Thông tin chỉ dùng để gửi kết quả và nội dung trong cộng đồng. Hoa không bán, không chia cho ai.</p>
+      <details>
+        <summary>Hoa dùng thông tin của bạn thế nào?</summary>
+        <p>Hoa lưu tên, email, số Zalo (nếu có) và đáp án bài chấm để gửi kết quả, nhắc bạn vào nhóm, báo lịch buổi học. Không dùng cho việc khác, không chuyển cho bên thứ ba. Muốn dừng nhận hoặc xoá thông tin, bạn trả lời email của Hoa một câu "dừng" hoặc "xoá thông tin" (theo Nghị định 13/2023/NĐ-CP).</p>
+      </details>
+      <button type="button" class="btn nhe" id="lamLai">↺ Làm lại từ câu 1</button>
+    </div>
+  </div>
+
+  <!-- KẾT QUẢ -->
+  <div class="card an" id="khuKetQua">
+    <h2 id="loiChao">Kết quả của bạn</h2>
+    <div class="rule"></div>
+    <div id="khuTomTat"></div>
+    <div id="khuDayDu"></div>
+    <div class="khoa">💬 <b>Kẹt ở câu nào, vào nhóm hỏi Hoa.</b> Trong nhóm có ghim sẵn <b>bảng sửa 10 câu</b>, mọi người khoe điểm trước – sau, và buổi Zoom học xây kênh bằng AI tối Chủ nhật.</div>
+    <a class="btn zalo" id="nutNhom" href="#" target="_blank" rel="noopener">Vào nhóm Zalo xây kênh →</a>
+    <div class="qrbox" id="qrBox">
+      <p style="font-size:13.5px;">Đang xem trên máy tính? Quét mã bằng <b>camera điện thoại</b> để mở nhóm trong Zalo:</p>
+      <img id="qrNhom" alt="Mã QR vào nhóm Zalo">
+    </div>
+    <div class="note" id="emailNote">📩 Hoa đã gửi <b>bản đầy đủ</b> vào <b id="emailDaGui"></b>. Không thấy thư, bạn xem mục <b>Quảng cáo</b> hoặc <b>Thư rác</b> nhé.</div>
+  </div>
+
+  <div class="card">
+    <div class="author">
+      <img src="anh-hoa-damhoa.jpg" alt="Đàm Hoa">
+      <div>
+        <div style="font-weight:800;color:var(--navy);font-size:16.5px;">Đàm Hoa</div>
+        <div style="font-size:13px;color:var(--navy-soft);margin-top:2px;">Xây kênh bán hàng bằng AI · người mới cũng làm được</div>
+        <p style="font-size:14.4px;color:var(--ink-soft);margin-top:10px;">Hoa làm bài chấm này để chị em đang bán hàng tự nhìn ra chỗ hở của kênh, sửa từng bước nhỏ ngay trên điện thoại, thay vì đăng thêm 30 video theo cách cũ.</p>
+      </div>
+    </div>
+  </div>
+  <p class="foot">© Đàm Hoa · Ứng Dụng AI Bán Hàng – Cùng Đàm Hoa</p>
+</div>
+
+<script>
+/* 10 câu — BẢN 2 chị duyệt 04/11. uu = thứ tự ưu tiên sửa (1 = sửa trước). */
+var CAU = [
+ {ten:'Giới thiệu kênh rõ ràng', hoi:'Người lạ đọc tên và dòng giới thiệu kênh, có biết ngay bạn giúp ai, giúp việc gì không?',
+  xem:'trang kênh của bạn (tên + dòng giới thiệu)', uu:2,
+  sua:'Viết lại dòng giới thiệu thành 1 câu: "Mình giúp [ai] [làm được gì]". Ví dụ: "Mình giúp chị em bán quần áo online làm video bằng điện thoại".',
+  vi:'Người lạ quyết định có theo dõi hay không chỉ trong vài giây.'},
+ {ten:'Kênh chỉ 1 chủ đề', hoi:'12 video gần nhất có cùng xoay quanh 1 chủ đề, cho 1 nhóm người không?',
+  xem:'lướt 12 video gần nhất trên kênh', uu:4,
+  sua:'Giữ 1 chủ đề mà người mua của bạn quan tâm. Bỏ bớt video lệch (đời tư, chia sẻ linh tinh).',
+  vi:'Nền tảng đưa video tới người có cùng sở thích; kênh lẫn nhiều chủ đề thì khó tìm đúng người xem.'},
+ {ten:'Video tự làm, không đăng lại', hoi:'Video là do bạn tự quay hoặc tự làm — không tải lại video của người khác, không dính logo ứng dụng khác?',
+  xem:'tự xem lại các video gần đây', uu:1,
+  sua:'Chỉ đăng video tự quay/tự làm. Muốn dùng lại video người khác thì phải thêm góc nhìn, lời nói của chính mình.',
+  vi:'Meta công bố ngày 14/07/2025: tài khoản nhiều lần đăng lại nội dung không nguyên bản sẽ bị giảm đề xuất và hạn chế kiếm tiền.'},
+ {ten:'3 giây đầu giữ người xem', hoi:'3 giây đầu video có cả câu nói và dòng chữ cho người xem biết họ sẽ được gì (không mở bằng chào hỏi)?',
+  xem:'tự xem lại 3 video gần nhất', uu:3,
+  sua:'Mở đầu bằng điều khách đang lo hoặc đang muốn. Thêm dòng chữ tiêu đề trong 3 giây đầu — nhiều người lướt không bật tiếng.',
+  vi:'Facebook, TikTok đều cho xem người xem rời đi ở giây nào; phần lớn rời ngay đầu video.'},
+ {ten:'Người xem ở lại lâu', hoi:'Thời gian xem trung bình có từ một nửa độ dài video trở lên không?', chuaBiet:true,
+  xem:'bấm vào 1 video → <b>Thông tin chi tiết</b> (Facebook) hoặc <b>Phân tích</b> (TikTok) → dòng "Thời gian xem trung bình"', uu:5,
+  sua:'Cắt phần thừa, giữ video 20–40 giây, mỗi video chỉ 1 ý.',
+  vi:'Thời gian xem trung bình có sẵn trong thống kê từng video. Mốc "một nửa" là mốc tham khảo.'},
+ {ten:'Người lạ xem nhiều', hoi:'Phần lớn lượt xem có đến từ người chưa theo dõi kênh không?', chuaBiet:true,
+  xem:'<b>TikTok:</b> Phân tích video → Nguồn lưu lượng ("Dành cho bạn") · <b>Facebook:</b> Thông tin chi tiết → người theo dõi / chưa theo dõi', uu:6,
+  sua:'Bớt nội dung chỉ người quen quan tâm. Nói về nỗi lo của khách lạ, đừng chia sẻ lên trang cá nhân để "kéo view".',
+  vi:'Video đi ra ngoài người theo dõi là dấu hiệu nền tảng đang thử nó với người mới.'},
+ {ten:'Có video vượt trội', hoi:'Trong 10 video gần nhất, có ít nhất 1 video lượt xem gấp 3 lần mức thường của bạn không?', chuaBiet:true,
+  xem:'danh sách video trên kênh, so số lượt xem', uu:9,
+  sua:'Chưa có: lấy video nhiều lượt xem nhất, làm thêm 3 video cùng đề tài, đổi câu mở đầu. Có rồi: làm tiếp đề tài đó.',
+  vi:'Dấu hiệu nền tảng từng đưa video ra ngoài người theo dõi. Mốc "gấp 3" là mốc tham khảo.'},
+ {ten:'Đăng đều', hoi:'4 tuần qua bạn có đăng đều từ 3 video mỗi tuần không?',
+  xem:'danh sách video, đếm theo tuần', uu:10,
+  sua:'Chọn 3 ngày cố định trong tuần, quay dồn 1 buổi cho cả tuần.',
+  vi:'Càng nhiều video thì càng nhiều lần được nền tảng thử với người lạ.'},
+ {ten:'Người lạ hỏi, mình trả lời', hoi:'Có người lạ bình luận, hỏi thật (không chỉ bạn bè thả tim) và bạn có trả lời họ không?',
+  xem:'bình luận của 5 video gần nhất', uu:8,
+  sua:'Cuối video hỏi 1 câu dễ trả lời. Trả lời mọi bình luận trong giờ đầu sau khi đăng.',
+  vi:'Bình luận, chia sẻ là tín hiệu tương tác nền tảng dùng để xếp hạng video.'},
+ {ten:'Có lời mời cuối video', hoi:'Cuối video có 1 lời mời rõ ràng (bình luận 1 chữ hoặc nhắn tin) không?',
+  xem:'tự xem lại 3 video gần nhất', uu:7,
+  sua:'Thêm 1 câu cuối: "Ai cần … bình luận chữ … nhé". Chỉ 1 lời mời, không gộp like – share – tag.',
+  vi:'Không có lời mời thì người xem thích cũng không biết làm gì tiếp.'}
+];
+
+function diem(tra){ return tra.filter(function(x){ return x === 'C'; }).length; }
+function muc(d){
+  if (d >= 8) return {mau:'#2E8B57', ten:'Kênh đang khoẻ', loi:'Giữ nhịp đăng, nhân bản đề tài đã có nhiều lượt xem.'};
+  if (d >= 5) return {mau:'#C9861E', ten:'Đúng hướng, còn vài chỗ hở', loi:'Sửa các câu "Không" theo thứ tự bên dưới — sửa chỗ đầu tiên trước.'};
+  return {mau:'#B5543D', ten:'Kênh đang nói cho người quen', loi:'Đừng đăng thêm vội. Sửa từ chỗ đầu tiên bên dưới, mỗi tuần 1–2 chỗ.'};
+}
+function ho(tra){   /* các câu "Không", xếp theo thứ tự ưu tiên sửa */
+  var a = []; tra.forEach(function(x, k){ if (x !== 'C') a.push(k); });
+  return a.sort(function(p, q){ return CAU[p].uu - CAU[q].uu; });
+}
+function dau(d, m){
+  return '<div class="diem"><div class="vong" style="background:' + m.mau + '"><b>' + d + '</b><span>/10 điểm</span></div>' +
+    '<div><div class="muc">' + m.ten + '</div><p class="t" style="margin-top:4px;">' + m.loi + '</p></div></div>';
+}
+function canhBao(tra){
+  return tra[2] !== 'C' ? '<div class="canh">⚠️ <b>Sửa ngay câu 3 trước tiên:</b> kênh đăng lại video không phải của mình có thể bị Facebook giảm đề xuất, dù các câu khác làm tốt.</div>' : '';
+}
+
+window.BAI = {
+  ma:'kiemkenh', nguonMacDinh:'damhoa-kiemkenh',
+  linkNhom:'https://zalo.me/g/adohlltts6zacuoyoh0m',
+  chuNutGui:'Xem kết quả của tôi →',
+  cauHoi: CAU.map(function(c){
+    var lua = [{k:'C', nhan:'✓', chu:'Có'}, {k:'K', nhan:'✕', chu:'Không'}];
+    if (c.chuaBiet) lua.push({k:'X', nhan:'?', chu:'Chưa biết xem ở đâu (tính là chưa đạt)'});
+    return {hoi:c.hoi, xem:c.xem, lua:lua};
+  }),
+  ma_hoa: function(tra){ return tra.join(''); },
+  giai_ma: function(s){ return /^[CKX]{10}$/.test(s) ? s.split('') : null; },
+  chu_ngan: function(tra){ var d = diem(tra); return d + '/10 — ' + muc(d).ten; },
+  tom_tat: function(tra){
+    var d = diem(tra), m = muc(d), h = ho(tra), out = dau(d, m) + canhBao(tra);
+    if (h.length){
+      var c = CAU[h[0]];
+      out += '<h3>Sửa trước tiên: câu ' + (h[0] + 1) + ' — ' + c.ten + '</h3><ul class="ds"><li><span class="d k">!</span>' + c.hoi +
+             '<span class="sua">👉 ' + c.sua + '</span></li></ul>';
+      if (h.length > 1) out += '<h3>Còn ' + (h.length - 1) + ' chỗ hở nữa</h3><ul class="ds">' +
+        h.slice(1).map(function(k){ return '<li><span class="d k">✕</span>Câu ' + (k + 1) + ' — ' + CAU[k].ten + '</li>'; }).join('') + '</ul>' +
+        '<p class="t">Cách sửa từng câu nằm trong <b>bản đầy đủ Hoa gửi về email</b> và <b>ghim trong nhóm Zalo</b>.</p>';
+    } else out += '<p class="t">Cả 10 câu đều đạt 👏 Vào nhóm khoe điểm và chia sẻ cách làm cho mọi người nhé.</p>';
+    return out;
+  },
+  day_du: function(tra){
+    var d = diem(tra), m = muc(d), h = ho(tra);
+    var out = dau(d, m) + canhBao(tra);
+    if (h.length) out += '<h3>Sửa theo thứ tự này</h3><ul class="ds">' + h.map(function(k){ var c = CAU[k];
+      return '<li><span class="d k">✕</span><b>Câu ' + (k + 1) + ' — ' + c.ten + '</b><span class="sua">👉 ' + c.sua + '</span><span class="vi">Vì sao: ' + c.vi + '</span></li>'; }).join('') + '</ul>';
+    var dat = []; tra.forEach(function(x, k){ if (x === 'C') dat.push(k); });
+    if (dat.length) out += '<h3>Đã làm tốt — giữ nguyên</h3><ul class="ds">' + dat.map(function(k){
+      return '<li><span class="d c">✓</span>Câu ' + (k + 1) + ' — ' + CAU[k].ten + '</li>'; }).join('') + '</ul>';
+    return out + '<p class="luu">Làm lại bài chấm sau 2 tuần để xem điểm lên bao nhiêu. "Kênh khoẻ" là kênh làm đúng các việc cơ bản — không phải lời hứa về lượt xem.</p>';
+  }
+};
+</script>
+<script src="bai-test.js"></script>
+</body>
+</html>
