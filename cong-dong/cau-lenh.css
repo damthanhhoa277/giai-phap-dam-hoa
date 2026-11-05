@@ -1,0 +1,14 @@
+/* Trang quà câu lệnh (cau-lenh.html, qua-2011.html) — BÌNH 05/11/2026. Dùng chung bai-test.css */
+.buoc{counter-reset:b;margin-top:10px;}
+.buoc li{list-style:none;position:relative;padding:7px 0 7px 34px;font-size:15px;color:var(--ink-soft);}
+.buoc li::before{counter-increment:b;content:counter(b);position:absolute;left:0;top:6px;width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;}
+.nhom{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:24px 2px 10px;}
+.cl .so{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--gold);color:#fff;font-weight:800;font-size:14px;margin-right:8px;vertical-align:middle;}
+.cl img{border-radius:12px;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;margin:12px 0 4px;}
+.cl .nhan{font-size:12px;color:var(--navy-soft);text-align:center;}
+.lenh{position:relative;background:var(--ivory);border:1.5px dashed var(--gold);border-radius:12px;padding:14px 14px 12px;margin-top:12px;font-size:15px;line-height:1.6;color:var(--ink);white-space:pre-wrap;}
+.lenh b.sua{background:#FFF1C9;color:var(--navy);padding:0 3px;border-radius:4px;font-weight:700;}
+.chep{display:block;width:100%;margin-top:10px;font-family:inherit;font-size:15.5px;font-weight:800;border:none;border-radius:11px;padding:12px;background:var(--navy);color:#fff;cursor:pointer;}
+.chep.da{background:var(--ok);}
+.meo{font-size:14px;color:var(--ink-soft);margin-top:10px;padding-left:22px;position:relative;}
+.meo::before{content:"👉";position:absolute;left:0;top:0;}
