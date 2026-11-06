@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Mã QR chuyển khoản – Hoa – Đẹp Khỏe Cùng Đàm Hoa</title>
 <meta name="robots" content="noindex">
-<meta name="description" content="Quét mã QR BIDV để chuyển khoản, nội dung ghi: tên + số điện thoại.">
+<meta name="description" content="BIDV 8818573909 · ĐÀM THỊ THANH HOA. Bấm nút ngân hàng để mở app, hoặc quét mã QR.">
 <meta property="og:title" content="Mã QR chuyển khoản – Hoa">
-<meta property="og:description" content="Quét mã QR BIDV để chuyển khoản, nội dung ghi: tên + số điện thoại.">
+<meta property="og:description" content="BIDV 8818573909 · ĐÀM THỊ THANH HOA. Bấm nút ngân hàng để mở app, hoặc quét mã QR.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://quatang.damthanhhoa.com/cong-dong/tra-tien.html">
 <meta property="og:image" content="https://quatang.damthanhhoa.com/cong-dong/qr-chuyen-khoan.jpg">
@@ -21,14 +21,53 @@
 <body class="depkhoe">
 <div class="wrap">
   <div class="brandbar"><span><b>Đẹp Khỏe</b> Cùng Đàm Hoa</span><span>Chuyển khoản</span></div>
+  <style>
+    .nhgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;}
+    .nh{display:block;text-align:center;padding:12px 6px;border-radius:10px;border:1.5px solid var(--line);color:var(--navy);font-weight:700;text-decoration:none;font-size:15px;background:#fff;}
+    .stk{font-size:22px;font-weight:800;letter-spacing:1px;text-align:center;margin:6px 0 0;}
+  </style>
+  <div class="card">
+    <div class="in">
+      <h1>Chuyển khoản cho Hoa</h1>
+      <p class="sub">BIDV · <b>ĐÀM THỊ THANH HOA</b></p>
+      <p class="stk" id="stk">8818573909</p>
+      <button class="btn" id="saoChep" type="button">Sao chép số tài khoản</button>
+      <p class="mini">Nội dung chuyển khoản ghi: <b>tên chị + số điện thoại</b></p>
+
+      <p class="sub" style="margin-top:18px"><b>Bấm đúng ngân hàng chị đang dùng</b>, điện thoại mở luôn app:</p>
+      <p class="mini" style="text-align:left">App tự điền sẵn số tài khoản của Hoa, chị chỉ gõ số tiền:</p>
+      <div class="nhgrid">
+        <a class="nh" href="https://dl.vietqr.io/pay?app=bidv&amp;ba=8818573909@bidv">BIDV</a>
+        <a class="nh" href="https://dl.vietqr.io/pay?app=icb&amp;ba=8818573909@bidv">VietinBank</a>
+        <a class="nh" href="https://dl.vietqr.io/pay?app=mb&amp;ba=8818573909@bidv">MB Bank</a>
+        <a class="nh" href="https://dl.vietqr.io/pay?app=acb&amp;ba=8818573909@bidv">ACB</a>
+        <a class="nh" href="https://dl.vietqr.io/pay?app=ocb&amp;ba=8818573909@bidv">OCB</a>
+      </div>
+      <p class="mini" style="text-align:left;margin-top:14px">App chỉ mở lên, chị bấm "Sao chép số tài khoản" ở trên rồi dán vào app:</p>
+      <div class="nhgrid">
+        <a class="nh" href="https://dl.vietqr.io/pay?app=vcb&amp;ba=8818573909@bidv">Vietcombank</a>
+        <a class="nh" href="https://dl.vietqr.io/pay?app=tcb&amp;ba=8818573909@bidv">Techcombank</a>
+        <a class="nh" href="https://dl.vietqr.io/pay?app=vpb&amp;ba=8818573909@bidv">VPBank</a>
+        <a class="nh" href="https://dl.vietqr.io/pay?app=vba&amp;ba=8818573909@bidv">Agribank</a>
+        <a class="nh" href="https://dl.vietqr.io/pay?app=tpb&amp;ba=8818573909@bidv">TPBank</a>
+      </div>
+    </div>
+  </div>
   <div class="card hero">
     <img src="qr-chuyen-khoan.jpg" alt="Mã QR chuyển khoản BIDV của Đàm Thị Thanh Hoa" width="1029" height="1260">
     <div class="in">
-      <h1>Mã QR chuyển khoản</h1>
-      <p class="sub">Chị quét mã QR BIDV này để chuyển khoản, nội dung ghi: <b>tên chị + số điện thoại</b>.</p>
+      <p class="sub">Hoặc quét mã QR này bằng app ngân hàng.</p>
       <p class="sub">Chuyển xong chị chụp màn hình gửi Hoa trên Messenger, Hoa gói quà, viết thiệp và gửi hàng luôn ạ. Bên Hoa nhận chuyển khoản trước, không thu tiền khi giao hàng.</p>
     </div>
   </div>
+<script>
+document.getElementById('saoChep').addEventListener('click',function(){
+  var b=this, so='8818573909';
+  function xong(){ b.textContent='Đã sao chép ✓'; setTimeout(function(){b.textContent='Sao chép số tài khoản';},2500); }
+  if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(so).then(xong,function(){ prompt('Chị giữ ngón tay để sao chép:',so); }); }
+  else { prompt('Chị giữ ngón tay để sao chép:',so); }
+});
+</script>
 </div>
 </body>
 </html>
