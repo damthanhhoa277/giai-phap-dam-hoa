@@ -105,3 +105,4 @@ details p{margin-top:6px;line-height:1.55;}
 .author img{flex:none;width:76px;height:76px;object-position:center 30%;border-radius:50%;object-fit:cover;border:2px solid var(--gold-soft);}
 .foot{text-align:center;font-size:11.5px;color:var(--navy-soft);margin-top:20px;line-height:1.6;}
 @media(max-width:380px){ .card{padding:19px 15px;} .card.hero .in{padding:18px 15px;} }
+.btn.fb{background:#1877F2;box-shadow:0 5px 16px rgba(24,119,242,.32);font-size:16px;margin-top:10px;}
