@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Quà ảnh AI miễn phí – Đàm Hoa</title>
-<meta name="description" content="Tự làm ảnh AI lung linh từ 1 tấm ảnh điện thoại: áo dài, ảnh Tết, ảnh gia đình, Halloween… Điền 3 dòng là nhận quà ngay, miễn phí.">
-<meta property="og:title" content="Quà ảnh AI miễn phí của Đàm Hoa 🎁">
-<meta property="og:description" content="Tự làm ảnh AI lung linh từ 1 tấm ảnh điện thoại. Miễn phí, người mới cũng làm được.">
+<title>Kho quà xây kênh miễn phí – Đàm Hoa</title>
+<meta name="description" content="Làm kênh mãi chưa ra đơn? Chọn quà đúng chỗ bạn đang vướng: video AI, edit tự động bằng AI, chấm điểm kênh, xây cộng đồng, Zoom miễn phí. Điền 3 dòng là vào nhóm nhận quà.">
+<meta property="og:title" content="Kho quà xây kênh miễn phí của Đàm Hoa 🎁">
+<meta property="og:description" content="Vướng chỗ nào lấy quà chỗ đó. Miễn phí, làm được ngay trên điện thoại.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://quatang.damthanhhoa.com/cong-dong/">
 <meta property="og:image" content="https://quatang.damthanhhoa.com/cong-dong/anh-2-ao-dai.jpg">
@@ -99,6 +99,14 @@
   .qrbox{display:none;margin-top:14px;}
   .qrbox img{width:180px;height:180px;display:block;margin:8px auto;border:1px solid var(--line);border-radius:12px;background:#fff;}
   @media(max-width:380px){ .card{padding:19px 15px;} }
+  .kho{display:grid;gap:10px;margin-top:4px;}
+  .qua{position:relative;background:var(--ivory);border:1px solid var(--line);border-radius:12px;padding:13px 14px 13px 14px;}
+  .qua .dau{font-weight:800;color:var(--navy);font-size:15.5px;line-height:1.35;padding-right:78px;}
+  .qua .nhan{font-size:14px;color:var(--ink-soft);margin-top:6px;}
+  .qua .tt{position:absolute;top:12px;right:12px;font-size:11px;font-weight:800;padding:3px 9px;border-radius:999px;white-space:nowrap;}
+  .qua .tt.co{background:#E3F2E6;color:#2E6B3A;}
+  .qua .tt.trong{background:#E6EEFB;color:#1B4E9B;}
+  .qua .tt.sap{background:var(--ivory2);color:var(--navy-soft);}
 </style>
 </head>
 <body>
@@ -106,69 +114,53 @@
 
   <div class="brandbar"><span><b>Đàm Hoa</b> · Xây kênh bằng AI</span><span>Miễn phí</span></div>
 
-  <!-- MỞ ĐẦU -->
+  <!-- MỞ ĐẦU: KHO QUÀ CHUNG -->
   <div class="card" id="dau">
-    <span class="tag">🎁 QUÀ MIỄN PHÍ · NHẬN NGAY</span>
-    <h1>Tự làm ảnh AI lung linh<br><span class="hl">từ 1 tấm ảnh điện thoại</span></h1>
+    <span class="tag">🎁 KHO QUÀ XÂY KÊNH · MIỄN PHÍ</span>
+    <h1>Làm kênh mãi chưa ra đơn?<br><span class="hl">Chọn đúng quà cho chỗ bạn đang vướng</span></h1>
     <div class="rule"></div>
-    <p class="sub">Áo dài, ảnh Tết, ảnh gia đình, Halloween… Mỗi đợt Hoa tặng <b>một mẫu ảnh mới theo trend</b> trong nhóm Zalo — chưa biết gì về AI cũng làm theo được ngay trên điện thoại. <b>Làm cho mình, cho gia đình hay để bán hàng đều được.</b></p>
-
-    <!-- Lưới 1 ảnh gốc → nhiều chủ đề (chị Hoa duyệt 26/10). Đổi ảnh: thay file cùng tên. -->
-    <div class="luoi">
-      <figure class="goc"><img src="anh-1-goc.jpg" alt="Đàm Hoa — Ảnh gốc chụp bằng điện thoại" width="480" height="640" loading="eager"><figcaption>Ảnh gốc</figcaption></figure>
-      <figure><img src="anh-2-ao-dai.jpg" alt="Đàm Hoa — Áo dài sen bằng AI" width="480" height="640" loading="eager"><figcaption>Áo dài</figcaption></figure>
-      <figure><img src="anh-3-tet.jpg" alt="Đàm Hoa — Ảnh Tết bằng AI" width="480" height="640" loading="eager"><figcaption>Tết</figcaption></figure>
-      <figure><img src="anh-4-gia-dinh.jpg" alt="Đàm Hoa — Ảnh dã ngoại hoàng hôn bằng AI" width="480" height="640" loading="eager"><figcaption>Dã ngoại</figcaption></figure>
-      <figure><img src="anh-5-halloween.jpg" alt="Đàm Hoa — Ảnh Halloween bằng AI" width="480" height="640" loading="eager"><figcaption>Halloween</figcaption></figure>
-      <figure><img src="anh-6-thanh-long.jpg" alt="Đàm Hoa — Ảnh váy thanh long bằng AI" width="480" height="640" loading="eager"><figcaption>Váy thanh long</figcaption></figure>
-    </div>
-    <p class="cap">Từ <b>1 tấm ảnh điện thoại</b> → mỗi đợt nhóm học làm một chủ đề mới</p>
-    <a class="btn" href="#nhanqua">Điền 3 dòng để nhận quà ↓</a>
+    <p class="sub">Hoa gom các quà xây kênh vào <b>một kho chung trong nhóm Zalo</b>. Bạn vướng chỗ nào thì lấy quà chỗ đó, <b>làm được ngay trên điện thoại</b>, không cần giỏi công nghệ.</p>
+    <a class="btn" href="#nhanqua">Điền 3 dòng để mở kho quà ↓</a>
   </div>
 
-  <!-- 2 NHÓM NGƯỜI -->
+  <!-- KHO QUÀ THEO NỖI ĐAU -->
   <div class="card">
-    <h2>Nhóm hợp với bạn nếu…</h2>
+    <h2>Bạn đang vướng chỗ nào?</h2>
     <div class="rule"></div>
-    <div class="hai">
-      <div class="hop">
-        <div class="t">🌸 Bạn muốn ảnh đẹp cho mình</div>
-        <ul>
-          <li>Ảnh áo dài, ảnh Tết, ảnh theo mùa, theo dịp</li>
-          <li>Ảnh gia đình, ảnh cho bé, ảnh kỷ niệm</li>
-          <li>Từ 1 tấm ảnh điện thoại — không cần ra studio</li>
-        </ul>
-      </div>
-      <div class="hop">
-        <div class="t">🛍️ Bạn đang bán hàng online</div>
-        <ul>
-          <li>Ảnh sản phẩm đẹp mà không cần thuê chụp</li>
-          <li>Ảnh người mẫu mặc đồ, cầm sản phẩm bằng AI</li>
-          <li>Video ngắn giới thiệu hàng để đăng Facebook, TikTok</li>
-        </ul>
-      </div>
+    <div class="kho">
+      <div class="qua"><div class="dau">🎬 Muốn làm video bán hàng mà ngại quay, ngại lộ mặt</div>
+        <div class="nhan">Quà: <b>Điền 4 dòng về món hàng → có kịch bản 20 giây + câu lệnh làm video bằng AI</b></div>
+        <span class="tt trong">Trong nhóm</span></div>
+      <div class="qua"><div class="dau">✂️ Mất cả buổi mới edit xong 1 video</div>
+        <div class="nhan">Quà: <b>Edit video tự động bằng AI</b> — tự cắt, tự thêm phụ đề, thêm tiêu đề, vài phút là xong</div>
+        <span class="tt sap">Sắp có</span></div>
+      <div class="qua"><div class="dau">📉 Đăng đều mà kênh không lên, không biết sai ở đâu</div>
+        <div class="nhan">Quà: <b>Tự chấm điểm kênh /10</b> + <b>kiểm kênh miễn phí</b> cùng Hoa trong nhóm Facebook</div>
+        <span class="tt co">Có ngay</span></div>
+      <div class="qua"><div class="dau">💬 Có view mà chẳng ai nhắn tin hỏi mua</div>
+        <div class="nhan">Quà: <b>Cách biến người xem thành khách hàng</b> — câu chốt cuối video, quà mời bình luận, tin trả lời tự động</div>
+        <span class="tt sap">Sắp có</span></div>
+      <div class="qua"><div class="dau">👥 Bán xong là mất khách, không ai quay lại</div>
+        <div class="nhan">Quà: <b>Cách xây cộng đồng khách quen</b> bằng nhóm Zalo, nhóm Facebook — khách tự quay lại hỏi mua</div>
+        <span class="tt sap">Sắp có</span></div>
+      <div class="qua"><div class="dau">💡 Bí ý tưởng, mỗi ngày không biết đăng gì</div>
+        <div class="nhan">Quà: <b>Nhờ AI lấy ý tưởng video từ kênh triệu view</b> cùng chủ đề với bạn</div>
+        <span class="tt sap">Sắp có</span></div>
+      <div class="qua"><div class="dau">🖼️ Cần ảnh đẹp cho sản phẩm, cho mình</div>
+        <div class="nhan">Quà: <b>Câu lệnh làm ảnh AI</b> từ 1 tấm ảnh điện thoại, mỗi đợt một mẫu mới</div>
+        <span class="tt co">Có ngay</span></div>
+      <div class="qua"><div class="dau">📅 Muốn học bài bản cách xây kênh ra đơn</div>
+        <div class="nhan">Quà: <b>Vé học Zoom miễn phí</b> cùng Hoa, lịch báo trong nhóm</div>
+        <span class="tt trong">Trong nhóm</span></div>
     </div>
+    <p class="cap" style="margin-top:12px;">Quà mới Hoa thêm vào kho trong nhóm. Đã vào nhóm là nhận hết, không phải điền lại.</p>
   </div>
-
-  <!-- VÀO NHÓM ĐƯỢC GÌ -->
-  <div class="card">
-    <h2>Bạn nhận được</h2>
-    <div class="rule"></div>
-    <ul class="get">
-      <li><span class="i">🎁</span><b>Quà của đợt này</b> — câu lệnh làm ảnh AI đang hot, mở được <b>ngay khi điền xong</b>.</li>
-      <li><span class="i">🔁</span><b>Quà mới mỗi đợt</b> — chủ đề đổi theo mùa, theo dịp: Tết, Trung thu, Noel, ảnh cưới, ảnh cho bé…</li>
-      <li><span class="i">💡</span><b>Mẹo AI nhỏ</b> — vài phút là xong: mẹo làm ảnh cho mình &amp; gia đình, và mẹo làm ảnh/video cho hàng bán.</li>
-      <li><span class="i">👀</span><b>Xem mọi người khoe ảnh tự làm</b> — học từ bài thật của nhau.</li>
-      <li><span class="i">📅</span><b>Buổi học Zoom miễn phí</b> — cho ai muốn học sâu hơn, báo trong nhóm khi có.</li>
-    </ul>
-  </div>
-
   <!-- FORM -->
   <div class="card" id="nhanqua">
     <div id="khuForm">
-      <h2>Để lại thông tin để nhận quà</h2>
+      <h2>Để lại thông tin để mở kho quà</h2>
       <div class="rule"></div>
-      <p class="sub" style="margin-top:0;font-size:14.5px;">Miễn phí. Điền xong là hiện ngay nút mở quà.</p>
+      <p class="sub" style="margin-top:0;font-size:14.5px;">Miễn phí. Điền xong là hiện ngay nút vào nhóm nhận quà.</p>
 
       <form id="f" novalidate>
         <label for="ten">Hoa gọi bạn là gì?</label>
@@ -180,7 +172,7 @@
         <label for="email">Email</label>
         <input id="email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="ten@gmail.com" required>
 
-        <label class="agree" id="agreeBox"><input id="dongy" name="dongy" type="checkbox"><span>Mình đồng ý để Đàm Hoa gửi email, tin Zalo về quà tặng và nội dung làm ảnh/video AI. Mình có thể dừng nhận bất cứ lúc nào.</span></label>
+        <label class="agree" id="agreeBox"><input id="dongy" name="dongy" type="checkbox"><span>Mình đồng ý để Đàm Hoa gửi email, tin Zalo về quà tặng và nội dung xây kênh bằng AI. Mình có thể dừng nhận bất cứ lúc nào.</span></label>
 
         <button class="btn" type="submit" id="btn">Nhận quà ngay 🎁</button>
       </form>
@@ -197,15 +189,15 @@
     <div class="done" id="khuXong">
       <div class="big">🎉</div>
       <h2 id="loiChao">Xong rồi!</h2>
-      <p><b>Quà của bạn đây.</b> Bấm nút dưới để mở câu lệnh làm ảnh AI nhé.</p>
-      <a class="btn" id="nutQua" href="cau-lenh.html?nguon=congqua" target="_blank" rel="noopener">Mở quà câu lệnh ảnh AI 🎁</a>
-      <p style="margin-top:18px;"><b>Vào nhóm Zalo</b> để nhận link <b>Zoom học AI miễn phí</b> và quà mới mỗi đợt:</p>
-      <a class="btn zalo" id="nutNhom" href="#" target="_blank" rel="noopener">Vào nhóm Zalo nhận Zoom + quà mới →</a>
+      <p><b>Kho quà nằm trong nhóm Zalo.</b> Bấm nút dưới để vào nhóm, mở tin ghim là thấy đủ quà.</p>
+      
+      
+      <a class="btn zalo" id="nutNhom" href="#" target="_blank" rel="noopener">Vào nhóm Zalo mở kho quà →</a>
       <div class="qrbox" id="qrBox">
         <p style="font-size:13.5px;">Bạn đang xem trên máy tính? Quét mã này bằng <b>camera điện thoại</b> để mở thẳng nhóm trong Zalo:</p>
         <img id="qrNhom" alt="Mã QR vào nhóm Zalo">
       </div>
-      <p style="font-size:13.5px;margin-top:14px;text-align:center;color:#555;">Làm xong ảnh đầu tiên, vào nhóm Facebook của Hoa khoe và hỏi chỗ chưa rõ nhé:</p>
+      <p style="font-size:13.5px;margin-top:14px;text-align:center;color:#555;">Muốn được <b>kiểm kênh miễn phí</b>, bạn vào nhóm Facebook của Hoa và để link kênh dưới bài KIỂM KÊNH nhé:</p>
       <a class="btn fb" href="https://www.facebook.com/groups/1788679095718962" target="_blank" rel="noopener">Vào nhóm Facebook "Kinh Doanh Online Nhàn Tênh" →</a>
 
       <div class="note">📩 Hoa cũng vừa gửi email vào hộp thư <b id="emailDaGui"></b> có sẵn nút mở quà và nút vào nhóm — lỡ đóng trang này thì mở email là xem lại được. Không thấy thư, bạn xem mục <b>Quảng cáo</b> hoặc <b>Thư rác</b> giúp Hoa nhé.</div>
@@ -219,7 +211,7 @@
       <div>
         <div style="font-weight:800;color:var(--navy);font-size:16.5px;">Đàm Hoa</div>
         <div style="font-size:13px;color:var(--navy-soft);margin-top:2px;">Xây kênh bán hàng bằng AI · người mới cũng làm được</div>
-        <p style="font-size:14.4px;color:var(--ink-soft);margin-top:10px;">Hoa lập nhóm này để chị em cùng "chơi" với AI: làm ảnh đẹp cho mình, cho gia đình, cho những dịp đặc biệt — và ai cần thì dùng luôn cho việc bán hàng. Từng bước nhỏ, không cần giỏi công nghệ.</p>
+        <p style="font-size:14.4px;color:var(--ink-soft);margin-top:10px;">Hoa lập nhóm này cho chị em đang tự xây kênh bán hàng mà còn vướng: chưa biết làm video, edit mất thời gian, kênh không lên, có view mà không ai hỏi mua. Hoa gom quà và mẹo vào một chỗ, từng bước nhỏ, không cần giỏi công nghệ.</p>
       </div>
     </div>
   </div>
