@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tạo kịch bản và video bán hàng bằng AI – Đàm Hoa</title>
+<meta name="description" content="Điền 4 dòng về món hàng của bạn, nhận ngay câu lệnh viết kịch bản 20 giây và câu lệnh làm video AI từng cảnh. Làm trên điện thoại, không cần tự quay.">
+<meta property="og:title" content="Tạo kịch bản và video bán hàng bằng AI, không cần tự quay">
+<meta property="og:description" content="Điền 4 dòng, nhận 2 câu lệnh chép là dùng: kịch bản 20 giây và video AI từng cảnh.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quatang.damthanhhoa.com/cong-dong/tao-video.html">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+<!-- QUÀ 6 — TẠO KỊCH BẢN + VIDEO BÁN HÀNG BẰNG AI (trang Xây Kênh) — AN 12/11/2026. Ruột: trang-cong-qua/qua-6-tao-kich-ban-video-ban-hang-12-11.md. Sửa câu lệnh: hàm taoCauLenh() bên dưới. -->
+<link rel="stylesheet" href="bai-test.css">
+<style>
+  .o{border:1px solid #e5dccb;border-radius:12px;padding:12px;background:#fffdf8;white-space:pre-wrap;font-size:15px;line-height:1.55;margin:10px 0}
+  .chep{display:block;width:100%;margin:6px 0 4px}
+  .buoc{display:inline-block;background:#1f1f1f;color:#ffd84d;font-weight:700;border-radius:999px;padding:2px 12px;font-size:14px}
+  select,textarea{width:100%;box-sizing:border-box;font:inherit;font-size:16px;padding:12px;border:1px solid #d9cfbd;border-radius:10px;background:#fff;margin:4px 0 12px}
+  textarea{min-height:64px}
+  .an{display:none}
+  ol.lam li{margin:6px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brandbar"><span><b>Đàm Hoa</b> · Xây kênh bằng AI</span><span>Miễn phí</span></div>
+
+  <div class="card hero">
+    <div class="in">
+      <span class="tag">QUÀ · TẠO VIDEO BÁN HÀNG BẰNG AI</span>
+      <h1>Không cần tự quay: <span class="hl">điền 4 dòng, có kịch bản và câu lệnh video</span></h1>
+      <div class="rule"></div>
+      <p class="sub">Bạn điền món hàng của mình. Trang này viết sẵn cho bạn <b>2 câu lệnh</b>: một câu nhờ ChatGPT viết kịch bản video 20 giây, một câu nhờ ChatGPT tách kịch bản thành câu lệnh làm video AI từng cảnh. Bạn chỉ cần chép và dán.</p>
+      <a class="btn" href="#dien">Bắt đầu điền →</a>
+      <p class="mini">Làm trên điện thoại · không cần đăng ký thêm gì</p>
+    </div>
+  </div>
+
+  <div class="card" id="dien">
+    <span class="buoc">BƯỚC 1</span>
+    <h2>Kể cho AI nghe về món hàng của bạn</h2>
+    <div class="rule"></div>
+    <label for="sp">Bạn bán gì?</label>
+    <input id="sp" type="text" placeholder="Ví dụ: kem chống nắng cho da dầu">
+    <label for="khach">Khách của bạn là ai?</label>
+    <input id="khach" type="text" placeholder="Ví dụ: chị em văn phòng 30–45 tuổi, đi xe máy">
+    <label for="lo">Khách đang lo hoặc đang khổ vì điều gì?</label>
+    <textarea id="lo" placeholder="Ví dụ: bôi kem chống nắng bị bết, đổ dầu, đi nắng về vẫn sạm"></textarea>
+    <label for="hay">Điểm hay nhất của món hàng là gì?</label>
+    <textarea id="hay" placeholder="Ví dụ: thấm nhanh, không bết, nâng tông nhẹ"></textarea>
+    <label for="giong">Giọng nói trong video</label>
+    <select id="giong">
+      <option>nữ miền Bắc</option><option>nữ miền Nam</option><option>nữ miền Trung</option>
+      <option>nam miền Bắc</option><option>nam miền Nam</option>
+    </select>
+    <button class="btn" type="button" id="nutTao">Tạo câu lệnh cho tôi →</button>
+    <p class="mini">Ô nào chưa nghĩ ra thì cứ để trống, câu lệnh sẽ để sẵn chỗ [ ] cho bạn tự sửa.</p>
+  </div>
+
+  <div id="ketQua" class="an">
+    <div class="card">
+      <span class="buoc">BƯỚC 2</span>
+      <h2>Nhờ ChatGPT viết kịch bản 20 giây</h2>
+      <div class="rule"></div>
+      <p class="t">Mở ChatGPT, bấm nút dưới để chép, dán vào ô chat rồi gửi. ChatGPT trả về <b>7 câu nói</b> và 1 tiêu đề. Đọc lại, sửa chữ nào chưa giống giọng bạn.</p>
+      <div class="o" id="cl1"></div>
+      <button class="btn chep" type="button" data-chep="cl1">📋 Chép câu lệnh kịch bản</button>
+    </div>
+
+    <div class="card">
+      <span class="buoc">BƯỚC 3</span>
+      <h2>Nhờ ChatGPT tách kịch bản thành câu lệnh video</h2>
+      <div class="rule"></div>
+      <p class="t">Vẫn trong cuộc chat đó, chép câu dưới và gửi tiếp. ChatGPT chia kịch bản thành <b>3 cảnh</b>, mỗi cảnh khoảng 8 giây, mỗi cảnh một câu lệnh. Lời nói giữ nguyên.</p>
+      <div class="o" id="cl2"></div>
+      <button class="btn chep" type="button" data-chep="cl2">📋 Chép câu lệnh tách cảnh</button>
+    </div>
+
+    <div class="card">
+      <span class="buoc">BƯỚC 4</span>
+      <h2>Dán từng cảnh vào công cụ làm video AI</h2>
+      <div class="rule"></div>
+      <ol class="lam">
+        <li>Chuẩn bị <b>1 ảnh</b>: ảnh của bạn, hoặc ảnh người mẫu bạn được phép dùng, hoặc ảnh món hàng.</li>
+        <li>Mở công cụ làm video từ ảnh (Hoa đang dùng <b>Google Flow</b>), chọn tạo video từ ảnh, tải ảnh lên.</li>
+        <li>Dán câu lệnh <b>cảnh 1</b>, bấm tạo. Làm tiếp cảnh 2, cảnh 3.</li>
+        <li>Ghép 3 cảnh lại, thêm tiêu đề ở 3 giây đầu. Xong một video khoảng 20 giây.</li>
+      </ol>
+      <p class="t">Cảnh nào AI làm chưa ưng, bạn bấm tạo lại cảnh đó, không phải làm lại cả video.</p>
+    </div>
+
+    <div class="card">
+      <h2>Làm xong nhớ khoe trong nhóm nha 💛</h2>
+      <div class="rule"></div>
+      <p class="t">Đăng video của bạn vào nhóm, chị em cùng góp ý câu mở đầu và tiêu đề. Mỗi đợt Hoa thêm câu lệnh mới vào tin ghim của nhóm.</p>
+      <button type="button" class="btn nhe" id="lamLai">↺ Làm cho món hàng khác</button>
+    </div>
+  </div>
+
+  <p class="privacy">🔒 Trang này không lưu gì bạn điền. Câu lệnh tạo ngay trên điện thoại của bạn.</p>
+</div>
+
+<script>
+(function(){
+  function g(id){ var v=(document.getElementById(id).value||'').trim(); return v; }
+  function o(v, mau){ return v ? v : mau; }
+  function taoCauLenh(){
+    var sp=o(g('sp'),'[món hàng của bạn]');
+    var khach=o(g('khach'),'[khách của bạn là ai]');
+    var lo=o(g('lo'),'[điều khách đang lo]');
+    var hay=o(g('hay'),'[điểm hay nhất của món hàng]');
+    var giong=document.getElementById('giong').value;
+    var cl1=
+'Bạn là người viết kịch bản video bán hàng ngắn trên Facebook Reels và TikTok. Viết cho tôi 1 kịch bản video 20 giây bán: '+sp+'.\n'+
+'Khách của tôi: '+khach+'.\n'+
+'Điều khách đang lo: '+lo+'.\n'+
+'Điểm hay nhất của món hàng: '+hay+'.\n\n'+
+'Yêu cầu:\n'+
+'- Đây là LỜI NÓI. Câu ngắn, đọc thành tiếng tự nhiên như đang nói chuyện. Xưng "mình", gọi khách là "bạn".\n'+
+'- Đúng 7 câu, tổng khoảng 60 chữ.\n'+
+'- Câu 1 là 3 giây đầu: nói trúng điều khách đang lo để họ dừng lướt. Không chào hỏi, không giới thiệu tên.\n'+
+'- Câu 2 đến câu 5: nỗi lo đó, món hàng giúp thế nào, và 1 chi tiết thật (chất liệu, cách dùng, cảm nhận khi dùng).\n'+
+'- Câu 6: một câu làm khách yên tâm.\n'+
+'- Câu 7: mời khách nhắn tin thật nhẹ nhàng.\n'+
+'- Không hứa quá đà. Không dùng chữ "chữa", "trị", "khỏi", "cam kết 100%".\n'+
+'- Viết thêm 1 tiêu đề dưới 9 chữ để đặt ở 3 giây đầu video.\n\n'+
+'Trình bày thành bảng 3 cột: số câu · lời nói · cảnh nên có.';
+    var cl2=
+'Tách kịch bản bạn vừa viết thành 3 cảnh video, mỗi cảnh khoảng 8 giây, ngắt theo ý. Giữ nguyên 100% lời nói, không sửa, không thêm, không bớt chữ nào.\n\n'+
+'Mỗi cảnh viết 1 câu lệnh làm video AI bằng tiếng Việt, đúng theo mẫu sau:\n'+
+'"[Tả cảnh: ở đâu, nhân vật đang làm gì với '+sp+']. Người trong ảnh tham chiếu là nhân vật chính, giữ nguyên khuôn mặt và độ tuổi như ảnh gốc. Trang phục hợp mùa. Ánh sáng tự nhiên, sáng sủa. Video dọc 9:16. Nhân vật nói bằng giọng '+giong+': \\"[lời nói của cảnh này]\\" — nói đúng một lần. Không nhạc, không chữ trên hình."\n\n'+
+'Viết mỗi câu lệnh thành một đoạn riêng, đặt tên Cảnh 1, Cảnh 2, Cảnh 3 để tôi chép từng cảnh.';
+    document.getElementById('cl1').textContent=cl1;
+    document.getElementById('cl2').textContent=cl2.replace(/\\"/g,'"');
+    var k=document.getElementById('ketQua'); k.classList.remove('an');
+    k.scrollIntoView({behavior:'smooth'});
+  }
+  document.getElementById('nutTao').addEventListener('click',taoCauLenh);
+  document.getElementById('lamLai').addEventListener('click',function(){
+    ['sp','khach','lo','hay'].forEach(function(id){document.getElementById(id).value='';});
+    document.getElementById('ketQua').classList.add('an');
+    document.getElementById('dien').scrollIntoView({behavior:'smooth'});
+  });
+  document.querySelectorAll('[data-chep]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var t=document.getElementById(b.getAttribute('data-chep')).textContent;
+      var xong=function(){ var c=b.textContent; b.textContent='✅ Đã chép, dán vào ChatGPT nhé'; setTimeout(function(){b.textContent=c;},2200); };
+      if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(xong,function(){chepCu(t);xong();}); }
+      else { chepCu(t); xong(); }
+    });
+  });
+  function chepCu(t){ var a=document.createElement('textarea'); a.value=t; document.body.appendChild(a); a.select(); try{document.execCommand('copy');}catch(e){} document.body.removeChild(a); }
+})();
+</script>
+</body>
+</html>
