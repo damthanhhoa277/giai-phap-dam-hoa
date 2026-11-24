@@ -33,7 +33,7 @@
       <div class="rule"></div>
       <p class="sub">Bạn điền món hàng của mình. Trang này viết sẵn cho bạn <b>2 câu lệnh</b>: một câu nhờ ChatGPT viết kịch bản video 20 giây, một câu nhờ ChatGPT tách kịch bản thành câu lệnh làm video AI từng cảnh. Bạn chỉ cần chép và dán.</p>
       <a class="btn" href="#dien">Bắt đầu điền →</a>
-      <p class="mini">Làm trên điện thoại · không cần đăng ký thêm gì</p>
+      <p class="mini">Làm trên điện thoại · miễn phí</p>
     </div>
   </div>
 
@@ -56,6 +56,25 @@
     </select>
     <button class="btn" type="button" id="nutTao">Tạo câu lệnh cho tôi →</button>
     <p class="mini">Ô nào chưa nghĩ ra thì cứ để trống, câu lệnh sẽ để sẵn chỗ [ ] cho bạn tự sửa.</p>
+  </div>
+
+  <div class="card an" id="cong">
+    <span class="buoc">CÒN 1 BƯỚC</span>
+    <h2>Để lại tên và Zalo để mở câu lệnh</h2>
+    <div class="rule"></div>
+    <p class="t" style="margin-top:0;">Điền 1 lần, lần sau mở lại không phải điền nữa. Hoa gửi thêm câu lệnh mới qua Zalo và email.</p>
+    <form id="f" novalidate>
+      <label for="ten">Hoa gọi bạn là gì?</label>
+      <input id="ten" type="text" autocomplete="name" placeholder="Ví dụ: Lan" required>
+      <label for="sdt">Số Zalo</label>
+      <input id="sdt" type="tel" autocomplete="tel" inputmode="tel" placeholder="Ví dụ: 0912 345 678" required>
+      <label for="email">Email</label>
+      <input id="email" type="email" autocomplete="email" inputmode="email" placeholder="ten@gmail.com" required>
+      <label class="agree" id="agreeBox"><input id="dongy" type="checkbox"><span>Mình đồng ý để Đàm Hoa gửi email, tin Zalo về quà tặng và nội dung xây kênh bằng AI. Mình có thể dừng nhận bất cứ lúc nào.</span></label>
+      <button class="btn" type="submit" id="btn">Mở câu lệnh của tôi →</button>
+    </form>
+    <div class="msg" id="msg"></div>
+    <p class="privacy">🔒 Hoa chỉ lưu tên, Zalo, email để gửi quà. Không bán, không chia cho ai (theo Nghị định 13/2023/NĐ-CP).</p>
   </div>
 
   <div id="ketQua" class="an">
@@ -100,7 +119,7 @@
     </div>
   </div>
 
-  <p class="privacy">🔒 Trang này không lưu gì bạn điền. Câu lệnh tạo ngay trên điện thoại của bạn.</p>
+  <p class="privacy">🔒 Món hàng bạn điền không gửi đi đâu, câu lệnh tạo ngay trên điện thoại của bạn.</p>
 </div>
 
 <script>
@@ -138,7 +157,38 @@
     var k=document.getElementById('ketQua'); k.classList.remove('an');
     k.scrollIntoView({behavior:'smooth'});
   }
-  document.getElementById('nutTao').addEventListener('click',taoCauLenh);
+  /* Bước để lại tên + Zalo (giữ luồng chị chốt 12/11). Đã điền ở cổng quà / lần trước thì mở luôn. */
+  var API="https://script.google.com/macros/s/AKfycbyk5OId1qNFx3spEcH2wGa3Ol1vGTr70MWSznrmfQAs_xquEYk13xCO2xxFyOIOpIJ2sQ/exec";
+  if (/^(localhost|127\.0\.0\.1|)$/.test(location.hostname) || /[?&]xemthu=1/.test(location.search)) API="";
+  var NGUON=((location.search.match(/[?&]nguon=([A-Za-z0-9-]{1,20})/)||[])[1]||'tao-video').toLowerCase();
+  function daDien(){ try{ var c=JSON.parse(localStorage.getItem('dhKhach')||'null'); return !!(c&&c.ten&&c.sdt); }catch(e){ return false; } }
+  var cong=document.getElementById('cong');
+  document.getElementById('nutTao').addEventListener('click',function(){
+    if (daDien()) return taoCauLenh();
+    cong.classList.remove('an'); cong.scrollIntoView({behavior:'smooth'});
+    setTimeout(function(){ document.getElementById('ten').focus({preventScroll:true}); },400);
+  });
+  var f=document.getElementById('f'), btn=document.getElementById('btn'), msg=document.getElementById('msg');
+  function bao(chu){ msg.className='msg no'; msg.innerHTML=chu; }
+  function moKhoa(d){ try{ localStorage.setItem('dhKhach', JSON.stringify({ten:d.ten, sdt:d.sdt, email:d.email})); }catch(e){} cong.classList.add('an'); taoCauLenh(); }
+  f.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    var ten=document.getElementById('ten'), sdt=document.getElementById('sdt'), email=document.getElementById('email'),
+        dongy=document.getElementById('dongy'), agreeBox=document.getElementById('agreeBox');
+    [ten,sdt,email].forEach(function(x){ x.classList.remove('err'); }); agreeBox.classList.remove('err-box');
+    var s=sdt.value.replace(/[\s.\-()]/g,'').replace(/^\+?84/,'0');
+    if(!ten.value.trim()){ ten.classList.add('err'); ten.focus(); return bao('Bạn cho Hoa xin tên với nhé.'); }
+    if(!/^0\d{9}$/.test(s)){ sdt.classList.add('err'); sdt.focus(); return bao('Số Zalo chưa đúng — bạn ghi đủ 10 số giúp Hoa nhé (ví dụ 0912 345 678).'); }
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(email.value.trim())){ email.classList.add('err'); email.focus(); return bao('Email chưa đúng, bạn kiểm tra lại giúp Hoa nhé.'); }
+    if(!dongy.checked){ agreeBox.classList.add('err-box'); dongy.focus(); return bao('Bạn tick ô đồng ý giúp Hoa nhé.'); }
+    var d={ ten:ten.value.trim(), sdt:s, email:email.value.trim().toLowerCase(), nguon:NGUON, dongy:true };
+    if(!API) return moKhoa(d);
+    btn.disabled=true; btn.textContent='Đang mở…';
+    fetch(API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(d)})
+      .then(function(r){ return r.json(); })
+      .then(function(k){ if(k&&k.ok) moKhoa(d); else { btn.disabled=false; btn.textContent='Mở câu lệnh của tôi →'; bao((k&&k.thongDiep)||'Có trục trặc, bạn thử lại giúp Hoa nhé.'); } })
+      .catch(function(){ moKhoa(d); });   /* mạng lỗi: không để khách kẹt */
+  });
   document.getElementById('lamLai').addEventListener('click',function(){
     ['sp','khach','lo','hay'].forEach(function(id){document.getElementById(id).value='';});
     document.getElementById('ketQua').classList.add('an');

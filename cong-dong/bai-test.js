@@ -87,6 +87,9 @@ if (/^(localhost|127\.0\.0\.1|)$/.test(location.hostname) || /[?&]xemthu=1/.test
 
   /* ---------- form ---------- */
   var f = $('f'), btn = $('btn'), msg = $('msg');
+  /* khách đã điền ở cổng quà / trang khác: điền sẵn cho đỡ gõ lại */
+  try { var cu = JSON.parse(localStorage.getItem('dhKhach') || 'null');
+    if (cu){ if (cu.ten) $('ten').value = cu.ten; if (cu.email) $('email').value = cu.email; if (cu.sdt) $('sdt').value = cu.sdt; } } catch(e){}
   function bao(chu){ msg.className = 'msg no'; msg.innerHTML = chu; }
   function hopLeEmail(v){ return /^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(v); }
   function chuanSdt(v){ return v.replace(/[\s.\-()]/g, '').replace(/^\+?84/, '0'); }
@@ -110,11 +113,12 @@ if (/^(localhost|127\.0\.0\.1|)$/.test(location.hostname) || /[?&]xemthu=1/.test
     var s = chuanSdt(sdt.value);
     if (!ten.value.trim()){ ten.classList.add('err'); ten.focus(); return bao('Bạn cho Hoa xin tên với nhé.'); }
     if (!hopLeEmail(email.value.trim())){ email.classList.add('err'); email.focus(); return bao('Email chưa đúng, bạn kiểm tra lại giúp Hoa nhé — kết quả đầy đủ gửi về email này.'); }
-    if (s && !/^0\d{9}$/.test(s)){ sdt.classList.add('err'); sdt.focus(); return bao('Số Zalo chưa đúng — bạn ghi đủ 10 số (ví dụ 0912 345 678), hoặc để trống cũng được.'); }
+    if ((s || B.batBuocZalo) && !/^0\d{9}$/.test(s)){ sdt.classList.add('err'); sdt.focus(); return bao(B.batBuocZalo ? 'Số Zalo chưa đúng — bạn ghi đủ 10 số giúp Hoa nhé (ví dụ 0912 345 678).' : 'Số Zalo chưa đúng — bạn ghi đủ 10 số (ví dụ 0912 345 678), hoặc để trống cũng được.'); }
     if (!dongy.checked){ agreeBox.classList.add('err-box'); dongy.focus(); return bao('Bạn tick ô đồng ý giúp Hoa nhé — có vậy Hoa mới được gửi kết quả cho bạn.'); }
 
     var duLieu = { ten: ten.value.trim(), sdt: s, email: email.value.trim().toLowerCase(), nguon: NGUON, dongy: true,
                    qua: B.ma, kq: B.ma_hoa(tra), tomtat: B.chu_ngan(tra) };
+    try{ localStorage.setItem('dhKhach', JSON.stringify({ten:duLieu.ten, sdt:duLieu.sdt, email:duLieu.email})); }catch(e){}
     if (!API) return moKetQua(duLieu.ten, duLieu.email, '', true);
     btn.disabled = true; btn.textContent = 'Đang gửi…';
     fetch(API, { method:'POST', headers:{ 'Content-Type':'text/plain;charset=utf-8' }, body: JSON.stringify(duLieu) })

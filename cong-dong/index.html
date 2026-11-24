@@ -200,6 +200,9 @@
         <p style="font-size:13.5px;">Bạn đang xem trên máy tính? Quét mã này bằng <b>camera điện thoại</b> để mở thẳng nhóm trong Zalo:</p>
         <img id="qrNhom" alt="Mã QR vào nhóm Zalo">
       </div>
+      <p style="font-size:13.5px;margin-top:16px;text-align:center;color:#555;">2 quà làm được liền, bạn mở ngay ở đây:</p>
+      <a class="btn nhe" href="kiem-kenh.html?nguon=cong-qua" target="_blank" rel="noopener" style="margin-top:8px;">📉 Tự chấm kênh 11 câu →</a>
+      <a class="btn nhe" href="tao-video.html" target="_blank" rel="noopener" style="margin-top:8px;">🎬 Tạo kịch bản + video không cần quay →</a>
       <p style="font-size:13.5px;margin-top:14px;text-align:center;color:#555;">Muốn được <b>kiểm kênh miễn phí</b>, bạn vào nhóm Facebook của Hoa và để link kênh dưới bài KIỂM KÊNH nhé:</p>
       <a class="btn fb" href="https://www.facebook.com/groups/1788679095718962" target="_blank" rel="noopener">Vào nhóm Facebook "Kinh Doanh Online Nhàn Tênh" →</a>
 
@@ -284,6 +287,7 @@ function laDienThoai(){
     if (!dongy.checked){ agreeBox.classList.add('err-box'); dongy.focus(); return bao('Bạn tick ô đồng ý giúp Hoa nhé — có vậy Hoa mới được gửi quà cho bạn.'); }
 
     var duLieu = { ten: ten.value.trim(), sdt: chuanSdt(sdt.value), email: email.value.trim().toLowerCase(), nguon: NGUON, dongy: true };
+    try{ localStorage.setItem('dhKhach', JSON.stringify({ten:duLieu.ten, sdt:duLieu.sdt, email:duLieu.email})); }catch(e){}
 
     if (!CONFIG.apiUrl){ /* XEM THỬ: chưa nối Sheet */
       return moNhom(duLieu.ten, duLieu.email, '');
