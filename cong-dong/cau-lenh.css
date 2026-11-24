@@ -12,3 +12,4 @@
 .chep.da{background:var(--ok);}
 .meo{font-size:14px;color:var(--ink-soft);margin-top:10px;padding-left:22px;position:relative;}
 .meo::before{content:"👉";position:absolute;left:0;top:0;}
+.cl .hop{font-size:14px;line-height:1.5;color:var(--navy);background:#FFF8E6;border-left:3px solid var(--gold);border-radius:8px;padding:8px 12px;margin-top:10px;}
