@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Biến người xem thành khách hỏi mua – Đàm Hoa</title>
+<meta name="description" content="3 việc làm ngay để video có người bình luận và nhắn tin: câu mời cuối video, quà mời bình luận, tin trả lời tự động.">
+<meta property="og:title" content="Biến người xem thành khách hỏi mua: 3 việc làm ngay">
+<meta property="og:description" content="3 việc làm ngay để video có người bình luận và nhắn tin: câu mời cuối video, quà mời bình luận, tin trả lời tự động.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quatang.damthanhhoa.com/cong-dong/ra-don.html">
+<meta property="og:image" content="https://quatang.damthanhhoa.com/cong-dong/kk-2-vui.jpg">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💬</text></svg>">
+<!-- QUÀ 💬 RA ĐƠN — BÌNH 24/11/2026 (chị duyệt qua Khải). Ruột: KHO-TRI-THUC/wiki/DU-AN-XAY-KENH/trang-cong-qua/bon-qua-moi-thay-o-sap-co-24-11.md. Bước tên + Zalo: cong-qua.js -->
+<link rel="stylesheet" href="bai-test.css">
+<style>
+  .o{border:1px solid #e5dccb;border-radius:12px;padding:12px;background:#fffdf8;white-space:pre-wrap;font-size:15px;line-height:1.55;margin:10px 0}
+  .chep{display:block;width:100%;margin:6px 0 4px}
+  .buoc{display:inline-block;background:#1f1f1f;color:#ffd84d;font-weight:700;border-radius:999px;padding:2px 12px;font-size:14px}
+  .an{display:none}
+  ol.lam li,ul.lam li{margin:7px 0;line-height:1.5}
+  .bang{width:100%;border-collapse:collapse;font-size:14.5px;margin:10px 0}
+  .bang th,.bang td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top;line-height:1.45}
+  .bang th{background:var(--ivory2);color:var(--navy)}
+  .tuan{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin:10px 0}
+  .tuan div{background:var(--ivory);border:1px solid var(--line);border-radius:8px;padding:6px 2px;text-align:center;font-size:12px;line-height:1.3}
+  .tuan b{display:block;color:var(--navy);font-size:13px}
+  .do{background:#FDF1EE;border-left:3px solid var(--no);padding:10px 12px;border-radius:8px;font-size:14.5px;margin:12px 0}
+  .cau{display:flex;gap:8px;align-items:flex-start;margin:10px 0}
+  .cau .o{flex:1;margin:0}
+  .cau .btn{width:auto;flex:none;padding:10px 12px;font-size:14px;margin:0}
+</style>
+</head>
+<body data-nguon="ra-don">
+<div class="wrap">
+  <div class="brandbar"><span><b>Đàm Hoa</b> · Xây kênh</span><span>Miễn phí</span></div>
+
+  <div class="card hero">
+    <div class="in">
+      <span class="tag">QUÀ · RA ĐƠN</span>
+      <h1>Có lượt xem mà chưa ai hỏi mua? <span class="hl">3 việc làm ngay</span></h1>
+      <div class="rule"></div>
+      <p class="sub">Làm xong 3 việc này, video của bạn có người <b>bình luận và nhắn tin</b>. Có câu mẫu, bấm chép là dùng.</p>
+      <p class="mini">Làm trên điện thoại · miễn phí</p>
+    </div>
+  </div>
+
+  <div class="card" id="cong">
+    <span class="buoc">CÒN 1 BƯỚC</span>
+    <h2>Để lại tên và Zalo để mở quà</h2>
+    <div class="rule"></div>
+    <p class="t" style="margin-top:0;">Điền 1 lần, lần sau mở lại các quà khác không phải điền nữa. Quà mới Hoa báo qua Zalo và email.</p>
+    <form id="f" novalidate>
+      <label for="ten">Hoa gọi bạn là gì?</label>
+      <input id="ten" type="text" autocomplete="name" placeholder="Ví dụ: Lan" required>
+      <label for="sdt">Số Zalo</label>
+      <input id="sdt" type="tel" autocomplete="tel" inputmode="tel" placeholder="Ví dụ: 0912 345 678" required>
+      <label for="email">Email</label>
+      <input id="email" type="email" autocomplete="email" inputmode="email" placeholder="ten@gmail.com" required>
+      <label class="agree" id="agreeBox"><input id="dongy" type="checkbox"><span>Mình đồng ý để Đàm Hoa gửi email, tin Zalo về quà tặng và nội dung xây kênh. Mình có thể dừng nhận bất cứ lúc nào.</span></label>
+      <button class="btn" type="submit" id="btn">Mở quà của tôi →</button>
+    </form>
+    <div class="msg" id="msg"></div>
+    <p class="privacy">🔒 Hoa chỉ lưu tên, Zalo, email để gửi quà. Không bán, không chia cho ai (theo Nghị định 13/2023/NĐ-CP).</p>
+  </div>
+
+  <div id="noiDung" class="an">
+    <div class="card">
+      <span class="buoc">VIỆC 1</span>
+      <h2>Cuối video luôn có 1 câu mời rõ ràng</h2>
+      <div class="rule"></div>
+      <p class="t">5 câu mẫu. Bấm Chép, thay chữ trong [ ] bằng món quà và từ khoá của bạn.</p>
+      <div class="cau"><div class="o" id="m1">Ai cần [quà], bình luận chữ [TỪ KHOÁ], mình gửi bạn nhé.</div><button class="btn nhe" type="button" data-chep="m1">📋 Chép</button></div>
+      <div class="cau"><div class="o" id="m2">Muốn xem tiếp phần 2, bình luận chữ [TỪ KHOÁ].</div><button class="btn nhe" type="button" data-chep="m2">📋 Chép</button></div>
+      <div class="cau"><div class="o" id="m3">Mình để sẵn [quà] cho ai cần, bình luận [TỪ KHOÁ] là nhận.</div><button class="btn nhe" type="button" data-chep="m3">📋 Chép</button></div>
+      <div class="cau"><div class="o" id="m4">Lưu lại video này, chia sẻ cho người bạn đang cần.</div><button class="btn nhe" type="button" data-chep="m4">📋 Chép</button></div>
+      <div class="cau"><div class="o" id="m5">Bạn thấy đúng thì bình luận 1 chữ [TỪ KHOÁ], mình gửi thêm cách làm.</div><button class="btn nhe" type="button" data-chep="m5">📋 Chép</button></div>
+    </div>
+
+    <div class="card">
+      <span class="buoc">VIỆC 2</span>
+      <h2>Làm 1 món quà mời bình luận</h2>
+      <div class="rule"></div>
+      <table class="bang">
+        <tr><th>Luật</th><th>Vì sao</th></tr>
+        <tr><td>Làm 1 lần, phát mãi</td><td>không phải làm riêng từng người</td></tr>
+        <tr><td>Không tốn tiền hàng</td><td>bảng tra, câu lệnh, danh sách, mẫu</td></tr>
+        <tr><td>Mỗi quà 1 từ khoá</td><td>để biết quà nào kéo được người</td></tr>
+        <tr><td>Không dán link vào bài</td><td>link dễ bị Facebook giảm người xem</td></tr>
+      </table>
+      <p class="t"><b>Ví dụ theo ngành:</b> bán mỹ phẩm → bảng tra loại da · bán quần áo → bảng chọn size · bán đồ ăn → thực đơn 7 ngày.</p>
+    </div>
+
+    <div class="card">
+      <span class="buoc">VIỆC 3</span>
+      <h2>Cài tin trả lời tự động (miễn phí)</h2>
+      <div class="rule"></div>
+      <ol class="lam">
+        <li>Mở <b>Meta Business Suite</b> trên máy tính, vào phần tự động trả lời bình luận.</li>
+        <li>Chọn từ khoá của món quà (ví dụ chữ bạn mời ở Việc 1).</li>
+        <li>Viết 2 câu trả lời: 1 câu trả lời công khai dưới bình luận, 1 tin nhắn riêng gửi cho khách.</li>
+      </ol>
+      <p class="t"><b>Mẫu trả lời công khai:</b></p>
+      <div class="cau"><div class="o" id="tl1">Mình nhắn tin cho bạn rồi nha 💛 Không thấy thì bạn xem mục Tin nhắn chờ nhé.</div><button class="btn nhe" type="button" data-chep="tl1">📋 Chép</button></div>
+      <p class="t"><b>Mẫu tin nhắn riêng:</b></p>
+      <div class="cau"><div class="o" id="tl2">Chào bạn 💛 Quà mình để trong nhóm. Bạn bấm vào nhóm, trả lời 3 câu hỏi, rồi mở bài ghim là nhận được nha 👉 [link nhóm]</div><button class="btn nhe" type="button" data-chep="tl2">📋 Chép</button></div>
+      <div class="do">🔴 <b>Gửi link nhóm, không gửi thẳng quà.</b> Khách vào nhóm và để lại số Zalo, bạn mới giữ được liên lạc với khách.</div>
+    </div>
+
+    <div class="card">
+      <h2>Làm xong nhớ khoe trong nhóm nha 💛</h2>
+      <div class="rule"></div>
+      <p class="t">Chị em trong nhóm cùng góp ý. Quà mới Hoa thêm vào tin ghim của nhóm Zalo.</p>
+      <a class="btn zalo" href="https://zalo.me/g/adohlltts6zacuoyoh0m" target="_blank" rel="noopener">Vào nhóm Zalo →</a>
+      <a class="btn fb" href="https://www.facebook.com/groups/1788679095718962" target="_blank" rel="noopener">Vào nhóm Facebook →</a>
+      <a class="btn nhe" href="index.html" style="margin-top:12px;">🎁 Xem các quà khác trong kho</a>
+    </div>
+  </div>
+</div>
+<script src="cong-qua.js"></script>
+</body>
+</html>
